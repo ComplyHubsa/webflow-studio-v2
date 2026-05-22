@@ -187,7 +187,11 @@ export default function Hero() {
     resize();
     window.addEventListener("resize", resize, { passive: true });
 
-    const onMove = (e: MouseEvent) => { raw.x = e.clientX; raw.y = e.clientY; };
+    const onMove = (e: MouseEvent) => {
+      const rect = canvas.getBoundingClientRect();
+      raw.x = e.clientX - rect.left;
+      raw.y = e.clientY - rect.top;
+    };
     window.addEventListener("mousemove", onMove, { passive: true });
 
     const draw = () => {
