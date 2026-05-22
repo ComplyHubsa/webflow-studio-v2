@@ -68,7 +68,7 @@ void main(){
   vec2 delta  = uvA - mA;
   float mDist = length(delta);
   float push  = exp(-mDist * mDist * 12.0) * 0.07;
-  vec2  p     = uv + (delta / (mDist + 0.001)) * push;
+  vec2  p     = uv - (delta / (mDist + 0.001)) * push;
   p.x        *= ar;                         /* aspect-correct from here */
 
   /* ── two-pass domain warp (creates the organic curve in the threads) ── */
