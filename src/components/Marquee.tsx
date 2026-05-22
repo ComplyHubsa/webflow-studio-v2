@@ -20,9 +20,9 @@ export default function Marquee() {
     <div
       className="relative overflow-hidden py-6"
       style={{
-        borderTop: "1px solid var(--border)",
-        borderBottom: "1px solid var(--border)",
-        background: "var(--surface)",
+        borderTop: "1px solid rgba(108,99,255,0.18)",
+        borderBottom: "1px solid rgba(108,99,255,0.18)",
+        background: "linear-gradient(135deg, #f0f0ff 0%, #e8e4ff 40%, #f5f0ff 100%)",
       }}
     >
       <div className="marquee-track flex items-center gap-12 whitespace-nowrap w-max">
@@ -30,13 +30,13 @@ export default function Marquee() {
           <span key={i} className="flex items-center gap-12">
             <span
               className="text-sm font-semibold uppercase tracking-widest"
-              style={{ color: "var(--muted)" }}
+              style={{ color: "#6b6890" }}
             >
               {item}
             </span>
             <span
               className="w-1.5 h-1.5 rounded-full flex-shrink-0"
-              style={{ background: "var(--accent)", opacity: 0.5 }}
+              style={{ background: "#6c63ff", opacity: 0.45 }}
             />
           </span>
         ))}

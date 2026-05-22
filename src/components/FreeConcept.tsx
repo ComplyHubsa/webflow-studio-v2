@@ -6,10 +6,10 @@ import FadeIn from "./FadeIn";
 
 /* ─── Spring / geometry config ───────────────────────────────────────────── */
 const N          = 64;
-const MAX_PUSH   = 32;
-const INFLUENCE  = 210;
-const SPRING_K   = 0.42;
-const DAMPING    = 0.42;
+const MAX_PUSH   = 48;    // bigger outward bulge
+const INFLUENCE  = 240;   // wider catch radius
+const SPRING_K   = 0.62;  // snappier follow
+const DAMPING    = 0.28;  // less damping = more springy oscillation
 const BR         = 24;
 
 /* ─── Point + outward normal at arc-length s on a rounded rect ───────────── */
