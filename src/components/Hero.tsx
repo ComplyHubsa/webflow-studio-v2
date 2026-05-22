@@ -20,36 +20,36 @@ const VERT = `
 `;
 
 /*
-  Silk effect via layered domain-warped FBM.
-  Mouse creates a push (repel) + swirl that deforms the fabric.
+  Silk threads: FBM-warped sin stripes create flowing line-like fabric.
+  Mouse pushes coordinates before warping so lines visibly bend away.
 */
 const FRAG = `
 precision mediump float;
 uniform float u_time;
-uniform vec2  u_mouse;   /* raw pixel coords          */
-uniform vec2  u_res;     /* viewport size in pixels   */
+uniform vec2  u_mouse;
+uniform vec2  u_res;
 
 /* ── value noise ── */
 float hash(vec2 p){
-  p = fract(p * vec2(127.1,311.7));
-  p += dot(p, p+43.21);
-  return fract(p.x*p.y);
+  p = fract(p * vec2(127.1, 311.7));
+  p += dot(p, p + 43.21);
+  return fract(p.x * p.y);
 }
 float vnoise(vec2 p){
-  vec2 i=floor(p), f=fract(p);
-  f = f*f*(3.-2.*f);
+  vec2 i = floor(p), f = fract(p);
+  f = f * f * (3. - 2. * f);
   return mix(
-    mix(hash(i),        hash(i+vec2(1,0)), f.x),
-    mix(hash(i+vec2(0,1)), hash(i+vec2(1,1)), f.x), f.y);
+    mix(hash(i),           hash(i + vec2(1, 0)), f.x),
+    mix(hash(i + vec2(0,1)), hash(i + vec2(1,1)), f.x), f.y);
 }
 
-/* ── fractal brownian motion (5 oct, rotated to add directionality) ── */
+/* ── FBM — 5 octaves, 30° rotation keeps directionality ── */
 float fbm(vec2 p){
-  float v=0., a=0.52;
-  mat2 R = mat2( 0.8660,-0.5, 0.5, 0.8660 ); /* 30-deg rotation */
-  for(int i=0;i<5;i++){
+  float v = 0., a = 0.52;
+  mat2 R = mat2(0.8660, -0.5, 0.5, 0.8660);
+  for(int i = 0; i < 5; i++){
     v += a * vnoise(p);
-    p  = R * p * 2.05 + vec2(13.1,7.4);
+    p  = R * p * 2.05 + vec2(13.1, 7.4);
     a *= 0.5;
   }
   return v;
@@ -57,60 +57,68 @@ float fbm(vec2 p){
 
 void main(){
   vec2 uv  = gl_FragCoord.xy / u_res;
-  uv.y     = 1.-uv.y;
+  uv.y     = 1. - uv.y;
   float ar = u_res.x / u_res.y;
-  float t  = u_time * 0.14;
+  float t  = u_time * 0.10;
 
-  /* mouse in UV space */
-  vec2 m = vec2(u_mouse.x/u_res.x, 1.-u_mouse.y/u_res.y);
+  /* ── mouse push — displaces coords so lines bend away from cursor ── */
+  vec2 m      = vec2(u_mouse.x / u_res.x, 1. - u_mouse.y / u_res.y);
+  vec2 uvA    = vec2(uv.x * ar, uv.y);
+  vec2 mA     = vec2(m.x  * ar, m.y);
+  vec2 delta  = uvA - mA;
+  float mDist = length(delta);
+  float push  = exp(-mDist * mDist * 4.5) * 0.72;
+  vec2  p     = uv + (delta / (mDist + 0.001)) * push;
+  p.x        *= ar;                         /* aspect-correct from here */
 
-  /* ── mouse distortion — push outward + swirl ── */
-  vec2  delta  = (uv - m) * vec2(ar, 1.);
-  float mDist  = length(delta);
-  float denom  = mDist + 0.0001;
-
-  float pushAmt  = exp(-mDist*mDist * 6.5) * 0.55;
-  vec2  push     = (delta/denom) * pushAmt;
-
-  float swirlAmt = exp(-mDist*mDist * 5.0) * 0.38;
-  vec2  swirl    = vec2(-delta.y, delta.x) / denom * swirlAmt;
-
-  vec2 p = uv + push + swirl;
-
-  /* ── domain warping — two rounds, creates silk folds ── */
+  /* ── two-pass domain warp (creates the organic curve in the threads) ── */
   vec2 q = vec2(
-    fbm(p*2.3 + vec2(0.0, 0.0) + t*0.55),
-    fbm(p*2.3 + vec2(5.2, 1.3) + t*0.42)
+    fbm(p * 1.6 + vec2(0.0, 0.0)   + t * 0.50),
+    fbm(p * 1.6 + vec2(5.2, 1.3)   + t * 0.38)
   );
   vec2 r = vec2(
-    fbm(p*2.3 + 0.9*q + vec2(1.7,9.2) + t*0.30),
-    fbm(p*2.3 + 0.9*q + vec2(8.3,2.8) + t*0.22)
+    fbm(p * 1.6 + q * 0.85 + vec2(1.7, 9.2) + t * 0.28),
+    fbm(p * 1.6 + q * 0.85 + vec2(8.3, 2.8) + t * 0.20)
   );
 
-  float f  = fbm(p*1.7 + 0.7*r + t*0.18);
-  f        = f*0.5+0.5;          /* remap → [0,1]   */
-  float rx = r.x*0.5+0.5;
-  float ry = r.y*0.5+0.5;
+  /* warped coordinate used for both line drawing and colour */
+  vec2 wp = p + r * 0.42;
 
-  /* ── silk colour palette ── */
-  /* rose pink → peach cream */
-  vec3 col = mix(vec3(1.00,0.72,0.80), vec3(1.00,0.90,0.72), smoothstep(0.0,0.46,f));
-  /* → soft lavender */
-  col = mix(col, vec3(0.83,0.79,1.00), smoothstep(0.36,0.66,f));
-  /* → mint green (driven by r.x) */
-  col = mix(col, vec3(0.79,0.95,0.83), smoothstep(0.52,0.85,rx));
-  /* → warm white sheen (bright silk highlight) */
-  col = mix(col, vec3(1.00,0.98,0.95), smoothstep(0.70,0.88,f)*0.60);
-  /* → cool blue in shadows */
-  col = mix(col, vec3(0.76,0.87,1.00), smoothstep(0.28,0.0,f)*0.32);
-  /* → blush (driven by r.y) */
-  col = mix(col, vec3(1.00,0.82,0.88), smoothstep(0.60,0.85,ry)*0.40);
+  /* ── SILK LINES — sin stripes along a slowly-rotating diagonal ── */
+  float ang   = t * 0.06;                   /* direction drifts slowly  */
+  float cs    = cos(ang), sn = sin(ang);
+  float along = wp.x * cs + wp.y * sn;      /* projection onto direction */
 
-  /* lighten overall to stay silky-bright */
-  col = mix(vec3(0.99,0.97,0.98), col, 0.78);
-  col = clamp(col,0.,1.);
+  /* broad threads (~26 visible across screen) */
+  float broad  = sin(along * 26.0) * 0.5 + 0.5;
 
-  gl_FragColor = vec4(col,1.);
+  /* fine sheen lines on top (~70 visible) — give the glossy silk highlight */
+  float fine   = sin(along * 70.0) * 0.5 + 0.5;
+
+  /* ── colour palette driven by a slow fbm pass ── */
+  float fc  = fbm(wp * 0.75 + t * 0.07) * 0.5 + 0.5;
+  float fc2 = fbm(wp * 0.55 + vec2(3.3, 1.1) + t * 0.05) * 0.5 + 0.5;
+
+  /* rose → peach */
+  vec3 col = mix(vec3(1.00, 0.74, 0.82), vec3(1.00, 0.89, 0.74), smoothstep(0.0,  0.45, fc));
+  /* → lavender */
+  col = mix(col, vec3(0.82, 0.77, 1.00), smoothstep(0.35, 0.65, fc));
+  /* → mint (secondary map) */
+  col = mix(col, vec3(0.78, 0.95, 0.84), smoothstep(0.55, 0.80, fc2) * 0.55);
+  /* → cool blush shadow */
+  col = mix(col, vec3(0.88, 0.78, 0.96), smoothstep(0.70, 0.90, fc) * 0.45);
+
+  /* ── apply thread shading ── */
+  /* broad bands: darken valleys, brighten ridges — the main thread look */
+  col *= 0.80 + broad * 0.24;
+  /* fine sheen: subtle bright gloss lines */
+  col  = mix(col, col * 1.18, fine * 0.28);
+
+  /* global lighten to keep it silky-bright */
+  col = mix(vec3(0.99, 0.97, 0.98), col, 0.76);
+  col = clamp(col, 0., 1.);
+
+  gl_FragColor = vec4(col, 1.);
 }
 `;
 
