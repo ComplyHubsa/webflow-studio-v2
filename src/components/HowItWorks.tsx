@@ -9,7 +9,7 @@ const steps = [
   {
     number: "02",
     title: "Design & Build",
-    desc: "I design and build your custom site — no templates. You'll see a live preview within 48 hours.",
+    desc: "I design and build your custom site — no templates. You'll see a live preview within 3–5 days.",
   },
   {
     number: "03",

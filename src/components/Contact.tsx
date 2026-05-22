@@ -27,6 +27,7 @@ export default function Contact() {
     hasWebsite: "",
     websiteUrl: "",
     industry: "",
+    industryOther: "",
     message: "",
   });
 
@@ -41,11 +42,16 @@ export default function Contact() {
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
+        body: JSON.stringify({
+          ...form,
+          industry: form.industry === "Other" && form.industryOther
+            ? `Other: ${form.industryOther}`
+            : form.industry,
+        }),
       });
       if (!res.ok) throw new Error();
       setStatus("success");
-      setForm({ name: "", phone: "", email: "", hasWebsite: "", websiteUrl: "", industry: "", message: "" });
+      setForm({ name: "", phone: "", email: "", hasWebsite: "", websiteUrl: "", industry: "", industryOther: "", message: "" });
     } catch {
       setStatus("error");
     }
@@ -260,6 +266,32 @@ export default function Contact() {
                       ))}
                     </select>
                   </div>
+
+                  {/* Industry — Other text box */}
+                  <AnimatePresence>
+                    {form.industry === "Other" && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.25 }}
+                        style={{ overflow: "hidden" }}
+                      >
+                        <label className={labelStyle} style={{ color: "var(--muted)" }}>
+                          Please specify your industry <span style={{ color: "var(--accent2)" }}>*</span>
+                        </label>
+                        <input
+                          name="industryOther"
+                          value={form.industryOther}
+                          onChange={handleChange}
+                          placeholder="e.g. Photography, Law, Real Estate..."
+                          required
+                          style={inputStyle}
+                          {...focusProps}
+                        />
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
 
                   {/* Message */}
                   <div>

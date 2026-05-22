@@ -60,7 +60,7 @@ export default function ContactCTA() {
                 style={{ color: "var(--muted)" }}
               >
                 Your business deserves a website that actually impresses people.
-                Get in touch today — most projects launch within 48 hours.
+                Get in touch today — most projects are live within 3–5 days.
               </p>
 
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">

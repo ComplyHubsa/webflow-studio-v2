@@ -6,7 +6,7 @@ import FadeIn from "./FadeIn";
 const stats = [
   { number: "20+", label: "Sites Delivered", icon: "◈" },
   { number: "100%", label: "Client Satisfaction", icon: "◉" },
-  { number: "48hr", label: "Avg Turnaround", icon: "◎" },
+  { number: "3–5 days", label: "Avg Turnaround", icon: "◎" },
   { number: "ZA", label: "Based in SA", icon: "◇" },
 ];
 
