@@ -23,21 +23,39 @@ const plans = [
     popular: false,
   },
   {
-    name: "Full Build",
+    name: "Starter Site",
     price: "R3,500",
-    desc: "A complete custom website built from scratch — your digital storefront, perfected.",
+    desc: "Your business online, done right.",
     features: [
-      "Custom multi-page design",
-      "Mobile responsive",
-      "Contact / booking form",
-      "Google Analytics setup",
-      "SEO optimised",
-      "Fast hosting setup",
-      "Unlimited revisions",
-      "1 year support",
+      "Clean, professional website built from scratch",
+      "Mobile-friendly and fast-loading",
+      "Contact form included",
+      "WhatsApp & call button",
+      "Basic SEO setup",
+      "Live within 5 days",
+      "1 round of revisions",
+      "Free concept before you pay anything",
     ],
-    payUrl: "https://pay.yoco.com/r/4gv1Ng",
+    payUrl: "https://pay.yoco.com/r/78RkZE",
     accent: "#6c63ff",
+    popular: false,
+  },
+  {
+    name: "Premium Site",
+    price: "R6,500",
+    desc: "A website that turns heads and wins customers.",
+    features: [
+      "Everything in Starter plus:",
+      "Smooth scroll animations throughout",
+      "Interactive hover effects and transitions",
+      "Multi-page site (Home, Work, Contact)",
+      "Advanced custom layout and design",
+      "Live within 7–10 days",
+      "2 rounds of revisions",
+      "Free concept before you pay anything",
+    ],
+    payUrl: "https://pay.yoco.com/r/mO1JaL",
+    accent: "#a78bfa",
     popular: true,
   },
 ];
@@ -45,7 +63,7 @@ const plans = [
 export default function Pricing() {
   return (
     <section className="py-18 px-6" style={{ background: "var(--surface)" }}>
-      <div className="max-w-4xl mx-auto">
+      <div className="max-w-6xl mx-auto">
         <FadeIn>
           <div className="text-center mb-20">
             <span
@@ -62,13 +80,13 @@ export default function Pricing() {
               <span className="gradient-text">Affordable.</span>
             </h2>
             <p className="text-base max-w-md mx-auto" style={{ color: "var(--muted)" }}>
-              No hidden fees. No vague quotes. Just two clear packages and a
-              Yoco payment link so you can get started instantly.
+              No hidden fees. No vague quotes. Three clear packages — pick what
+              fits and pay instantly via Yoco.
             </p>
           </div>
         </FadeIn>
 
-        <div className="grid grid-cols-2 gap-8 max-w-4xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
           {plans.map((plan, i) => (
             <FadeIn key={plan.name} delay={i * 0.18} className="w-full">
               <motion.div
@@ -119,17 +137,27 @@ export default function Pricing() {
                 </div>
 
                 <ul className="flex flex-col gap-3 mb-8 flex-1">
-                  {plan.features.map((feature) => (
-                    <li key={feature} className="flex items-center gap-3 text-sm">
-                      <span
-                        className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0"
-                        style={{ background: `${plan.accent}20` }}
-                      >
-                        <Check size={11} strokeWidth={2.5} style={{ color: plan.accent }} />
-                      </span>
-                      <span style={{ color: "var(--text)" }}>{feature}</span>
-                    </li>
-                  ))}
+                  {plan.features.map((feature) =>
+                    feature === "Everything in Starter plus:" ? (
+                      <li key={feature} className="flex items-center gap-2 pt-1">
+                        <div className="flex-1 h-px" style={{ background: `${plan.accent}30` }} />
+                        <span className="text-xs uppercase tracking-widest flex-shrink-0" style={{ color: plan.accent, opacity: 0.7 }}>
+                          + plus
+                        </span>
+                        <div className="flex-1 h-px" style={{ background: `${plan.accent}30` }} />
+                      </li>
+                    ) : (
+                      <li key={feature} className="flex items-center gap-3 text-sm">
+                        <span
+                          className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0"
+                          style={{ background: `${plan.accent}20` }}
+                        >
+                          <Check size={11} strokeWidth={2.5} style={{ color: plan.accent }} />
+                        </span>
+                        <span style={{ color: "var(--text)" }}>{feature}</span>
+                      </li>
+                    )
+                  )}
                 </ul>
 
                 <Link
@@ -140,9 +168,15 @@ export default function Pricing() {
                   style={
                     plan.popular
                       ? {
-                          background: "linear-gradient(135deg, #6c63ff, #8b5cf6)",
+                          background: "linear-gradient(135deg, #a78bfa, #6c63ff)",
                           color: "#fff",
-                          boxShadow: "0 0 30px rgba(108,99,255,0.3)",
+                          boxShadow: "0 0 30px rgba(167,139,250,0.35)",
+                        }
+                      : plan.name === "Starter Site"
+                      ? {
+                          background: "rgba(108,99,255,0.1)",
+                          border: "1px solid rgba(108,99,255,0.3)",
+                          color: plan.accent,
                         }
                       : {
                           background: "rgba(56,189,248,0.1)",
