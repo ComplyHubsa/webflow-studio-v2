@@ -68,9 +68,9 @@ void main(){
   vec2 mA     = vec2(m.x  * ar, m.y);
   float mDist = length(uvA - mA);
   /* falloff: only pixels close to cursor are dragged */
-  float influence = exp(-mDist * mDist * 16.0);
+  float influence = exp(-mDist * mDist * 12.0);
   /* displace in the direction the mouse is travelling */
-  vec2  p     = uv + u_vel * influence * 3.5;
+  vec2  p     = uv + u_vel * influence * 6.0;
   p.x        *= ar;                         /* aspect-correct from here */
 
   /* ── two-pass domain warp (creates the organic curve in the threads) ── */
