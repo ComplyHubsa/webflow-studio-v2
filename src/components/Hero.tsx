@@ -27,6 +27,7 @@ const FRAG = `
 precision mediump float;
 uniform float u_time;
 uniform vec2  u_mouse;
+uniform vec2  u_vel;
 uniform vec2  u_res;
 
 /* ── value noise ── */
@@ -61,14 +62,15 @@ void main(){
   float ar = u_res.x / u_res.y;
   float t  = u_time * 0.10;
 
-  /* ── mouse — very subtle ripple, just a gentle local nudge ── */
+  /* ── mouse drag — silk follows mouse movement direction ── */
   vec2 m      = vec2(u_mouse.x / u_res.x, 1. - u_mouse.y / u_res.y);
   vec2 uvA    = vec2(uv.x * ar, uv.y);
   vec2 mA     = vec2(m.x  * ar, m.y);
-  vec2 delta  = uvA - mA;
-  float mDist = length(delta);
-  float push  = exp(-mDist * mDist * 12.0) * 0.07;
-  vec2  p     = uv - (delta / (mDist + 0.001)) * push;
+  float mDist = length(uvA - mA);
+  /* falloff: only pixels close to cursor are dragged */
+  float influence = exp(-mDist * mDist * 16.0);
+  /* displace in the direction the mouse is travelling */
+  vec2  p     = uv + u_vel * influence * 3.5;
   p.x        *= ar;                         /* aspect-correct from here */
 
   /* ── two-pass domain warp (creates the organic curve in the threads) ── */
@@ -152,6 +154,7 @@ function initGL(canvas: HTMLCanvasElement) {
     gl,
     uTime:  gl.getUniformLocation(prog, "u_time"),
     uMouse: gl.getUniformLocation(prog, "u_mouse"),
+    uVel:   gl.getUniformLocation(prog, "u_vel"),
     uRes:   gl.getUniformLocation(prog, "u_res"),
   };
 }
@@ -166,14 +169,15 @@ export default function Hero() {
     if (!canvas) return;
     const ctx = initGL(canvas);
     if (!ctx) return;
-    const { gl, uTime, uMouse, uRes } = ctx;
+    const { gl, uTime, uMouse, uVel, uRes } = ctx;
 
     let raf = 0, running = true;
     const start = performance.now();
 
-    /* raw mouse + smoothed mouse (lerp for silk drag feel) */
+    /* raw mouse + smoothed mouse + smoothed velocity */
     const raw    = { x: window.innerWidth / 2,  y: window.innerHeight / 2 };
     const smooth = { x: window.innerWidth / 2,  y: window.innerHeight / 2 };
+    const vel    = { x: 0, y: 0 };
 
     const resize = () => {
       canvas.width  = window.innerWidth;
@@ -188,12 +192,17 @@ export default function Hero() {
 
     const draw = () => {
       if (!running) return;
-      /* 0.07 lerp → responsive but still silky-smooth drag */
-      smooth.x += (raw.x - smooth.x) * 0.07;
-      smooth.y += (raw.y - smooth.y) * 0.07;
+      /* lerp mouse position */
+      const px = smooth.x, py = smooth.y;
+      smooth.x += (raw.x - smooth.x) * 0.10;
+      smooth.y += (raw.y - smooth.y) * 0.10;
+      /* smooth velocity = direction + speed of mouse travel, in UV space */
+      vel.x = vel.x * 0.70 + ((smooth.x - px) / canvas.width)  * 0.30;
+      vel.y = vel.y * 0.70 + ((smooth.y - py) / canvas.height) * 0.30;
 
       gl.uniform1f(uTime,  (performance.now() - start) / 1000);
       gl.uniform2f(uMouse, smooth.x, smooth.y);
+      gl.uniform2f(uVel,   vel.x, vel.y);
       gl.uniform2f(uRes,   canvas.width, canvas.height);
       gl.drawArrays(gl.TRIANGLES, 0, 6);
       raf = requestAnimationFrame(draw);
