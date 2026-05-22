@@ -61,13 +61,13 @@ void main(){
   float ar = u_res.x / u_res.y;
   float t  = u_time * 0.10;
 
-  /* ── mouse push — displaces coords so lines bend away from cursor ── */
+  /* ── mouse — very subtle ripple, just a gentle local nudge ── */
   vec2 m      = vec2(u_mouse.x / u_res.x, 1. - u_mouse.y / u_res.y);
   vec2 uvA    = vec2(uv.x * ar, uv.y);
   vec2 mA     = vec2(m.x  * ar, m.y);
   vec2 delta  = uvA - mA;
   float mDist = length(delta);
-  float push  = exp(-mDist * mDist * 4.5) * 0.72;
+  float push  = exp(-mDist * mDist * 12.0) * 0.07;
   vec2  p     = uv + (delta / (mDist + 0.001)) * push;
   p.x        *= ar;                         /* aspect-correct from here */
 
