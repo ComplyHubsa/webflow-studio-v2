@@ -14,81 +14,63 @@ const projects = [
 ];
 
 /* ─────────────────────────────────────────────────────────────────────────
-   LUMIÈRE — Split layout: serum bottle + product card
+   LUMIÈRE — Live iframe of /beauty, scaled to fit card
 ───────────────────────────────────────────────────────────────────────── */
 function LumiereMockup() {
   return (
-    <div className="absolute inset-0 overflow-hidden" style={{ background: "#0d0a08" }}>
-      <div
-        className="absolute pointer-events-none"
+    <Link
+      href="/beauty"
+      target="_blank"
+      className="absolute inset-0 block overflow-hidden"
+      style={{ cursor: "pointer" }}
+    >
+      {/* Scaled live page */}
+      <iframe
+        src="/beauty"
         style={{
-          right: "10%", top: "30%", width: 200, height: 200,
-          background: "radial-gradient(circle, rgba(212,180,131,0.18) 0%, transparent 70%)",
+          width: 1280,
+          height: 1400,
+          transform: "scale(0.32)",
+          transformOrigin: "top left",
+          pointerEvents: "none",
+          border: "none",
         }}
+        tabIndex={-1}
+        aria-hidden="true"
       />
+      {/* Gold ● Live badge */}
       <div
-        className="flex items-center justify-between relative z-10"
-        style={{ padding: "18px 24px", borderBottom: "1px solid rgba(212,180,131,0.1)" }}
+        style={{
+          position: "absolute",
+          top: 12,
+          right: 12,
+          zIndex: 10,
+          display: "flex",
+          alignItems: "center",
+          gap: 5,
+          background: "rgba(8,3,16,0.65)",
+          backdropFilter: "blur(6px)",
+          border: "1px solid rgba(212,165,83,0.45)",
+          borderRadius: 20,
+          padding: "4px 10px",
+          fontSize: 10,
+          fontWeight: 600,
+          color: "#D4A553",
+          letterSpacing: "0.06em",
+        }}
       >
-        <span style={{ color: "rgba(212,180,131,0.85)", fontSize: 11, fontWeight: 400, letterSpacing: "0.38em", fontFamily: "Georgia, serif" }}>
-          L U M I È R E
-        </span>
-        <div className="flex gap-5">
-          {["Atelier", "Serums", "Book"].map((n) => (
-            <span key={n} style={{ color: "rgba(255,255,255,0.22)", fontSize: 8 }}>{n}</span>
-          ))}
-        </div>
+        <span
+          style={{
+            width: 6,
+            height: 6,
+            borderRadius: "50%",
+            background: "#D4A553",
+            display: "inline-block",
+          }}
+        />
+        Live
       </div>
-
-      <div className="absolute flex" style={{ top: 54, left: 0, right: 0, bottom: 0 }}>
-        <div className="flex flex-col justify-center pl-6 pr-3" style={{ width: "60%" }}>
-          <div style={{ color: "rgba(212,180,131,0.5)", fontSize: 7, letterSpacing: "0.4em", marginBottom: 10, textTransform: "uppercase" }}>
-            New · Vitamin C
-          </div>
-          <div style={{ color: "#f0ece4", fontSize: 22, fontWeight: 300, lineHeight: 1.2, marginBottom: 10, fontFamily: "Georgia, serif", letterSpacing: "0.01em" }}>
-            Skin That<br />Glows From<br /><em>Within.</em>
-          </div>
-          <div style={{ width: 24, height: 1, background: "rgba(212,180,131,0.35)", marginBottom: 12 }} />
-          <div style={{ border: "1px solid rgba(212,180,131,0.2)", padding: "8px 10px", marginBottom: 12, background: "rgba(212,180,131,0.04)" }}>
-            <div style={{ color: "rgba(212,180,131,0.85)", fontSize: 9, fontFamily: "Georgia, serif" }}>Glow Serum N°3</div>
-            <div className="flex items-center justify-between" style={{ marginTop: 3 }}>
-              <span style={{ color: "rgba(255,255,255,0.4)", fontSize: 7 }}>30ml · Vitamin C</span>
-              <span style={{ color: "#f0ece4", fontSize: 10, fontFamily: "Georgia, serif" }}>R 480</span>
-            </div>
-          </div>
-          <div className="flex items-center gap-3" style={{ marginBottom: 10 }}>
-            <span style={{ color: "#d4b483", fontSize: 8, letterSpacing: 1 }}>★★★★★</span>
-            <span style={{ color: "rgba(255,255,255,0.35)", fontSize: 7 }}>248 reviews</span>
-          </div>
-          <span style={{ display: "inline-block", border: "1px solid rgba(212,180,131,0.45)", color: "rgba(212,180,131,0.85)", fontSize: 8, padding: "7px 16px", letterSpacing: "0.22em", fontFamily: "Georgia, serif", alignSelf: "flex-start" }}>
-            SHOP THE EDIT
-          </span>
-        </div>
-
-        <div className="relative flex items-end justify-center" style={{ width: "40%", paddingBottom: 30 }}>
-          <div className="absolute" style={{ bottom: 24, width: 64, height: 6, background: "radial-gradient(ellipse, rgba(212,180,131,0.25) 0%, transparent 70%)", filter: "blur(2px)" }} />
-          <svg width="60" height="200" viewBox="0 0 60 200" fill="none">
-            <rect x="20" y="6" width="20" height="22" rx="2" fill="#1a1410" stroke="rgba(212,180,131,0.5)" strokeWidth="0.8" />
-            <rect x="22" y="28" width="16" height="4" fill="rgba(212,180,131,0.3)" />
-            <rect x="24" y="32" width="12" height="8" fill="rgba(212,180,131,0.15)" stroke="rgba(212,180,131,0.4)" strokeWidth="0.6" />
-            <rect x="8" y="40" width="44" height="140" rx="6" fill="url(#serumGrad)" stroke="rgba(212,180,131,0.55)" strokeWidth="0.8" />
-            <rect x="12" y="46" width="4" height="120" rx="2" fill="rgba(255,235,180,0.18)" />
-            <rect x="14" y="90" width="32" height="40" fill="rgba(20,14,8,0.85)" stroke="rgba(212,180,131,0.3)" strokeWidth="0.4" />
-            <text x="30" y="105" textAnchor="middle" fontSize="5" fill="rgba(212,180,131,0.85)" fontFamily="Georgia, serif" letterSpacing="1">LUMIÈRE</text>
-            <line x1="20" y1="110" x2="40" y2="110" stroke="rgba(212,180,131,0.3)" strokeWidth="0.3" />
-            <text x="30" y="118" textAnchor="middle" fontSize="3.5" fill="rgba(255,255,255,0.5)" letterSpacing="0.8">VITAMIN C</text>
-            <text x="30" y="125" textAnchor="middle" fontSize="3" fill="rgba(255,255,255,0.35)" letterSpacing="0.6">GLOW SERUM N°3</text>
-            <defs>
-              <linearGradient id="serumGrad" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor="#c9954a" stopOpacity="0.55" />
-                <stop offset="60%" stopColor="#7a4d18" stopOpacity="0.85" />
-                <stop offset="100%" stopColor="#3a200a" stopOpacity="0.95" />
-              </linearGradient>
-            </defs>
-          </svg>
-        </div>
-      </div>
-    </div>
+    </Link>
   );
 }
 
