@@ -9,7 +9,7 @@ const projects = [
   { id: 2, title: "Ember & Oak", subtitle: "Fine Dining Restaurant", tags: ["Reservations", "Menu", "Photography"] },
   { id: 3, title: "Titan Build", subtitle: "Construction Company", tags: ["Lead Gen", "Quote Form", "SEO"] },
   { id: 4, title: "Serenity", subtitle: "Wellness Spa", tags: ["Booking", "UI Design", "Mobile First"] },
-  { id: 5, title: "Meridian", subtitle: "Accounting Firm", tags: ["Authority", "Trust Design", "SEO"] },
+  { id: 5, title: "Meridian", subtitle: "Accounting Firm", tags: ["Authority", "Trust Design", "SEO"], href: "/accountant" },
   { id: 6, title: "FlowFix", subtitle: "Plumbing Business", tags: ["Emergency CTA", "Lead Gen", "Mobile"] },
 ];
 
@@ -307,73 +307,40 @@ function SerenityMockup() {
    MERIDIAN — Dark navy, bar chart dashboard, accounting firm
 ───────────────────────────────────────────────────────────────────────── */
 function MeridianMockup() {
-  const bars = [38, 52, 44, 65, 55, 78, 90];
-  const monthLabels = ["J", "F", "M", "A", "M", "J", "J"];
-
   return (
-    <div className="absolute inset-0 overflow-hidden flex flex-col" style={{ background: "linear-gradient(140deg, #060f1e 0%, #0b1e3a 100%)" }}>
-      <div className="flex items-center justify-between" style={{ padding: "14px 20px", borderBottom: "1px solid rgba(129,140,248,0.1)" }}>
-        <div className="flex items-center gap-2">
-          <div style={{ width: 8, height: 8, background: "#818cf8", borderRadius: 2 }} />
-          <span style={{ color: "#fff", fontSize: 11, fontWeight: 700, letterSpacing: "0.16em" }}>MERIDIAN</span>
-        </div>
-        <div className="flex gap-3 items-center">
-          {["Services", "Team"].map((n) => (
-            <span key={n} style={{ color: "rgba(255,255,255,0.22)", fontSize: 7 }}>{n}</span>
-          ))}
-          <span style={{ color: "#818cf8", fontSize: 7, border: "1px solid rgba(129,140,248,0.4)", padding: "3px 7px", borderRadius: 3 }}>Login</span>
-        </div>
-      </div>
-
-      <div className="flex" style={{ padding: "16px 20px 0" }}>
-        <div style={{ flex: 1.1, paddingRight: 8 }}>
-          <div style={{ color: "#818cf8", fontSize: 6.5, letterSpacing: "0.35em", marginBottom: 8 }}>CHARTERED ACCOUNTANTS</div>
-          <div style={{ color: "#fff", fontSize: 18, fontWeight: 700, lineHeight: 1.15, marginBottom: 8, letterSpacing: "-0.02em" }}>
-            Your Numbers.<br />Our Edge.
-          </div>
-          <div style={{ color: "rgba(255,255,255,0.4)", fontSize: 8, lineHeight: 1.6, marginBottom: 12 }}>
-            Tax, audit & advisory<br />for ambitious businesses.
-          </div>
-          <span style={{ background: "#818cf8", color: "#fff", fontSize: 7, fontWeight: 700, padding: "6px 12px", borderRadius: 4, letterSpacing: "0.06em", display: "inline-block" }}>
-            BOOK CONSULT →
-          </span>
-        </div>
-
-        <div style={{ width: 130, background: "rgba(129,140,248,0.06)", border: "1px solid rgba(129,140,248,0.18)", borderRadius: 6, padding: "8px 9px" }}>
-          <div className="flex items-center justify-between" style={{ marginBottom: 6 }}>
-            <span style={{ color: "#fff", fontSize: 7, fontWeight: 700 }}>Tax Year 2026</span>
-            <span style={{ color: "#4ade80", fontSize: 6, background: "rgba(74,222,128,0.12)", padding: "1px 4px", borderRadius: 2 }}>ON TRACK</span>
-          </div>
-          <div className="grid grid-cols-2 gap-1.5" style={{ marginBottom: 7 }}>
-            <div style={{ background: "rgba(0,0,0,0.25)", borderRadius: 3, padding: "4px 6px" }}>
-              <div style={{ color: "rgba(255,255,255,0.4)", fontSize: 5.5, letterSpacing: "0.1em" }}>FILED</div>
-              <div style={{ color: "#fff", fontSize: 12, fontWeight: 700 }}>234</div>
-            </div>
-            <div style={{ background: "rgba(0,0,0,0.25)", borderRadius: 3, padding: "4px 6px" }}>
-              <div style={{ color: "rgba(255,255,255,0.4)", fontSize: 5.5, letterSpacing: "0.1em" }}>DUE</div>
-              <div style={{ color: "#818cf8", fontSize: 12, fontWeight: 700 }}>12</div>
-            </div>
-          </div>
-          <div style={{ color: "rgba(129,140,248,0.45)", fontSize: 5.5, letterSpacing: "0.15em", marginBottom: 3 }}>REVENUE YoY</div>
-          <div className="flex items-end gap-1" style={{ height: 36 }}>
-            {bars.map((h, i) => (
-              <div key={i} className="flex flex-col items-center" style={{ flex: 1 }}>
-                <div style={{ width: "100%", height: `${h}%`, background: i === bars.length - 1 ? "#818cf8" : `rgba(129,140,248,${0.14 + i * 0.08})`, borderRadius: "1px 1px 0 0" }} />
-              </div>
-            ))}
-          </div>
-          <div className="flex" style={{ marginTop: 2 }}>
-            {monthLabels.map((m, i) => (
-              <div key={i} style={{ flex: 1, textAlign: "center", color: "rgba(255,255,255,0.3)", fontSize: 5 }}>{m}</div>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      <div className="flex flex-wrap gap-1" style={{ padding: "12px 20px 14px", marginTop: "auto" }}>
-        {["SARS Registered", "SAICA Member", "200+ Clients", "15yr Track Record"].map((b) => (
-          <span key={b} style={{ color: "rgba(129,140,248,0.6)", fontSize: 6.5, background: "rgba(129,140,248,0.07)", border: "1px solid rgba(129,140,248,0.18)", padding: "2px 7px", borderRadius: 99, whiteSpace: "nowrap" }}>{b}</span>
-        ))}
+    <div className="absolute inset-0 overflow-hidden" style={{ background: "#060609" }}>
+      <iframe
+        src="/accountant"
+        title="Meridian Accounting Hero"
+        scrolling="no"
+        style={{
+          border: "none",
+          width: 1280,
+          height: 1400,
+          transformOrigin: "top left",
+          transform: "scale(0.32)",
+          pointerEvents: "none",
+        }}
+      />
+      <div
+        style={{
+          position: "absolute",
+          top: 14,
+          right: 14,
+          background: "rgba(0,255,136,0.10)",
+          border: "1px solid rgba(0,255,136,0.35)",
+          color: "#00FF88",
+          fontSize: 9,
+          fontWeight: 600,
+          letterSpacing: "0.16em",
+          padding: "4px 10px",
+          borderRadius: 99,
+          fontFamily: "Inter, sans-serif",
+          textTransform: "uppercase",
+          backdropFilter: "blur(6px)",
+        }}
+      >
+        ● Live
       </div>
     </div>
   );
