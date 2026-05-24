@@ -429,16 +429,23 @@ const MOCKUPS: Record<number, () => React.ReactElement> = {
 
 function ProjectCard({ project, index }: { project: (typeof projects)[0]; index: number }) {
   const Mockup = MOCKUPS[project.id];
+  const card = (
+    <motion.div
+      className="relative rounded-2xl overflow-hidden"
+      style={{ height: 440, cursor: project.href ? "pointer" : "default" }}
+      whileHover={{ scale: 1.02, y: -4 }}
+      transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+    >
+      <Mockup />
+    </motion.div>
+  );
   return (
     <FadeIn delay={index * 0.09}>
-      <motion.div
-        className="relative rounded-2xl overflow-hidden cursor-default"
-        style={{ height: 440 }}
-        whileHover={{ scale: 1.02, y: -4 }}
-        transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-      >
-        <Mockup />
-      </motion.div>
+      {project.href ? (
+        <Link href={project.href} target="_blank" rel="noopener noreferrer">
+          {card}
+        </Link>
+      ) : card}
     </FadeIn>
   );
 }
