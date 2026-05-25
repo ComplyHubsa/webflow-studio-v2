@@ -238,14 +238,14 @@ export default function FreeConcept() {
                 }}
               />
               <div
-                className="absolute -top-24 -right-24 w-96 h-96 rounded-full"
+                className="absolute -top-24 -right-24 w-96 h-96 rounded-full hidden sm:block"
                 style={{
                   background: "radial-gradient(circle, rgba(108,99,255,0.18) 0%, transparent 70%)",
                   filter: "blur(50px)",
                 }}
               />
               <div
-                className="absolute -bottom-20 -left-20 w-80 h-80 rounded-full"
+                className="absolute -bottom-20 -left-20 w-80 h-80 rounded-full hidden sm:block"
                 style={{
                   background: "radial-gradient(circle, rgba(167,139,250,0.22) 0%, transparent 70%)",
                   filter: "blur(50px)",
