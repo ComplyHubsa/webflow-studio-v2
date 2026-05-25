@@ -101,20 +101,21 @@ void main(){
   float fc  = fbm(wp * 0.75 + t * 0.07) * 0.5 + 0.5;
   float fc2 = fbm(wp * 0.55 + vec2(3.3, 1.1) + t * 0.05) * 0.5 + 0.5;
 
-  /* rose → peach — darkened palette */
-  vec3 col = mix(vec3(0.55, 0.32, 0.42), vec3(0.52, 0.40, 0.28), smoothstep(0.0,  0.45, fc));
-  /* → lavender */
-  col = mix(col, vec3(0.34, 0.30, 0.55), smoothstep(0.35, 0.65, fc));
-  /* → mint (secondary map) */
-  col = mix(col, vec3(0.28, 0.45, 0.34), smoothstep(0.55, 0.80, fc2) * 0.55);
-  /* → cool blush shadow */
-  col = mix(col, vec3(0.38, 0.28, 0.50), smoothstep(0.70, 0.90, fc) * 0.45);
+  /* medium-tone pastels — visible colour, dark text still readable */
+  vec3 col = mix(vec3(0.80, 0.60, 0.72), vec3(0.82, 0.72, 0.56), smoothstep(0.0,  0.45, fc));
+  /* → medium lavender */
+  col = mix(col, vec3(0.64, 0.60, 0.90), smoothstep(0.35, 0.65, fc));
+  /* → muted mint */
+  col = mix(col, vec3(0.60, 0.82, 0.68), smoothstep(0.55, 0.80, fc2) * 0.50);
+  /* → dusty blush */
+  col = mix(col, vec3(0.74, 0.62, 0.86), smoothstep(0.70, 0.90, fc) * 0.42);
 
-  /* ── apply thread shading ── */
-  col *= 0.78 + broad * 0.30;
-  col  = mix(col, col * 1.22, fine * 0.30);
+  /* ── thread shading ── */
+  col *= 0.78 + broad * 0.28;
+  col  = mix(col, col * 1.18, fine * 0.28);
 
-  /* final clamp — no extra lighten */
+  /* unify toward a warm light-grey so silk reads as one cohesive tone */
+  col = mix(vec3(0.84, 0.82, 0.88), col, 0.78);
   col = clamp(col, 0., 1.);
 
   gl_FragColor = vec4(col, 1.);
