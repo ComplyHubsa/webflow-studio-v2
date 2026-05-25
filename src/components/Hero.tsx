@@ -288,9 +288,7 @@ export default function Hero() {
           className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16"
         >
           <Link
-            href="https://pay.yoco.com/r/4gv1Ng"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="/contact"
             className="inline-flex items-center gap-2 text-white font-semibold px-9 py-4 rounded-full text-base transition-all duration-300 hover:scale-105"
             style={{
               background: "linear-gradient(135deg, #6c63ff, #8b5cf6)",
