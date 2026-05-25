@@ -8,9 +8,9 @@ const projects = [
   { id: 1, title: "Lumière", subtitle: "Luxury Beauty Salon", tags: ["Booking System", "SEO", "Animations"] },
   { id: 2, title: "Ember & Oak", subtitle: "Fine Dining Restaurant", tags: ["Reservations", "Menu", "Photography"] },
   { id: 3, title: "Titan Build", subtitle: "Construction Company", tags: ["Lead Gen", "Quote Form", "SEO"] },
-  { id: 4, title: "Serenity", subtitle: "Wellness Spa", tags: ["Booking", "UI Design", "Mobile First"] },
+  { id: 4, title: "Maison Sérène", subtitle: "Luxury Wellness Spa", tags: ["Hero Design", "Animations", "Brand Identity"], href: "/spa" },
   { id: 5, title: "Meridian", subtitle: "Accounting Firm", tags: ["Authority", "Trust Design", "SEO"], href: "/accountant" },
-  { id: 6, title: "FlowFix", subtitle: "Plumbing Business", tags: ["Emergency CTA", "Lead Gen", "Mobile"] },
+  { id: 6, title: "Flux Plumbing", subtitle: "Plumbing Business", tags: ["Water Animation", "Emergency CTA", "Lead Gen"], href: "/plumbing" },
 ];
 
 /* ─────────────────────────────────────────────────────────────────────────
@@ -247,57 +247,43 @@ function TitanBuildMockup() {
 }
 
 /* ─────────────────────────────────────────────────────────────────────────
-   SERENITY — Minimal cream spa with botanical leaf bullets + treatment menu
+   MAISON SÉRÈNE — Live iframe of the /spa hero, scaled to fit the card
 ───────────────────────────────────────────────────────────────────────── */
 function SerenityMockup() {
-  const treatments = [
-    { name: "Hot Stone Massage", dur: "90 min", price: "R 450" },
-    { name: "Aromatherapy Facial", dur: "60 min", price: "R 380" },
-    { name: "Couples Retreat", dur: "120 min", price: "R 890" },
-  ];
-
   return (
-    <div className="absolute inset-0 overflow-hidden flex flex-col" style={{ background: "#f9f6f1" }}>
-      <div className="flex items-center justify-between" style={{ padding: "18px 26px", borderBottom: "1px solid rgba(0,0,0,0.06)" }}>
-        <span style={{ color: "#2d3a2e", fontSize: 10, fontWeight: 400, letterSpacing: "0.42em" }}>SERENITY</span>
-        <div className="flex gap-4">
-          {["Rituals", "Book", "About"].map((n) => (
-            <span key={n} style={{ color: "rgba(0,0,0,0.25)", fontSize: 8 }}>{n}</span>
-          ))}
-        </div>
-      </div>
-
-      <div style={{ padding: "18px 26px 8px" }}>
-        <div style={{ color: "rgba(0,0,0,0.25)", fontSize: 7, letterSpacing: "0.38em", marginBottom: 8, textTransform: "uppercase" }}>Wellness · Spa Retreat</div>
-        <div style={{ color: "#1a1a1a", fontSize: 26, fontWeight: 300, lineHeight: 1.1, fontFamily: "Georgia, serif" }}>
-          Be <em style={{ fontStyle: "italic", color: "#5c7a6e" }}>Still.</em>
-        </div>
-      </div>
-
-      <div style={{ padding: "0 26px", flex: 1 }}>
-        <div style={{ color: "rgba(45,58,46,0.5)", fontSize: 6, letterSpacing: "0.32em", marginTop: 6, marginBottom: 8, textTransform: "uppercase" }}>─── This Week&apos;s Rituals</div>
-        <div className="flex flex-col gap-2.5">
-          {treatments.map((t) => (
-            <div key={t.name} className="flex items-center justify-between" style={{ paddingBottom: 8, borderBottom: "1px solid rgba(0,0,0,0.07)" }}>
-              <div className="flex items-start gap-2.5">
-                <svg width="10" height="14" viewBox="0 0 10 14" style={{ marginTop: 2 }}>
-                  <path d="M5 1 C2 3 1 7 2 10 C3 12 5 13 5 13 C5 13 7 12 8 10 C9 7 8 3 5 1Z" fill="rgba(92,122,110,0.18)" stroke="rgba(45,58,46,0.4)" strokeWidth="0.5" />
-                  <line x1="5" y1="3" x2="5" y2="13" stroke="rgba(45,58,46,0.3)" strokeWidth="0.4" />
-                </svg>
-                <div>
-                  <div style={{ color: "#1a1a1a", fontSize: 10, fontFamily: "Georgia, serif" }}>{t.name}</div>
-                  <div style={{ color: "rgba(0,0,0,0.35)", fontSize: 7, marginTop: 1 }}>{t.dur}</div>
-                </div>
-              </div>
-              <span style={{ color: "#2d3a2e", fontSize: 10, fontFamily: "Georgia, serif" }}>{t.price}</span>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      <div className="flex items-center justify-between" style={{ padding: "14px 26px", borderTop: "1px solid rgba(0,0,0,0.06)" }}>
-        <span style={{ color: "rgba(0,0,0,0.4)", fontSize: 7 }}>Sea Point · Cape Town</span>
-        <span style={{ color: "#2d3a2e", fontSize: 8, letterSpacing: "0.22em", borderBottom: "1px solid rgba(45,58,46,0.4)", paddingBottom: 2 }}>RESERVE YOUR RITUAL</span>
+    <div className="absolute inset-0 overflow-hidden" style={{ background: "#2A1E18" }}>
+      <iframe
+        src="/spa"
+        title="Maison Sérène Spa Hero"
+        scrolling="no"
+        style={{
+          border: "none",
+          width: 1280,
+          height: 1400,
+          transformOrigin: "top left",
+          transform: "scale(0.32)",
+          pointerEvents: "none",
+        }}
+      />
+      <div
+        style={{
+          position: "absolute",
+          top: 14,
+          right: 14,
+          background: "rgba(201,169,110,0.12)",
+          border: "1px solid rgba(201,169,110,0.4)",
+          color: "#C9A96E",
+          fontSize: 9,
+          fontWeight: 600,
+          letterSpacing: "0.16em",
+          padding: "4px 10px",
+          borderRadius: 99,
+          fontFamily: "Inter, sans-serif",
+          textTransform: "uppercase",
+          backdropFilter: "blur(6px)",
+        }}
+      >
+        ● Live
       </div>
     </div>
   );
@@ -349,72 +335,53 @@ function MeridianMockup() {
 /* ─────────────────────────────────────────────────────────────────────────
    FLOWFIX — Emergency banner, big phone number, service price cards
 ───────────────────────────────────────────────────────────────────────── */
-function FlowFixMockup() {
-  const services = [
-    { name: "Burst Pipe", time: "30min", price: "R 450" },
-    { name: "Blocked Drain", time: "45min", price: "R 350" },
-    { name: "Geyser Install", time: "2hr",  price: "R 1 200" },
-  ];
-
+function FluxPlumbingMockup() {
   return (
-    <div className="absolute inset-0 overflow-hidden flex flex-col" style={{ background: "#05101e" }}>
-      <div className="flex items-center justify-center gap-2" style={{ background: "#c81c1c", padding: "8px" }}>
-        <div style={{ width: 6, height: 6, borderRadius: "50%", background: "rgba(255,255,255,0.95)" }} />
-        <span style={{ color: "#fff", fontSize: 8, fontWeight: 800, letterSpacing: "0.2em" }}>24/7 EMERGENCY · CAPE TOWN</span>
-        <div style={{ width: 6, height: 6, borderRadius: "50%", background: "rgba(255,255,255,0.95)" }} />
+    <Link
+      href="/plumbing"
+      target="_blank"
+      className="absolute inset-0 block overflow-hidden"
+      style={{ cursor: "pointer" }}
+    >
+      <iframe
+        src="/plumbing"
+        scrolling="no"
+        style={{
+          width: 1280,
+          height: 1400,
+          transform: "scale(0.32)",
+          transformOrigin: "top left",
+          pointerEvents: "none",
+          border: "none",
+        }}
+        tabIndex={-1}
+        aria-hidden="true"
+      />
+      {/* Orange ● Live badge */}
+      <div
+        style={{
+          position: "absolute",
+          top: 12,
+          right: 12,
+          zIndex: 10,
+          display: "flex",
+          alignItems: "center",
+          gap: 5,
+          background: "rgba(15,7,3,0.65)",
+          backdropFilter: "blur(6px)",
+          border: "1px solid rgba(232,72,30,0.5)",
+          borderRadius: 20,
+          padding: "4px 10px",
+          fontSize: 10,
+          fontWeight: 600,
+          color: "#E8481E",
+          letterSpacing: "0.06em",
+        }}
+      >
+        <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#E8481E", display: "inline-block" }} />
+        Live
       </div>
-
-      <div className="flex items-center justify-between" style={{ padding: "10px 18px" }}>
-        <div className="flex items-center gap-2">
-          <div style={{ width: 4, height: 20, background: "#38bdf8", borderRadius: 2 }} />
-          <span style={{ color: "#fff", fontSize: 14, fontWeight: 900, letterSpacing: "0.08em" }}>FLOWFIX</span>
-        </div>
-        <div className="flex gap-3 items-center">
-          {["Services", "Areas"].map((n) => (
-            <span key={n} style={{ color: "rgba(255,255,255,0.25)", fontSize: 7 }}>{n}</span>
-          ))}
-          <span style={{ background: "#c81c1c", color: "#fff", fontSize: 7, fontWeight: 800, padding: "3px 8px", borderRadius: 2, letterSpacing: "0.1em" }}>CALL</span>
-        </div>
-      </div>
-
-      <div style={{ padding: "8px 18px 0" }}>
-        <div style={{ color: "#38bdf8", fontSize: 7, letterSpacing: "0.3em", marginBottom: 4 }}>PLUMBING & DRAINAGE</div>
-        <div style={{ color: "#ffffff", fontSize: 22, fontWeight: 900, letterSpacing: "-0.02em", lineHeight: 1 }}>073 127 5190</div>
-        <div className="flex items-center gap-3" style={{ marginTop: 4 }}>
-          <span style={{ color: "#fbbf24", fontSize: 8 }}>★★★★★</span>
-          <span style={{ color: "rgba(255,255,255,0.4)", fontSize: 7 }}>4.9 · 320 reviews</span>
-        </div>
-      </div>
-
-      <div style={{ padding: "10px 18px 0" }}>
-        <div style={{ color: "rgba(56,189,248,0.55)", fontSize: 6, letterSpacing: "0.28em", marginBottom: 6 }}>UPFRONT PRICING · NO CALLOUT FEE</div>
-        <div className="flex flex-col gap-1.5">
-          {services.map((s) => (
-            <div key={s.name} className="flex items-center justify-between" style={{ padding: "6px 9px", background: "rgba(56,189,248,0.06)", border: "1px solid rgba(56,189,248,0.14)", borderRadius: 3 }}>
-              <div className="flex items-center gap-2">
-                <svg width="10" height="10" viewBox="0 0 24 24" fill="none">
-                  <path d="M14 6a4 4 0 1 1 4 4L7 21l-3-3L14 7v-1Z" stroke="#38bdf8" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-                <div>
-                  <div style={{ color: "#fff", fontSize: 9, fontWeight: 600 }}>{s.name}</div>
-                  <div style={{ color: "rgba(255,255,255,0.35)", fontSize: 6.5 }}>arrive ~{s.time}</div>
-                </div>
-              </div>
-              <div className="text-right">
-                <div style={{ color: "rgba(255,255,255,0.4)", fontSize: 5.5, letterSpacing: "0.1em" }}>FROM</div>
-                <div style={{ color: "#38bdf8", fontSize: 10, fontWeight: 800 }}>{s.price}</div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      <div className="flex flex-wrap gap-1" style={{ padding: "10px 18px 12px", marginTop: "auto" }}>
-        {["Sea Point", "Camps Bay", "City Bowl", "Southern Suburbs"].map((t) => (
-          <span key={t} style={{ color: "rgba(56,189,248,0.55)", fontSize: 6.5, background: "rgba(56,189,248,0.06)", border: "1px solid rgba(56,189,248,0.12)", padding: "2px 6px", borderRadius: 2 }}>{t}</span>
-        ))}
-      </div>
-    </div>
+    </Link>
   );
 }
 
@@ -429,10 +396,12 @@ const MOCKUPS: Record<number, () => React.ReactElement> = {
 
 function ProjectCard({ project, index }: { project: (typeof projects)[0]; index: number }) {
   const Mockup = MOCKUPS[project.id];
+  const hasHref = "href" in project && project.href;
+
   const card = (
     <motion.div
       className="relative rounded-2xl overflow-hidden"
-      style={{ height: 440, cursor: project.href ? "pointer" : "default" }}
+      style={{ height: 440, cursor: hasHref ? "pointer" : "default" }}
       whileHover={{ scale: 1.02, y: -4 }}
       transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
     >
@@ -441,8 +410,8 @@ function ProjectCard({ project, index }: { project: (typeof projects)[0]; index:
   );
   return (
     <FadeIn delay={index * 0.09}>
-      {project.href ? (
-        <Link href={project.href} target="_blank" rel="noopener noreferrer">
+      {hasHref ? (
+        <Link href={project.href as string} target="_blank" rel="noopener noreferrer">
           {card}
         </Link>
       ) : card}
