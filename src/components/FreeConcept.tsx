@@ -204,7 +204,7 @@ export default function FreeConcept() {
     <section className="py-18 px-6">
       <div className="max-w-6xl mx-auto">
         <FadeIn>
-          <div ref={cardRef} className="relative rounded-3xl" style={{ background: "linear-gradient(135deg, #f0f0ff 0%, #e8e4ff 40%, #f5f0ff 100%)" }}>
+          <div ref={cardRef} className="relative rounded-3xl" style={{ background: "linear-gradient(160deg, #f0eeff 0%, #e8e6ff 25%, #ede8ff 55%, #e6ecff 100%)" }}>
             {/* SVG body — warping card shape, paints beyond bounds */}
             <svg
               ref={svgRef}
@@ -219,9 +219,9 @@ export default function FreeConcept() {
             >
               <defs>
                 <linearGradient id="freeConceptBg" x1="0" y1="0" x2="1" y2="1">
-                  <stop offset="0%"   stopColor="#f0f0ff" />
-                  <stop offset="40%"  stopColor="#e8e4ff" />
-                  <stop offset="100%" stopColor="#f5f0ff" />
+                  <stop offset="0%"   stopColor="#f0eeff" />
+                  <stop offset="40%"  stopColor="#e8e6ff" />
+                  <stop offset="100%" stopColor="#e6ecff" />
                 </linearGradient>
               </defs>
               <path ref={pathRef} fill="url(#freeConceptBg)" />

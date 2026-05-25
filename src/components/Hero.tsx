@@ -224,13 +224,13 @@ export default function Hero() {
       ref={sectionRef}
       className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden"
     >
-      {/* Mobile: static pastel gradient — no WebGL needed */}
+      {/* Mobile/tablet: static gradient matching the silk palette */}
       <div
-        className="absolute inset-0 sm:hidden"
-        style={{ background: "linear-gradient(160deg, #ede8ff 0%, #e4e0ff 30%, #f0e8f8 60%, #e8eeff 100%)" }}
+        className="absolute inset-0 lg:hidden"
+        style={{ background: "linear-gradient(160deg, #f0eeff 0%, #e8e6ff 25%, #ede8ff 55%, #e6ecff 100%)" }}
       />
-      {/* Desktop: WebGL silk shader */}
-      <canvas ref={canvasRef} className="absolute inset-0 w-full h-full hidden sm:block" />
+      {/* Desktop only: WebGL silk shader */}
+      <canvas ref={canvasRef} className="absolute inset-0 w-full h-full hidden lg:block" />
 
       <div className="relative z-10 max-w-6xl mx-auto px-6 text-center">
 
