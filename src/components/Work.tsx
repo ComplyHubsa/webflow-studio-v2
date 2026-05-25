@@ -385,7 +385,8 @@ function FluxPlumbingMockup() {
   );
 }
 
-const MOCKUPS: Record<number, () => React.ReactElement> = {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const MOCKUPS: Record<number, () => any> = {
   1: LumiereMockup,
   2: EmberOakMockup,
   3: TitanBuildMockup,
