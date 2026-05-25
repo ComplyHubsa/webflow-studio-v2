@@ -391,7 +391,7 @@ const MOCKUPS: Record<number, () => React.ReactElement> = {
   3: TitanBuildMockup,
   4: SerenityMockup,
   5: MeridianMockup,
-  6: FlowFixMockup,
+  6: FluxPlumbingMockup,
 };
 
 function ProjectCard({ project, index }: { project: (typeof projects)[0]; index: number }) {
