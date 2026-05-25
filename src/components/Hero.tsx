@@ -312,7 +312,7 @@ export default function Hero() {
         {/* Stats */}
         <motion.div
           {...fadeUp(0.82, 14)}
-          className="flex items-center justify-center gap-10 md:gap-16"
+          className="flex items-center justify-center gap-6 md:gap-16"
         >
           {[
             { value: "100%",    label: "Custom Built" },
@@ -320,7 +320,7 @@ export default function Hero() {
             { value: "R3.5k",   label: "Full Build"   },
           ].map((stat) => (
             <div key={stat.label} className="text-center">
-              <div className="text-2xl font-bold mb-1.5"
+              <div className="text-lg sm:text-2xl font-bold mb-1.5"
                 style={{ fontFamily: "var(--font-space)", color: "#1a0b2e" }}>
                 {stat.value}
               </div>

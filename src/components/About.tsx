@@ -14,7 +14,7 @@ export default function About() {
   return (
     <section className="py-18 px-6">
       <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20 items-center">
           <FadeIn direction="left">
             <div>
               <span
@@ -67,19 +67,19 @@ export default function About() {
           </FadeIn>
 
           <FadeIn direction="right" delay={0.15}>
-            <div className="grid grid-cols-2 gap-5">
+            <div className="grid grid-cols-2 gap-3 sm:gap-5">
               {stats.map((card) => (
                 <motion.div
                   key={card.label}
-                  className="glass rounded-2xl p-7 flex flex-col gap-3"
+                  className="glass rounded-2xl p-4 sm:p-7 flex flex-col gap-2 sm:gap-3"
                   whileHover={{ y: -4 }}
                   transition={{ duration: 0.25 }}
                 >
-                  <span className="text-xl" style={{ color: "var(--accent2)", opacity: 0.6 }}>
+                  <span className="text-lg sm:text-xl" style={{ color: "var(--accent2)", opacity: 0.6 }}>
                     {card.icon}
                   </span>
                   <div
-                    className="text-4xl font-bold"
+                    className="text-2xl sm:text-3xl md:text-4xl font-bold"
                     style={{ fontFamily: "var(--font-space)", color: "var(--text)" }}
                   >
                     {card.number}

@@ -254,7 +254,7 @@ export default function FreeConcept() {
             </div>
 
             {/* Content */}
-            <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-10 items-start p-10 md:p-14 lg:p-16">
+            <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-10 items-start p-6 sm:p-10 md:p-14 lg:p-16">
               {/* Left */}
               <div>
                 <div

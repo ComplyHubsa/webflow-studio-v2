@@ -399,7 +399,7 @@ function ProjectCard({ project, index }: { project: (typeof projects)[0]; index:
   const card = (
     <motion.div
       className="relative rounded-2xl overflow-hidden"
-      style={{ height: 440, cursor: hasHref ? "pointer" : "default" }}
+      style={{ height: "min(440px, 70vw)", cursor: hasHref ? "pointer" : "default" }}
       whileHover={{ scale: 1.02, y: -4 }}
       transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
     >

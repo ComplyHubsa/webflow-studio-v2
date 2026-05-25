@@ -9,7 +9,7 @@ export default function ContactCTA() {
       <div className="max-w-4xl mx-auto">
         <FadeIn>
           <div
-            className="relative rounded-3xl p-14 md:p-20 text-center overflow-hidden"
+            className="relative rounded-3xl p-8 sm:p-14 md:p-20 text-center overflow-hidden"
             style={{
               background:
                 "linear-gradient(145deg, rgba(108,99,255,0.13), rgba(56,189,248,0.07))",
