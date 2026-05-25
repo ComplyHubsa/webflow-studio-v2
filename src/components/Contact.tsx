@@ -58,7 +58,7 @@ export default function Contact() {
   };
 
   const inputStyle: React.CSSProperties = {
-    background: "rgba(255,255,255,0.03)",
+    background: "rgba(255,255,255,0.10)",
     border: "1px solid var(--border)",
     borderRadius: "12px",
     color: "var(--text)",
@@ -82,6 +82,7 @@ export default function Contact() {
     <section className="py-18 px-6">
       <div className="max-w-6xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+          <div className="order-2 lg:order-1">
           <FadeIn direction="left">
             <div>
               <span
@@ -150,7 +151,9 @@ export default function Contact() {
               </div>
             </div>
           </FadeIn>
+          </div>
 
+          <div className="order-1 lg:order-2">
           <FadeIn direction="right" delay={0.15}>
             <AnimatePresence mode="wait">
               {status === "success" ? (
@@ -324,6 +327,7 @@ export default function Contact() {
               )}
             </AnimatePresence>
           </FadeIn>
+          </div>
         </div>
       </div>
     </section>
