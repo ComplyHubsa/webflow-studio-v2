@@ -101,23 +101,20 @@ void main(){
   float fc  = fbm(wp * 0.75 + t * 0.07) * 0.5 + 0.5;
   float fc2 = fbm(wp * 0.55 + vec2(3.3, 1.1) + t * 0.05) * 0.5 + 0.5;
 
-  /* rose → peach */
-  vec3 col = mix(vec3(1.00, 0.74, 0.82), vec3(1.00, 0.89, 0.74), smoothstep(0.0,  0.45, fc));
+  /* rose → peach — darkened palette */
+  vec3 col = mix(vec3(0.55, 0.32, 0.42), vec3(0.52, 0.40, 0.28), smoothstep(0.0,  0.45, fc));
   /* → lavender */
-  col = mix(col, vec3(0.82, 0.77, 1.00), smoothstep(0.35, 0.65, fc));
+  col = mix(col, vec3(0.34, 0.30, 0.55), smoothstep(0.35, 0.65, fc));
   /* → mint (secondary map) */
-  col = mix(col, vec3(0.78, 0.95, 0.84), smoothstep(0.55, 0.80, fc2) * 0.55);
+  col = mix(col, vec3(0.28, 0.45, 0.34), smoothstep(0.55, 0.80, fc2) * 0.55);
   /* → cool blush shadow */
-  col = mix(col, vec3(0.88, 0.78, 0.96), smoothstep(0.70, 0.90, fc) * 0.45);
+  col = mix(col, vec3(0.38, 0.28, 0.50), smoothstep(0.70, 0.90, fc) * 0.45);
 
   /* ── apply thread shading ── */
-  /* broad bands: darken valleys, brighten ridges — the main thread look */
-  col *= 0.80 + broad * 0.24;
-  /* fine sheen: subtle bright gloss lines */
-  col  = mix(col, col * 1.18, fine * 0.28);
+  col *= 0.78 + broad * 0.30;
+  col  = mix(col, col * 1.22, fine * 0.30);
 
-  /* blend toward medium cool grey to darken overall */
-  col = mix(vec3(0.55, 0.53, 0.60), col, 0.82);
+  /* final clamp — no extra lighten */
   col = clamp(col, 0., 1.);
 
   gl_FragColor = vec4(col, 1.);
