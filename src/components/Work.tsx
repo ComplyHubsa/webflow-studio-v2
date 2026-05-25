@@ -5,9 +5,6 @@ import { motion } from "framer-motion";
 import FadeIn from "./FadeIn";
 
 const projects = [
-  { id: 1, title: "Lumière", subtitle: "Luxury Beauty Salon", tags: ["Booking System", "SEO", "Animations"] },
-  { id: 2, title: "Ember & Oak", subtitle: "Fine Dining Restaurant", tags: ["Reservations", "Menu", "Photography"] },
-  { id: 3, title: "Titan Build", subtitle: "Construction Company", tags: ["Lead Gen", "Quote Form", "SEO"] },
   { id: 4, title: "Maison Sérène", subtitle: "Luxury Wellness Spa", tags: ["Hero Design", "Animations", "Brand Identity"], href: "/spa" },
   { id: 5, title: "Meridian", subtitle: "Accounting Firm", tags: ["Authority", "Trust Design", "SEO"], href: "/accountant" },
   { id: 6, title: "Flux Plumbing", subtitle: "Plumbing Business", tags: ["Water Animation", "Emergency CTA", "Lead Gen"], href: "/plumbing" },
