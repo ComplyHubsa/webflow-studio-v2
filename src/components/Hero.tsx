@@ -116,8 +116,8 @@ void main(){
   /* fine sheen: subtle bright gloss lines */
   col  = mix(col, col * 1.18, fine * 0.28);
 
-  /* global lighten — pushed darker */
-  col = mix(vec3(0.99, 0.97, 0.98), col, 0.88);
+  /* blend toward medium cool grey to darken overall */
+  col = mix(vec3(0.55, 0.53, 0.60), col, 0.82);
   col = clamp(col, 0., 1.);
 
   gl_FragColor = vec4(col, 1.);
