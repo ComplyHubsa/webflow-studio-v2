@@ -204,7 +204,7 @@ export default function FreeConcept() {
     <section className="py-18 px-6">
       <div className="max-w-6xl mx-auto">
         <FadeIn>
-          <div ref={cardRef} className="relative">
+          <div ref={cardRef} className="relative rounded-3xl" style={{ background: "linear-gradient(135deg, #f0f0ff 0%, #e8e4ff 40%, #f5f0ff 100%)" }}>
             {/* SVG body — warping card shape, paints beyond bounds */}
             <svg
               ref={svgRef}

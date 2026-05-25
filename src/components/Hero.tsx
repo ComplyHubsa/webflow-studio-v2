@@ -224,7 +224,13 @@ export default function Hero() {
       ref={sectionRef}
       className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden"
     >
-      <canvas ref={canvasRef} className="absolute inset-0 w-full h-full" />
+      {/* Mobile: static pastel gradient — no WebGL needed */}
+      <div
+        className="absolute inset-0 sm:hidden"
+        style={{ background: "linear-gradient(160deg, #ede8ff 0%, #e4e0ff 30%, #f0e8f8 60%, #e8eeff 100%)" }}
+      />
+      {/* Desktop: WebGL silk shader */}
+      <canvas ref={canvasRef} className="absolute inset-0 w-full h-full hidden sm:block" />
 
       <div className="relative z-10 max-w-6xl mx-auto px-6 text-center">
 
