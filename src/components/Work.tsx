@@ -8,6 +8,8 @@ const projects = [
   { id: 4, title: "Maison Sérène", subtitle: "Luxury Wellness Spa", tags: ["Hero Design", "Animations", "Brand Identity"], href: "/spa" },
   { id: 5, title: "Meridian", subtitle: "Accounting Firm", tags: ["Authority", "Trust Design", "SEO"], href: "/accountant" },
   { id: 6, title: "Flux Plumbing", subtitle: "Plumbing Business", tags: ["Water Animation", "Emergency CTA", "Lead Gen"], href: "/plumbing" },
+  { id: 7, title: "Ironclad", subtitle: "Construction Company", tags: ["Hero Design", "Crane Animation", "Dark Industrial"], href: "/construction" },
+  { id: 8, title: "Velour", subtitle: "Luxury Cosmetics Brand", tags: ["Interactive Shades", "Live Lipstick", "Mobile-First"], href: "/cosmetics" },
 ];
 
 /* ─────────────────────────────────────────────────────────────────────────
@@ -382,7 +384,111 @@ function FluxPlumbingMockup() {
   );
 }
 
+/* ─────────────────────────────────────────────────────────────────────────
+   IRONCLAD — Live iframe of /construction, scaled to fit card
+───────────────────────────────────────────────────────────────────────── */
+function IroncladMockup() {
+  return (
+    <Link
+      href="/construction"
+      target="_blank"
+      className="absolute inset-0 block overflow-hidden"
+      style={{ cursor: "pointer", background: "#080808" }}
+    >
+      <iframe
+        src="/construction"
+        scrolling="no"
+        style={{
+          width: 1280,
+          height: 1400,
+          transform: "scale(0.32)",
+          transformOrigin: "top left",
+          pointerEvents: "none",
+          border: "none",
+        }}
+        tabIndex={-1}
+        aria-hidden="true"
+      />
+      {/* Orange ● Live badge */}
+      <div
+        style={{
+          position: "absolute",
+          top: 12,
+          right: 12,
+          zIndex: 10,
+          display: "flex",
+          alignItems: "center",
+          gap: 5,
+          background: "rgba(8,8,8,0.65)",
+          backdropFilter: "blur(6px)",
+          border: "1px solid rgba(255,87,34,0.5)",
+          borderRadius: 20,
+          padding: "4px 10px",
+          fontSize: 10,
+          fontWeight: 600,
+          color: "#FF5722",
+          letterSpacing: "0.06em",
+        }}
+      >
+        <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#FF5722", display: "inline-block" }} />
+        Live
+      </div>
+    </Link>
+  );
+}
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
+/* ─────────────────────────────────────────────────────────────────────────
+   VELOUR — Live iframe of /cosmetics, scaled to fit card
+───────────────────────────────────────────────────────────────────────── */
+function VelourMockup() {
+  return (
+    <Link
+      href="/cosmetics"
+      target="_blank"
+      className="absolute inset-0 block overflow-hidden"
+      style={{ background: "#F5E8DC", cursor: "pointer" }}
+    >
+      <iframe
+        src="/cosmetics"
+        style={{
+          width: 1280,
+          height: 1400,
+          transform: "scale(0.32)",
+          transformOrigin: "top left",
+          pointerEvents: "none",
+          border: "none",
+        }}
+        tabIndex={-1}
+        aria-hidden="true"
+      />
+      <div
+        style={{
+          position: "absolute",
+          top: 12,
+          right: 12,
+          zIndex: 10,
+          display: "flex",
+          alignItems: "center",
+          gap: 5,
+          background: "rgba(42,12,22,0.65)",
+          backdropFilter: "blur(6px)",
+          border: "1px solid rgba(168,51,76,0.45)",
+          borderRadius: 20,
+          padding: "4px 10px",
+          fontSize: 10,
+          fontWeight: 600,
+          color: "#A8334C",
+          letterSpacing: "0.06em",
+        }}
+      >
+        <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#A8334C", display: "inline-block" }} />
+        Live
+      </div>
+    </Link>
+  );
+}
+
 const MOCKUPS: Record<number, () => any> = {
   1: LumiereMockup,
   2: EmberOakMockup,
@@ -390,6 +496,8 @@ const MOCKUPS: Record<number, () => any> = {
   4: SerenityMockup,
   5: MeridianMockup,
   6: FluxPlumbingMockup,
+  7: IroncladMockup,
+  8: VelourMockup,
 };
 
 function ProjectCard({ project, index }: { project: (typeof projects)[0]; index: number }) {
