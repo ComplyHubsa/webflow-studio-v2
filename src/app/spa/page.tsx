@@ -130,7 +130,7 @@ export default function SpaPage() {
 
   return (
     <div className={`${cormorant.variable} ${jost.variable}`}
-      style={{ background: '#FAF5EE', color: '#1F2A24', fontFamily: 'var(--font-jost), system-ui, sans-serif', cursor: 'none', overflowX: 'hidden' }}>
+      style={{ background: '#FAF5EE', color: '#1F2A24', fontFamily: 'var(--font-jost), system-ui, sans-serif', cursor: 'none', overflowX: 'hidden', colorScheme: 'only light' }}>
       <style>{`
         @keyframes ken-burns { 0%,100%{transform:scale(1.04)} 50%{transform:scale(1.13)} }
         @keyframes drift {

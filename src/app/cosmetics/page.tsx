@@ -1737,6 +1737,7 @@ export default function VelourCosmeticsPage() {
         fontFamily: 'var(--font-inter), sans-serif',
         color: '#2A0C16',
         overflow: 'hidden',
+        colorScheme: 'only light',
       }}
     >
       <style>{`

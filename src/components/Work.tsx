@@ -25,15 +25,8 @@ function LumiereMockup() {
     >
       {/* Scaled live page */}
       <iframe
+        className="preview-iframe"
         src="/beauty"
-        style={{
-          width: 1280,
-          height: 1400,
-          transform: "scale(0.32)",
-          transformOrigin: "top left",
-          pointerEvents: "none",
-          border: "none",
-        }}
         tabIndex={-1}
         aria-hidden="true"
       />
@@ -252,17 +245,10 @@ function SerenityMockup() {
   return (
     <div className="absolute inset-0 overflow-hidden" style={{ background: "#2A1E18" }}>
       <iframe
+        className="preview-iframe"
         src="/spa"
         title="Maison Sérène Spa Hero"
         scrolling="no"
-        style={{
-          border: "none",
-          width: 1280,
-          height: 1400,
-          transformOrigin: "top left",
-          transform: "scale(0.32)",
-          pointerEvents: "none",
-        }}
       />
       <div
         style={{
@@ -295,17 +281,10 @@ function MeridianMockup() {
   return (
     <div className="absolute inset-0 overflow-hidden" style={{ background: "#060609" }}>
       <iframe
+        className="preview-iframe"
         src="/accountant"
         title="Meridian Accounting Hero"
         scrolling="no"
-        style={{
-          border: "none",
-          width: 1280,
-          height: 1400,
-          transformOrigin: "top left",
-          transform: "scale(0.32)",
-          pointerEvents: "none",
-        }}
       />
       <div
         style={{
@@ -343,16 +322,9 @@ function FluxPlumbingMockup() {
       style={{ cursor: "pointer" }}
     >
       <iframe
+        className="preview-iframe"
         src="/plumbing"
         scrolling="no"
-        style={{
-          width: 1280,
-          height: 1400,
-          transform: "scale(0.32)",
-          transformOrigin: "top left",
-          pointerEvents: "none",
-          border: "none",
-        }}
         tabIndex={-1}
         aria-hidden="true"
       />
@@ -396,16 +368,9 @@ function IroncladMockup() {
       style={{ cursor: "pointer", background: "#080808" }}
     >
       <iframe
+        className="preview-iframe"
         src="/construction"
         scrolling="no"
-        style={{
-          width: 1280,
-          height: 1400,
-          transform: "scale(0.32)",
-          transformOrigin: "top left",
-          pointerEvents: "none",
-          border: "none",
-        }}
         tabIndex={-1}
         aria-hidden="true"
       />
@@ -450,15 +415,8 @@ function VelourMockup() {
       style={{ background: "#F5E8DC", cursor: "pointer" }}
     >
       <iframe
+        className="preview-iframe"
         src="/cosmetics"
-        style={{
-          width: 1280,
-          height: 1400,
-          transform: "scale(0.32)",
-          transformOrigin: "top left",
-          pointerEvents: "none",
-          border: "none",
-        }}
         tabIndex={-1}
         aria-hidden="true"
       />
@@ -506,8 +464,8 @@ function ProjectCard({ project, index }: { project: (typeof projects)[0]; index:
 
   const card = (
     <motion.div
-      className="relative rounded-2xl overflow-hidden"
-      style={{ height: "min(440px, 70vw)", cursor: hasHref ? "pointer" : "default" }}
+      className="preview-card relative rounded-2xl overflow-hidden"
+      style={{ cursor: hasHref ? "pointer" : "default" }}
       whileHover={{ scale: 1.02, y: -4 }}
       transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
     >
@@ -517,7 +475,7 @@ function ProjectCard({ project, index }: { project: (typeof projects)[0]; index:
   return (
     <FadeIn delay={index * 0.09}>
       {hasHref ? (
-        <Link href={project.href as string} target="_blank" rel="noopener noreferrer">
+        <Link href={project.href as string} target="_blank" rel="noopener noreferrer" className="block">
           {card}
         </Link>
       ) : card}
@@ -528,6 +486,37 @@ function ProjectCard({ project, index }: { project: (typeof projects)[0]; index:
 export default function Work({ hideHeader = false }: { hideHeader?: boolean }) {
   return (
     <section className="py-18 px-6">
+      {/* Responsive iframe scaling — card aspect-ratio + container-query scale */}
+      <style>{`
+        .preview-card {
+          position: relative;
+          width: 100%;
+          aspect-ratio: 1280 / 1400;
+          max-height: 480px;
+        }
+        .preview-iframe {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 1280px;
+          height: 1400px;
+          transform-origin: top left;
+          border: none;
+          pointer-events: none;
+          /* Fallbacks for browsers without container queries */
+          transform: scale(0.255);
+        }
+        @media (min-width: 768px) {
+          .preview-iframe { transform: scale(0.30); }
+        }
+        @media (min-width: 1024px) {
+          .preview-iframe { transform: scale(0.30); }
+        }
+        @supports (container-type: inline-size) {
+          .preview-card { container-type: inline-size; }
+          .preview-iframe { transform: scale(calc(100cqw / 1280px)); }
+        }
+      `}</style>
       <div className="max-w-7xl mx-auto">
         {!hideHeader && (
           <FadeIn>
