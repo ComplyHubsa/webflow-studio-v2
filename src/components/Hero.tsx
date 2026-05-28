@@ -170,6 +170,7 @@ export default function Hero() {
     const { gl, uTime, uMouse, uVel, uRes } = ctx;
 
     let raf = 0, running = true;
+    let visible = true;   /* pause the draw loop when scrolled off-screen */
     const start = performance.now();
 
     /* raw mouse + smoothed mouse + smoothed velocity */
@@ -177,23 +178,32 @@ export default function Hero() {
     const smooth = { x: window.innerWidth / 2,  y: window.innerHeight / 2 };
     const vel    = { x: 0, y: 0 };
 
+    /* cache canvas rect to avoid layout thrash on every mousemove */
+    let canvasLeft = 0, canvasTop = 0;
+    const refreshCanvasRect = () => {
+      const r = canvas.getBoundingClientRect();
+      canvasLeft = r.left;
+      canvasTop  = r.top;
+    };
+
     const resize = () => {
       canvas.width  = window.innerWidth;
       canvas.height = window.innerHeight;
       gl.viewport(0, 0, canvas.width, canvas.height);
+      refreshCanvasRect();
     };
     resize();
     window.addEventListener("resize", resize, { passive: true });
+    window.addEventListener("scroll", refreshCanvasRect, { passive: true });
 
     const onMove = (e: MouseEvent) => {
-      const rect = canvas.getBoundingClientRect();
-      raw.x = e.clientX - rect.left;
-      raw.y = e.clientY - rect.top;
+      raw.x = e.clientX - canvasLeft;
+      raw.y = e.clientY - canvasTop;
     };
     window.addEventListener("mousemove", onMove, { passive: true });
 
     const draw = () => {
-      if (!running) return;
+      if (!running || !visible) { raf = 0; return; }
       /* lerp mouse position */
       const px = smooth.x, py = smooth.y;
       smooth.x += (raw.x - smooth.x) * 0.10;
@@ -209,12 +219,25 @@ export default function Hero() {
       gl.drawArrays(gl.TRIANGLES, 0, 6);
       raf = requestAnimationFrame(draw);
     };
+
+    /* Pause WebGL when canvas leaves viewport — frees up frame budget
+       so other animations (FreeConcept's elastic border, etc.) stay smooth */
+    const io = new IntersectionObserver(([entry]) => {
+      visible = entry.isIntersecting;
+      if (visible && running && raf === 0) {
+        raf = requestAnimationFrame(draw);
+      }
+    }, { rootMargin: "100px" });
+    io.observe(canvas);
+
     raf = requestAnimationFrame(draw);
 
     return () => {
       running = false;
       cancelAnimationFrame(raf);
+      io.disconnect();
       window.removeEventListener("resize", resize);
+      window.removeEventListener("scroll", refreshCanvasRect);
       window.removeEventListener("mousemove", onMove);
     };
   }, []);

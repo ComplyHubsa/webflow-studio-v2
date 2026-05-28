@@ -90,6 +90,16 @@ function useElasticBody(
     const mouse = { x: -9999, y: -9999, active: false };
     let rafId = 0;
     let running = true;
+    /* Cached card position — avoids layout thrash from calling
+       getBoundingClientRect() on every mousemove. Refreshed on
+       resize (ResizeObserver) + scroll. */
+    let rectLeft = 0, rectTop = 0;
+
+    function refreshRect() {
+      const r = cardEl.getBoundingClientRect();
+      rectLeft = r.left;
+      rectTop  = r.top;
+    }
 
     function buildRest() {
       const rect = cardEl.getBoundingClientRect();
@@ -99,6 +109,8 @@ function useElasticBody(
       }
       w = rect.width;
       h = rect.height;
+      rectLeft = rect.left;
+      rectTop  = rect.top;
       svgEl.setAttribute("width",  String(w));
       svgEl.setAttribute("height", String(h));
 
@@ -160,9 +172,8 @@ function useElasticBody(
     }
 
     function onMove(e: MouseEvent) {
-      const rect = cardEl.getBoundingClientRect();
-      mouse.x = e.clientX - rect.left;
-      mouse.y = e.clientY - rect.top;
+      mouse.x = e.clientX - rectLeft;
+      mouse.y = e.clientY - rectTop;
       mouse.active = true;
       startLoop();
     }
@@ -179,6 +190,8 @@ function useElasticBody(
 
     cardEl.addEventListener("mousemove", onMove, { passive: true });
     cardEl.addEventListener("mouseleave", onLeave);
+    window.addEventListener("scroll", refreshRect, { passive: true });
+    window.addEventListener("resize", refreshRect, { passive: true });
 
     buildRest();
     rafId = requestAnimationFrame(tick);
@@ -189,6 +202,8 @@ function useElasticBody(
       ro.disconnect();
       cardEl.removeEventListener("mousemove", onMove);
       cardEl.removeEventListener("mouseleave", onLeave);
+      window.removeEventListener("scroll", refreshRect);
+      window.removeEventListener("resize", refreshRect);
     };
   }, [cardRef, svgRef, pathRef]);
 }
