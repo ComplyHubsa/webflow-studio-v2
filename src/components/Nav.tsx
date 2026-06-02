@@ -25,6 +25,8 @@ export default function Nav() {
 
   useEffect(() => setOpen(false), [pathname]);
 
+  if (pathname?.startsWith("/party")) return null;
+
   return (
     <>
       <motion.header

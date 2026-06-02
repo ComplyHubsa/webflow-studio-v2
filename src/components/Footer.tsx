@@ -1,7 +1,13 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Mail, Phone } from "lucide-react";
 
 export default function Footer() {
+  const pathname = usePathname();
+  if (pathname?.startsWith("/party")) return null;
+
   return (
     <footer
       className="relative py-24 px-6 mt-0"
