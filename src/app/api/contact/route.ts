@@ -44,28 +44,40 @@ export async function POST(req: NextRequest) {
     .filter(Boolean)
     .join("\n\n--- BRIEF ---\n");
 
-  const params = new URLSearchParams({
-    name,
-    email,
-    phone,
-    hasWebsite,
-    websiteUrl: websiteUrl || "",
-    industry,
-    message: fullMessage || "",
-    businessName: businessName || "",
-    demoPreference: demoPreference || "",
-    about: about || "",
-    services: services || "",
-    serviceArea: serviceArea || "",
-    hours: hours || "",
-    whyChoose: whyChoose || "",
+  // The Apps Script only writes in doPost, and it JSON.parse()s the body.
+  // doGet is just a health check ("ComplyHub webhook is running") — calling it
+  // returns 200 while silently discarding the lead.
+  const res = await fetch(GOOGLE_SCRIPT_URL, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      name,
+      email,
+      phone,
+      hasWebsite,
+      websiteUrl: websiteUrl || "",
+      industry,
+      message: fullMessage || "",
+      // The Apps Script reads `business` for the "business name" column —
+      // `businessName` is silently ignored. Send both.
+      business: businessName || "",
+      businessName: businessName || "",
+      demoPreference: demoPreference || "",
+      about: about || "",
+      services: services || "",
+      serviceArea: serviceArea || "",
+      hours: hours || "",
+      whyChoose: whyChoose || "",
+    }),
+    redirect: "follow",
   });
 
-  const res = await fetch(`${GOOGLE_SCRIPT_URL}?${params.toString()}`, {
-    method: "GET",
-  });
+  const text = await res.text();
 
-  if (!res.ok) {
+  // Apps Script returns 200 with an HTML error page when the script throws, so
+  // a status check alone isn't enough to know the row was actually written.
+  if (!res.ok || /SyntaxError|TypeError|ReferenceError|Exception/i.test(text)) {
+    console.error("Lead submission failed:", res.status, text.slice(0, 500));
     return NextResponse.json({ error: "Failed to submit" }, { status: 500 });
   }
 
