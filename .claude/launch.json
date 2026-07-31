@@ -6,6 +6,18 @@
       "runtimeExecutable": "npm",
       "runtimeArgs": ["run", "dev", "--", "-p", "3001"],
       "port": 3001
+    },
+    {
+      "name": "visivoyage",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["-y", "serve", "-l", "8765", "/Users/aidanogorman/Desktop/VISI VOYAGE/visivoyage-site"],
+      "port": 8765
+    },
+    {
+      "name": "life-hub",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["--prefix", "/Users/aidanogorman/Desktop/Life Hub", "run", "dev", "--", "-p", "3003"],
+      "port": 3003
     }
   ]
 }
