@@ -344,7 +344,7 @@ export default function Hero() {
           {[
             { value: "100%",    label: "Custom Built" },
             { value: "3–5 days", label: "Turnaround"  },
-            { value: "R3.5k",   label: "Full Build"   },
+            { value: "R3.5k",   label: "Starting At"  },
           ].map((stat) => (
             <div key={stat.label} className="text-center">
               <div className="text-lg sm:text-2xl font-bold mb-1.5"

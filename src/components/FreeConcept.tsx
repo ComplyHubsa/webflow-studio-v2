@@ -352,7 +352,7 @@ export default function FreeConcept() {
                   {
                     step: "03",
                     title: "You decide",
-                    desc: "Love it? We build the full site for R3,500. Not feeling it? Walk away — no charge, no awkward conversation.",
+                    desc: "Love it? We build it out from R3,500. Not feeling it? Walk away — no charge, no awkward conversation.",
                   },
                 ].map((item) => (
                   <div

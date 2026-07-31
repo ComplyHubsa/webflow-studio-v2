@@ -3,18 +3,7 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import FadeIn from "./FadeIn";
-import { Check, Wrench, HardHat, Flower2, Calculator, Sparkles, Gem } from "lucide-react";
-
-const STARTER_PAY_URL = "https://pay.yoco.com/r/78RkZE";
-
-const industries = [
-  { icon: Wrench,     industry: "Plumbing",       demo: "Flux Plumbing", href: "/plumbing",     accent: "#E8481E" },
-  { icon: HardHat,    industry: "Construction",   demo: "Ironclad",      href: "/construction", accent: "#FF5722" },
-  { icon: Flower2,    industry: "Spa & Wellness", demo: "Maison Sérène", href: "/spa",          accent: "#C9A96E" },
-  { icon: Calculator, industry: "Accounting",     demo: "Meridian",      href: "/accountant",   accent: "#00FF88" },
-  { icon: Sparkles,   industry: "Cosmetics",      demo: "Velour",        href: "/cosmetics",    accent: "#E0526F" },
-  { icon: Gem,        industry: "Beauty & Salon", demo: "Lumière",       href: "/beauty",       accent: "#D4A553" },
-];
+import { Check } from "lucide-react";
 
 const plans = [
   {
@@ -36,9 +25,9 @@ const plans = [
   {
     name: "Starter Site",
     price: "R3,500",
-    desc: "Your business online, done right.",
+    desc: "One clean page that gets you online and taking calls.",
     features: [
-      "Clean, professional website built from scratch",
+      "Single-page site, built from scratch",
       "Mobile-friendly and fast-loading",
       "Contact form included",
       "WhatsApp & call button",
@@ -54,7 +43,7 @@ const plans = [
   {
     name: "Premium Site",
     price: "R6,500",
-    desc: "A website that turns heads and wins customers.",
+    desc: "The full build — exactly like the live demos above.",
     features: [
       "Everything in Starter plus:",
       "Smooth scroll animations throughout",
@@ -73,7 +62,7 @@ const plans = [
 
 export default function Pricing() {
   return (
-    <section className="py-18 px-6" style={{ background: "var(--surface)" }}>
+    <section id="pricing" className="py-18 px-6" style={{ background: "var(--surface)" }}>
       <div className="max-w-6xl mx-auto">
         <FadeIn>
           <div className="text-center mb-20">
@@ -91,89 +80,11 @@ export default function Pricing() {
               <span className="gradient-text">Affordable.</span>
             </h2>
             <p className="text-base max-w-md mx-auto" style={{ color: "var(--muted)" }}>
-              No hidden fees. No vague quotes. See a live site for your
-              industry, pick a package, and pay instantly via Yoco.
+              No hidden fees. No vague quotes. Pick the package that fits and
+              pay instantly via Yoco.
             </p>
           </div>
         </FadeIn>
-
-        {/* ── Pick your industry ─────────────────────────────────────── */}
-        <FadeIn>
-          <div className="text-center mb-10">
-            <h3
-              className="text-2xl font-bold tracking-tight mb-2 text-white"
-              style={{ fontFamily: "var(--font-space)" }}
-            >
-              Pick your industry
-            </h3>
-            <p className="text-sm max-w-md mx-auto" style={{ color: "var(--muted)" }}>
-              Every site starts from a live demo you can try right now. Yours
-              gets your logo, colours, photos and words — live in 5 days.
-            </p>
-          </div>
-        </FadeIn>
-
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 max-w-4xl mx-auto mb-20">
-          {industries.map((item, i) => (
-            <FadeIn key={item.industry} delay={i * 0.08} className="w-full">
-              <motion.div
-                className="relative rounded-2xl p-6 flex flex-col gap-4 h-full"
-                style={{
-                  background: "rgba(255,255,255,0.02)",
-                  border: "1px solid var(--border)",
-                }}
-                whileHover={{
-                  scale: 1.03,
-                  borderColor: `${item.accent}66`,
-                  boxShadow: `0 0 32px ${item.accent}14`,
-                }}
-                transition={{ duration: 0.25 }}
-              >
-                <div className="flex items-center gap-3">
-                  <span
-                    className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
-                    style={{ background: `${item.accent}18` }}
-                  >
-                    <item.icon size={19} strokeWidth={2} style={{ color: item.accent }} />
-                  </span>
-                  <div className="min-w-0">
-                    <div className="text-sm font-bold text-white truncate" style={{ fontFamily: "var(--font-space)" }}>
-                      {item.industry}
-                    </div>
-                    <div className="text-xs truncate" style={{ color: "var(--muted)" }}>
-                      {item.demo}
-                    </div>
-                  </div>
-                </div>
-
-                <div className="flex flex-col gap-2 mt-auto">
-                  <Link
-                    href={item.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-center text-xs font-semibold py-2.5 rounded-xl transition-all duration-300 hover:brightness-125"
-                    style={{
-                      background: `${item.accent}12`,
-                      border: `1px solid ${item.accent}40`,
-                      color: item.accent,
-                    }}
-                  >
-                    See live demo →
-                  </Link>
-                  <Link
-                    href={STARTER_PAY_URL}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-center text-xs font-medium py-2 rounded-xl transition-colors hover:text-white"
-                    style={{ color: "var(--muted)" }}
-                  >
-                    Start with this — R3,500
-                  </Link>
-                </div>
-              </motion.div>
-            </FadeIn>
-          ))}
-        </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
           {plans.map((plan, i) => (
