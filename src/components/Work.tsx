@@ -17,9 +17,7 @@ const projects = [
 ───────────────────────────────────────────────────────────────────────── */
 function LumiereMockup() {
   return (
-    <Link
-      href="/beauty"
-      target="_blank"
+    <div
       className="absolute inset-0 block overflow-hidden"
       style={{ cursor: "pointer" }}
     >
@@ -62,7 +60,7 @@ function LumiereMockup() {
         />
         Live
       </div>
-    </Link>
+    </div>
   );
 }
 
@@ -315,9 +313,7 @@ function MeridianMockup() {
 ───────────────────────────────────────────────────────────────────────── */
 function FluxPlumbingMockup() {
   return (
-    <Link
-      href="/plumbing"
-      target="_blank"
+    <div
       className="absolute inset-0 block overflow-hidden"
       style={{ cursor: "pointer" }}
     >
@@ -352,7 +348,7 @@ function FluxPlumbingMockup() {
         <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#E8481E", display: "inline-block" }} />
         Live
       </div>
-    </Link>
+    </div>
   );
 }
 
@@ -361,9 +357,7 @@ function FluxPlumbingMockup() {
 ───────────────────────────────────────────────────────────────────────── */
 function IroncladMockup() {
   return (
-    <Link
-      href="/construction"
-      target="_blank"
+    <div
       className="absolute inset-0 block overflow-hidden"
       style={{ cursor: "pointer", background: "#080808" }}
     >
@@ -398,7 +392,7 @@ function IroncladMockup() {
         <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#FF5722", display: "inline-block" }} />
         Live
       </div>
-    </Link>
+    </div>
   );
 }
 
@@ -408,9 +402,7 @@ function IroncladMockup() {
 ───────────────────────────────────────────────────────────────────────── */
 function VelourMockup() {
   return (
-    <Link
-      href="/cosmetics"
-      target="_blank"
+    <div
       className="absolute inset-0 block overflow-hidden"
       style={{ background: "#F5E8DC", cursor: "pointer" }}
     >
@@ -443,7 +435,7 @@ function VelourMockup() {
         <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#A8334C", display: "inline-block" }} />
         Live
       </div>
-    </Link>
+    </div>
   );
 }
 
