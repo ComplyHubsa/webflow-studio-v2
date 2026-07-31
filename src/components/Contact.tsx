@@ -35,10 +35,17 @@ export default function Contact() {
     name: "",
     phone: "",
     email: "",
+    businessName: "",
     hasWebsite: "",
     websiteUrl: "",
     industry: "",
     industryOther: "",
+    demoPreference: "",
+    about: "",
+    services: "",
+    serviceArea: "",
+    hours: "",
+    whyChoose: "",
     message: "",
   });
 
@@ -62,7 +69,11 @@ export default function Contact() {
       });
       if (!res.ok) throw new Error();
       setStatus("success");
-      setForm({ name: "", phone: "", email: "", hasWebsite: "", websiteUrl: "", industry: "", industryOther: "", message: "" });
+      setForm({
+        name: "", phone: "", email: "", businessName: "", hasWebsite: "", websiteUrl: "",
+        industry: "", industryOther: "", demoPreference: "", about: "", services: "",
+        serviceArea: "", hours: "", whyChoose: "", message: "",
+      });
     } catch {
       setStatus("error");
     }
@@ -233,6 +244,14 @@ export default function Contact() {
                       <input name="email" type="email" value={form.email} onChange={handleChange} placeholder="your@email.com" required style={inputStyle} {...focusProps} />
                     </div>
 
+                    {/* Business name */}
+                    <div>
+                      <label className={labelStyle} style={{ color: C.muted }}>
+                        Business Name <span style={{ color: C.accent }}>*</span>
+                      </label>
+                      <input name="businessName" value={form.businessName} onChange={handleChange} placeholder="Exactly as it should appear on the site" required style={inputStyle} {...focusProps} />
+                    </div>
+
                     {/* Website toggle */}
                     <div>
                       <label className={labelStyle} style={{ color: C.muted }}>
@@ -315,13 +334,96 @@ export default function Contact() {
                       )}
                     </AnimatePresence>
 
-                    {/* Message */}
+                    {/* ── The brief: everything needed to design a concept ── */}
+                    <div
+                      className="pt-6 mt-2"
+                      style={{ borderTop: `1px solid ${C.border}` }}
+                    >
+                      <div
+                        className="text-xs uppercase tracking-widest mb-1.5"
+                        style={{ color: C.accent }}
+                      >
+                        Your brief
+                      </div>
+                      <p className="text-xs mb-5" style={{ color: C.muted }}>
+                        The more you fill in here, the closer your free concept
+                        will be to what you actually want. Only the first two are
+                        required — WhatsApp me the rest if you&apos;d rather.
+                      </p>
+                    </div>
+
+                    {/* About */}
                     <div>
                       <label className={labelStyle} style={{ color: C.muted }}>
-                        Tell us about your business{" "}
+                        About your business <span style={{ color: C.accent }}>*</span>
+                      </label>
+                      <textarea name="about" value={form.about} onChange={handleChange} placeholder="2 or 3 sentences on who you are and what you do" rows={3} required style={{ ...inputStyle, resize: "vertical" }} {...focusProps} />
+                    </div>
+
+                    {/* Services */}
+                    <div>
+                      <label className={labelStyle} style={{ color: C.muted }}>
+                        Your services <span style={{ color: C.accent }}>*</span>
+                      </label>
+                      <textarea name="services" value={form.services} onChange={handleChange} placeholder="One per line, with prices if you want them shown" rows={3} required style={{ ...inputStyle, resize: "vertical" }} {...focusProps} />
+                    </div>
+
+                    {/* Which demo */}
+                    <div>
+                      <label className={labelStyle} style={{ color: C.muted }}>
+                        Which demo is closest to what you want?{" "}
                         <span style={{ color: C.muted, opacity: 0.5 }}>(optional)</span>
                       </label>
-                      <textarea name="message" value={form.message} onChange={handleChange} placeholder="What do you need? Any specific features, pages, or goals?" rows={4} style={{ ...inputStyle, resize: "vertical" }} {...focusProps} />
+                      <select name="demoPreference" value={form.demoPreference} onChange={handleChange} style={{ ...inputStyle, cursor: "pointer" }} {...focusProps}>
+                        <option value="" style={{ background: "#f5f0ff", color: C.heading }}>Haven&apos;t looked yet</option>
+                        {[
+                          "Plumbing — Flux Plumbing",
+                          "Construction — Ironclad",
+                          "Spa & Wellness — Maison Sérène",
+                          "Accounting — Meridian",
+                          "Cosmetics — Velour",
+                          "Beauty & Salon — Lumière",
+                          "None of these — I want a different look",
+                        ].map((d) => (
+                          <option key={d} value={d} style={{ background: "#f5f0ff", color: C.heading }}>{d}</option>
+                        ))}
+                      </select>
+                    </div>
+
+                    {/* Areas + hours */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div>
+                        <label className={labelStyle} style={{ color: C.muted }}>
+                          Areas you serve{" "}
+                          <span style={{ color: C.muted, opacity: 0.5 }}>(optional)</span>
+                        </label>
+                        <input name="serviceArea" value={form.serviceArea} onChange={handleChange} placeholder="e.g. Northern suburbs, Cape Town" style={inputStyle} {...focusProps} />
+                      </div>
+                      <div>
+                        <label className={labelStyle} style={{ color: C.muted }}>
+                          Opening hours{" "}
+                          <span style={{ color: C.muted, opacity: 0.5 }}>(optional)</span>
+                        </label>
+                        <input name="hours" value={form.hours} onChange={handleChange} placeholder="Mon–Fri 8am–5pm" style={inputStyle} {...focusProps} />
+                      </div>
+                    </div>
+
+                    {/* Why choose you */}
+                    <div>
+                      <label className={labelStyle} style={{ color: C.muted }}>
+                        Why do customers choose you over a competitor?{" "}
+                        <span style={{ color: C.muted, opacity: 0.5 }}>(optional)</span>
+                      </label>
+                      <textarea name="whyChoose" value={form.whyChoose} onChange={handleChange} placeholder="3 short points" rows={3} style={{ ...inputStyle, resize: "vertical" }} {...focusProps} />
+                    </div>
+
+                    {/* Anything else */}
+                    <div>
+                      <label className={labelStyle} style={{ color: C.muted }}>
+                        Anything else I should know?{" "}
+                        <span style={{ color: C.muted, opacity: 0.5 }}>(optional)</span>
+                      </label>
+                      <textarea name="message" value={form.message} onChange={handleChange} placeholder="Specific features, pages, or goals" rows={3} style={{ ...inputStyle, resize: "vertical" }} {...focusProps} />
                     </div>
 
                     {status === "error" && (
