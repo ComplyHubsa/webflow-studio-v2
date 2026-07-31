@@ -58,10 +58,12 @@ export async function POST(req: NextRequest) {
       websiteUrl: websiteUrl || "",
       industry,
       message: fullMessage || "",
-      // The Apps Script reads `business` for the "business name" column —
-      // `businessName` is silently ignored. Send both.
+      // The live script reads `business` and `extraInfo`; the newer one reads
+      // `businessName` and the individual brief fields. Send both shapes so
+      // this works either side of the Apps Script being updated.
       business: businessName || "",
       businessName: businessName || "",
+      extraInfo: fullMessage || "",
       demoPreference: demoPreference || "",
       about: about || "",
       services: services || "",
