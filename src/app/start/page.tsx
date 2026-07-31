@@ -8,8 +8,8 @@ export const metadata = {
     "Thanks for your payment — one quick step and your 5-day build starts.",
 };
 
-// TODO: swap for the Google Form link (with file uploads) once created
-const INTAKE_FORM_URL = "/contact";
+const INTAKE_FORM_URL =
+  "https://docs.google.com/forms/d/e/1FAIpQLSc4q-WmPPrWh65uwuPbEkmgnMJY8vrFyA6J5hWXJ6K5lmUa5A/viewform";
 
 const steps = [
   {
