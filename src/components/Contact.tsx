@@ -20,11 +20,11 @@ const INDUSTRIES = [
 
 /* ── Light-theme colour tokens ── */
 const C = {
-  heading:  "#0d0b1a",
-  body:     "#4a4870",
-  muted:    "#6b6890",
-  accent:   "#6c63ff",
-  border:   "rgba(108,99,255,0.18)",
+  heading:  "#14120e",
+  body:     "#4a4437",
+  muted:    "#6b6455",
+  accent:   "#8a7a4f",
+  border:   "rgba(20,18,14,0.16)",
   inputBg:  "rgba(255,255,255,0.75)",
   cardBg:   "rgba(255,255,255,0.60)",
 };
@@ -93,7 +93,7 @@ export default function Contact() {
 
   const focusProps = {
     onFocus: (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
-      (e.target.style.borderColor = "rgba(108,99,255,0.55)"),
+      (e.target.style.borderColor = "rgba(20,18,14,0.45)"),
     onBlur:  (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
       (e.target.style.borderColor = C.border),
   };
@@ -103,7 +103,7 @@ export default function Contact() {
   return (
     <section
       className="py-18 px-6"
-      style={{ background: "linear-gradient(135deg, #f0f0ff 0%, #e8e4ff 40%, #f5f0ff 100%)" }}
+      style={{ background: "linear-gradient(135deg, #f2ede3 0%, #e9e2d5 40%, #efe8db 100%)" }}
     >
       <div className="max-w-6xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
@@ -122,19 +122,18 @@ export default function Contact() {
                   className="text-[clamp(2rem,4.5vw,3.5rem)] font-bold leading-tight tracking-tight mb-6"
                   style={{ fontFamily: "var(--font-space)", color: C.heading }}
                 >
-                  Let&apos;s Build{" "}
-                  <span className="gradient-text">Together</span>
+                  Or just message me.
                 </h2>
                 <p className="text-base leading-relaxed mb-10" style={{ color: C.body }}>
-                  Got a project in mind? Fill in the form and I&apos;ll get back to you within a few
-                  hours. Or reach out directly — I&apos;m always happy to chat.
+                  If the form feels like a lot, skip it. A WhatsApp saying what
+                  you do and where you&apos;re based is enough to get started.
                 </p>
 
                 <div className="flex flex-col gap-5">
                   <a href="mailto:webflowstudiosa@gmail.com" className="flex items-center gap-4 group">
                     <div
                       className="w-12 h-12 rounded-2xl flex items-center justify-center flex-shrink-0"
-                      style={{ background: "rgba(108,99,255,0.10)", border: `1px solid ${C.border}` }}
+                      style={{ background: "rgba(20,18,14,0.06)", border: `1px solid ${C.border}` }}
                     >
                       <Mail size={18} style={{ color: C.accent }} />
                     </div>
@@ -149,7 +148,7 @@ export default function Contact() {
                   <a href="tel:0731275190" className="flex items-center gap-4 group">
                     <div
                       className="w-12 h-12 rounded-2xl flex items-center justify-center flex-shrink-0"
-                      style={{ background: "rgba(108,99,255,0.10)", border: `1px solid ${C.border}` }}
+                      style={{ background: "rgba(20,18,14,0.06)", border: `1px solid ${C.border}` }}
                     >
                       <Phone size={18} style={{ color: C.accent }} />
                     </div>
@@ -268,8 +267,8 @@ export default function Contact() {
                             onClick={() => setForm((f) => ({ ...f, hasWebsite: value, websiteUrl: "" }))}
                             className="flex-1 py-3 px-3 rounded-xl text-xs font-semibold transition-all duration-200"
                             style={{
-                              background: form.hasWebsite === value ? "rgba(108,99,255,0.15)" : "rgba(255,255,255,0.5)",
-                              border: form.hasWebsite === value ? "1px solid rgba(108,99,255,0.55)" : `1px solid ${C.border}`,
+                              background: form.hasWebsite === value ? "rgba(20,18,14,0.10)" : "rgba(255,255,255,0.5)",
+                              border: form.hasWebsite === value ? "1px solid rgba(20,18,14,0.45)" : `1px solid ${C.border}`,
                               color: form.hasWebsite === value ? C.accent : C.muted,
                             }}
                           >
@@ -301,9 +300,9 @@ export default function Contact() {
                         Industry / Business Type <span style={{ color: C.accent }}>*</span>
                       </label>
                       <select name="industry" value={form.industry} onChange={handleChange} required style={{ ...inputStyle, cursor: "pointer" }} {...focusProps}>
-                        <option value="" disabled style={{ background: "#f5f0ff", color: C.heading }}>Select your industry</option>
+                        <option value="" disabled style={{ background: "#f2ede3", color: C.heading }}>Select your industry</option>
                         {INDUSTRIES.map((ind) => (
-                          <option key={ind} value={ind} style={{ background: "#f5f0ff", color: C.heading }}>{ind}</option>
+                          <option key={ind} value={ind} style={{ background: "#f2ede3", color: C.heading }}>{ind}</option>
                         ))}
                       </select>
                     </div>
@@ -375,7 +374,7 @@ export default function Contact() {
                         <span style={{ color: C.muted, opacity: 0.5 }}>(optional)</span>
                       </label>
                       <select name="demoPreference" value={form.demoPreference} onChange={handleChange} style={{ ...inputStyle, cursor: "pointer" }} {...focusProps}>
-                        <option value="" style={{ background: "#f5f0ff", color: C.heading }}>Haven&apos;t looked yet</option>
+                        <option value="" style={{ background: "#f2ede3", color: C.heading }}>Haven&apos;t looked yet</option>
                         {[
                           "Plumbing — Flux Plumbing",
                           "Construction — Ironclad",
@@ -385,7 +384,7 @@ export default function Contact() {
                           "Beauty & Salon — Lumière",
                           "None of these — I want a different look",
                         ].map((d) => (
-                          <option key={d} value={d} style={{ background: "#f5f0ff", color: C.heading }}>{d}</option>
+                          <option key={d} value={d} style={{ background: "#f2ede3", color: C.heading }}>{d}</option>
                         ))}
                       </select>
                     </div>
@@ -435,14 +434,11 @@ export default function Contact() {
                     <button
                       type="submit"
                       disabled={status === "sending"}
-                      className="mt-1 w-full flex items-center justify-center gap-2 font-semibold py-4 rounded-2xl text-white text-sm transition-all duration-300 hover:scale-[1.02] disabled:opacity-60"
-                      style={{
-                        background: "linear-gradient(135deg, #6c63ff, #8b5cf6)",
-                        boxShadow: "0 0 30px rgba(108,99,255,0.25)",
-                      }}
+                      className="mt-1 w-full flex items-center justify-center gap-2 font-semibold py-4 rounded-full text-sm transition-opacity duration-300 hover:opacity-88 disabled:opacity-60"
+                      style={{ background: "#14120e", color: "#f4f2ee" }}
                     >
                       <Send size={15} />
-                      {status === "sending" ? "Sending..." : "Send Message"}
+                      {status === "sending" ? "Sending..." : "Send the brief"}
                     </button>
                   </motion.form>
                 )}

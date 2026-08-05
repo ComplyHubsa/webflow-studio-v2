@@ -294,8 +294,8 @@ export default function BeautyHeroPage() {
               letterSpacing: '.02em',
             }}
           >
-            Distilled from 24-karat botanicals and rare jasmine absolutes,
-            Lumière Sérum d&apos;Or rewrites what radiance means — one ritual at a time.
+            Cold-pressed marula oil, rooibos extract and jasmine absolute.
+            Lumière Sérum d&apos;Or is made in small batches in the Cape — one ritual at a time.
           </motion.p>
 
           {/* CTA row */}
@@ -384,7 +384,7 @@ export default function BeautyHeroPage() {
                 ★★★★★ 4.9 / 5
               </div>
               <div style={{ color: 'rgba(245,237,217,.38)', fontSize: '.62rem', fontFamily: 'Inter, sans-serif', marginTop: 2, letterSpacing: '.04em' }}>
-                14,200 verified reviews
+                1,240 verified reviews
               </div>
             </div>
           </motion.div>

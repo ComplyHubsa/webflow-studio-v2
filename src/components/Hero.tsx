@@ -101,21 +101,21 @@ void main(){
   float fc  = fbm(wp * 0.75 + t * 0.07) * 0.5 + 0.5;
   float fc2 = fbm(wp * 0.55 + vec2(3.3, 1.1) + t * 0.05) * 0.5 + 0.5;
 
-  /* medium-tone pastels — visible colour, dark text still readable */
-  vec3 col = mix(vec3(0.80, 0.60, 0.72), vec3(0.82, 0.72, 0.56), smoothstep(0.0,  0.45, fc));
-  /* → medium lavender */
-  col = mix(col, vec3(0.64, 0.60, 0.90), smoothstep(0.35, 0.65, fc));
-  /* → muted mint */
-  col = mix(col, vec3(0.60, 0.82, 0.68), smoothstep(0.55, 0.80, fc2) * 0.50);
-  /* → dusty blush */
-  col = mix(col, vec3(0.74, 0.62, 0.86), smoothstep(0.70, 0.90, fc) * 0.42);
+  /* warm stone palette — sand, clay and pale gold; dark text stays readable */
+  vec3 col = mix(vec3(0.86, 0.80, 0.70), vec3(0.90, 0.85, 0.74), smoothstep(0.0,  0.45, fc));
+  /* → soft taupe */
+  col = mix(col, vec3(0.78, 0.72, 0.63), smoothstep(0.35, 0.65, fc));
+  /* → warm clay */
+  col = mix(col, vec3(0.85, 0.77, 0.68), smoothstep(0.55, 0.80, fc2) * 0.50);
+  /* → pale gold */
+  col = mix(col, vec3(0.91, 0.85, 0.71), smoothstep(0.70, 0.90, fc) * 0.42);
 
   /* ── thread shading ── */
-  col *= 0.78 + broad * 0.28;
-  col  = mix(col, col * 1.18, fine * 0.28);
+  col *= 0.80 + broad * 0.26;
+  col  = mix(col, col * 1.16, fine * 0.28);
 
-  /* unify toward a warm light-grey so silk reads as one cohesive tone */
-  col = mix(vec3(0.84, 0.82, 0.88), col, 0.78);
+  /* unify toward warm cream so silk reads as one cohesive tone */
+  col = mix(vec3(0.94, 0.91, 0.85), col, 0.76);
   col = clamp(col, 0., 1.);
 
   gl_FragColor = vec4(col, 1.);
@@ -247,128 +247,122 @@ export default function Hero() {
       ref={sectionRef}
       className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden"
     >
-      {/* Mobile/tablet: static gradient matching the silk palette */}
+      {/* Mobile/tablet: static wash matching the silk palette */}
       <div
         className="absolute inset-0 lg:hidden"
-        style={{ background: "linear-gradient(160deg, #f0eeff 0%, #e8e6ff 25%, #ede8ff 55%, #e6ecff 100%)" }}
+        style={{ background: "linear-gradient(160deg, #f2ede3 0%, #e9e2d5 30%, #efe8db 60%, #e6ddcd 100%)" }}
       />
       {/* Desktop only: WebGL silk shader */}
       <canvas ref={canvasRef} className="absolute inset-0 w-full h-full hidden lg:block" />
 
-      <div className="relative z-10 max-w-6xl mx-auto px-6 text-center">
+      <div className="relative z-10 max-w-5xl mx-auto px-6 text-center">
 
-        {/* Badge */}
+        {/* Who this is */}
         <motion.div {...fadeUp(0.1, 14)} className="mb-10">
           <span
-            className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest px-5 py-2.5 rounded-full"
+            className="inline-flex items-center gap-2.5 text-xs font-medium uppercase tracking-[0.2em] px-4 py-2"
             style={{
-              background: "rgba(108,99,255,0.12)",
-              border: "1px solid rgba(108,99,255,0.28)",
-              color: "#5b50cc",
+              borderTop: "1px solid rgba(20,18,14,0.18)",
+              borderBottom: "1px solid rgba(20,18,14,0.18)",
+              color: "#4a4437",
             }}
           >
-            <span className="w-1.5 h-1.5 rounded-full" style={{ background: "#6c63ff" }} />
-            South Africa&apos;s Premium Web Studio
+            Web design studio · South Africa
           </span>
         </motion.div>
 
         {/* Headline */}
         <div className="mb-8">
           <motion.span {...fadeUp(0.22)}
-            className="block text-[clamp(3rem,9vw,7.5rem)] font-bold leading-[0.92] tracking-tight"
-            style={{ fontFamily: "var(--font-space)", color: "#1a0b2e" }}
+            className="block text-[clamp(2.6rem,7.5vw,6rem)] font-bold leading-[0.98] tracking-[-0.02em]"
+            style={{ fontFamily: "var(--font-space)", color: "#14120e" }}
           >
-            Websites That
+            Your website is the
           </motion.span>
           <motion.span {...fadeUp(0.34)}
-            className="block text-[clamp(3rem,9vw,7.5rem)] font-bold leading-[0.92] tracking-tight gradient-text"
-            style={{ fontFamily: "var(--font-space)" }}
+            className="block text-[clamp(2.6rem,7.5vw,6rem)] font-bold leading-[0.98] tracking-[-0.02em]"
+            style={{ fontFamily: "var(--font-space)", color: "#14120e" }}
           >
-            Make You Look
+            first thing people
           </motion.span>
           <motion.span {...fadeUp(0.46)}
-            className="block text-[clamp(3rem,9vw,7.5rem)] font-bold leading-[0.92] tracking-tight"
-            style={{ fontFamily: "var(--font-space)", color: "#1a0b2e" }}
+            className="block text-[clamp(2.6rem,7.5vw,6rem)] font-bold leading-[0.98] tracking-[-0.02em]"
+            style={{ fontFamily: "var(--font-space)", color: "#14120e" }}
           >
-            Like a Million Bucks
+            judge you on.
           </motion.span>
         </div>
 
         {/* Subtext */}
         <motion.p
           {...fadeUp(0.58, 14)}
-          className="text-lg md:text-xl max-w-xl mx-auto mb-12 leading-[1.8]"
-          style={{ color: "#5c5478" }}
+          className="text-lg md:text-xl max-w-2xl mx-auto mb-11 leading-[1.75]"
+          style={{ color: "#4a4437" }}
         >
-          Custom-built websites for South African small businesses. Fast, modern,
-          and designed to win customers — from just{" "}
-          <span style={{ color: "#1a0b2e", fontWeight: 600 }}>R3,500</span>.
+          I&apos;m Aidan. I build custom websites for South African small
+          businesses — no templates, no agency retainer. You see the design
+          before you pay a cent.
         </motion.p>
 
         {/* CTAs */}
         <motion.div
           {...fadeUp(0.7, 14)}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16"
+          className="flex flex-col sm:flex-row items-center justify-center gap-3.5 mb-16"
         >
           <Link
             href="/contact"
-            className="inline-flex items-center gap-2 text-white font-semibold px-9 py-4 rounded-full text-base transition-all duration-300 hover:scale-105"
-            style={{
-              background: "linear-gradient(135deg, #6c63ff, #8b5cf6)",
-              boxShadow: "0 0 30px rgba(108,99,255,0.35), 0 4px 20px rgba(0,0,0,0.1)",
-            }}
+            className="inline-flex items-center gap-2 font-semibold px-8 py-4 rounded-full text-base transition-all duration-300 hover:opacity-88"
+            style={{ background: "#14120e", color: "#f4f2ee" }}
           >
-            Start Your Website
+            Get a free concept
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
               <path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </Link>
           <Link
-            href="/work"
-            className="inline-flex items-center gap-2 font-medium px-9 py-4 rounded-full text-base transition-all duration-300"
+            href="#demos"
+            className="inline-flex items-center gap-2 font-medium px-8 py-4 rounded-full text-base transition-all duration-300 hover:bg-white/50"
             style={{
-              color: "#5c5478",
-              border: "1px solid rgba(108,99,255,0.25)",
-              background: "rgba(255,255,255,0.45)",
+              color: "#14120e",
+              border: "1px solid rgba(20,18,14,0.22)",
             }}
           >
-            View Our Work
+            See six real demo sites
           </Link>
         </motion.div>
 
-        {/* Stats */}
+        {/* Facts — each one is checkable, not a self-awarded badge */}
         <motion.div
           {...fadeUp(0.82, 14)}
-          className="flex items-center justify-center gap-6 md:gap-16"
+          className="flex items-start justify-center gap-8 md:gap-16"
         >
           {[
-            { value: "100%",    label: "Custom Built" },
-            { value: "3–5 days", label: "Turnaround"  },
-            { value: "R3.5k",   label: "Starting At"  },
-          ].map((stat) => (
-            <div key={stat.label} className="text-center">
+            { value: "R3,500", label: "starting price"       },
+            { value: "5 days", label: "typical build"        },
+            { value: "R0",     label: "to see your concept"  },
+          ].map((fact) => (
+            <div key={fact.label} className="text-center">
               <div className="text-lg sm:text-2xl font-bold mb-1.5"
-                style={{ fontFamily: "var(--font-space)", color: "#1a0b2e" }}>
-                {stat.value}
+                style={{ fontFamily: "var(--font-space)", color: "#14120e" }}>
+                {fact.value}
               </div>
-              <div className="text-xs uppercase tracking-widest" style={{ color: "#7b709e" }}>
-                {stat.label}
+              <div className="text-xs tracking-wide" style={{ color: "#6b6455" }}>
+                {fact.label}
               </div>
             </div>
           ))}
         </motion.div>
       </div>
 
-      {/* Scroll indicator — hidden on mobile so it doesn't overlap stats */}
+      {/* Scroll indicator — hidden on mobile so it doesn't overlap the facts */}
       <motion.div
         className="absolute bottom-10 left-1/2 -translate-x-1/2 hidden sm:flex flex-col items-center gap-2"
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 1.5, duration: 0.6 }}
       >
-        <span className="text-xs uppercase tracking-widest" style={{ color: "#9490b5" }}>Scroll</span>
         <div className="w-px h-12" style={{
-          background: "linear-gradient(to bottom, #6c63ff, transparent)",
+          background: "linear-gradient(to bottom, rgba(20,18,14,0.5), transparent)",
           animation: "scrollPulse 2s ease-in-out infinite",
         }} />
       </motion.div>

@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { isStandaloneRoute } from "@/lib/routes";
 
 const links = [
   { href: "/", label: "Home" },
@@ -25,7 +26,11 @@ export default function Nav() {
 
   useEffect(() => setOpen(false), [pathname]);
 
-  if (pathname?.startsWith("/party")) return null;
+  if (isStandaloneRoute(pathname)) return null;
+
+  /* The homepage hero is a light silk canvas — white nav text disappears on it
+     until the bar picks up its dark background on scroll. */
+  const onLightHero = pathname === "/" && !scrolled;
 
   return (
     <>
@@ -43,16 +48,19 @@ export default function Nav() {
         transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
       >
         <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2 group">
+          <Link href="/" className="flex items-center gap-2.5 group">
             <div
-              className="w-8 h-8 rounded-lg flex items-center justify-center text-white text-sm font-bold"
-              style={{ background: "linear-gradient(135deg, #6c63ff, #38bdf8)" }}
+              className="w-8 h-8 rounded-md flex items-center justify-center text-sm font-bold"
+              style={{ background: "var(--accent)", color: "var(--ink)" }}
             >
               W
             </div>
             <span
-              className="text-white font-semibold text-lg tracking-tight"
-              style={{ fontFamily: "var(--font-space)" }}
+              className="font-semibold text-lg tracking-[-0.01em]"
+              style={{
+                fontFamily: "var(--font-space)",
+                color: onLightHero ? "var(--ink)" : "#fff",
+              }}
             >
               Webflow Studio
             </span>
@@ -63,27 +71,31 @@ export default function Nav() {
               <Link
                 key={l.href}
                 href={l.href}
-                className={`text-sm font-medium transition-colors duration-200 ${
-                  pathname === l.href ? "text-white" : "text-[#7b7a8e] hover:text-white"
-                }`}
+                className="text-sm font-medium transition-opacity duration-200 hover:opacity-100"
+                style={{
+                  color: onLightHero ? "var(--ink)" : "#fff",
+                  opacity: pathname === l.href ? 1 : 0.6,
+                }}
               >
                 {l.label}
               </Link>
             ))}
             <Link
               href="/contact"
-              className="text-sm font-semibold text-white px-5 py-2.5 rounded-full transition-all duration-300 hover:scale-105 hover:shadow-lg"
-              style={{
-                background: "linear-gradient(135deg, #6c63ff, #8b5cf6)",
-                boxShadow: "0 0 20px rgba(108,99,255,0.3)",
-              }}
+              className="text-sm font-semibold px-5 py-2.5 rounded-full transition-opacity duration-300 hover:opacity-85"
+              style={
+                onLightHero
+                  ? { background: "var(--ink)", color: "var(--text)" }
+                  : { background: "var(--text)", color: "var(--ink)" }
+              }
             >
-              Get Started
+              Get a free concept
             </Link>
           </nav>
 
           <button
-            className="md:hidden text-white p-2"
+            className="md:hidden p-2"
+            style={{ color: onLightHero ? "var(--ink)" : "#fff" }}
             onClick={() => setOpen(!open)}
             aria-label="Toggle menu"
           >
@@ -126,10 +138,10 @@ export default function Nav() {
             <div className="mt-auto">
               <Link
                 href="/contact"
-                className="inline-block w-full text-center text-lg font-semibold text-white py-4 rounded-2xl"
-                style={{ background: "linear-gradient(135deg, #6c63ff, #8b5cf6)" }}
+                className="inline-block w-full text-center text-lg font-semibold py-4 rounded-full"
+                style={{ background: "var(--text)", color: "var(--ink)" }}
               >
-                Get Started
+                Get a free concept
               </Link>
             </div>
           </motion.div>

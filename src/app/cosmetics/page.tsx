@@ -37,16 +37,16 @@ const SHADES: Shade[] = [
 ]
 
 const PRODUCTS = [
-  { name: 'Velours Mat',    tag: 'Liquid Matte',     price: '$48', desc: '12-hour wear, silk-pressed pigment, zero transfer.',     accent: '#7A1A28' },
-  { name: 'Rouge à Lèvres', tag: 'Satin Bullet',     price: '$42', desc: 'Our signature lipstick in eighteen wearable shades.',    accent: '#A8334C' },
-  { name: 'Gloss Pur',      tag: 'High-Shine Oil',   price: '$36', desc: 'Liquid mirror finish, infused with botanical squalane.', accent: '#D85878' },
-  { name: 'Stain Éternel',  tag: 'Water-Wear Stain', price: '$52', desc: 'Stained-glass color that lasts through twelve hours.',   accent: '#C44A2E' },
+  { name: 'Velours Mat',    tag: 'Liquid Matte',     price: 'R495', desc: '12-hour wear, silk-pressed pigment, zero transfer.',     accent: '#7A1A28' },
+  { name: 'Rouge à Lèvres', tag: 'Satin Bullet',     price: 'R450', desc: 'Our signature lipstick in eighteen wearable shades.',    accent: '#A8334C' },
+  { name: 'Gloss Pur',      tag: 'High-Shine Oil',   price: 'R380', desc: 'Liquid mirror finish, infused with botanical squalane.', accent: '#D85878' },
+  { name: 'Stain Éternel',  tag: 'Water-Wear Stain', price: 'R520', desc: 'Stained-glass color that lasts through twelve hours.',   accent: '#C44A2E' },
 ]
 
 const REVIEWS = [
-  { text: 'I have never had a lipstick feel like this. Like water on the lips, like silk. I have ordered every shade.',  who: 'Camille Aubert',   role: 'Makeup Artist · Paris' },
-  { text: 'Rouge Noir is the only red I trust on set. The pigment is unreal. Twelve hours minimum without retouch.',     who: 'Imani Okafor',     role: 'Editorial Director · Vogue' },
-  { text: 'It changed my relationship with red lipstick. I never thought a shade could feel made for my face.',          who: 'Sofía Reyes',      role: 'Verified Buyer' },
+  { text: 'I have never had a lipstick feel like this. Like water on the lips, like silk. I have ordered every shade.',  who: 'Camille Aubert',   role: 'Makeup artist · Cape Town' },
+  { text: 'Rouge Noir is the only red I trust on set. The pigment is unreal. Twelve hours minimum without retouch.',     who: 'Imani Okafor',     role: 'Editorial stylist · Johannesburg' },
+  { text: 'It changed my relationship with red lipstick. I never thought a shade could feel made for my face.',          who: 'Sofía Reyes',      role: 'Verified buyer' },
 ]
 
 const PETALS = Array.from({ length: 20 }, (_, i) => ({
@@ -824,7 +824,7 @@ function Hero({ shade, setShade }: { shade: Shade; setShade: (s: Shade) => void 
                 letterSpacing: '.06em',
               }}
             >
-              Satin Bullet · 3.5g · $42
+              Satin Bullet · 3.5g · R450
             </div>
           </motion.div>
         </motion.div>

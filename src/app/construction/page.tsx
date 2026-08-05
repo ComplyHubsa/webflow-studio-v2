@@ -466,7 +466,7 @@ export default function ConstructionPage() {
               transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.65 }}
               className="BI"
               style={{ display: 'block', color: 'transparent', WebkitTextStroke: '2px #ECEFF1' }}
-            >DIFFERENT.</motion.span>
+            >TO LAST.</motion.span>
           </h1>
 
           <motion.div
@@ -475,7 +475,7 @@ export default function ConstructionPage() {
             style={{ marginTop: 44 }}
           >
             <p style={{ fontSize: 16, lineHeight: 1.8, color: '#78909C', maxWidth: 480, fontWeight: 300, marginBottom: 32 }}>
-              South Africa&apos;s most trusted heavy construction company. 450+ projects completed. Zero compromises.
+              Heavy construction across South Africa since 2008 — commercial, industrial and civil. 450 projects delivered, R4.2 billion in contract value.
             </p>
             <div style={{ display: 'flex', gap: 14, flexWrap: 'wrap' }}>
               <button
@@ -950,7 +950,7 @@ export default function ConstructionPage() {
                 <span className="B" style={{ fontSize: 22, fontWeight: 800, color: '#ECEFF1', letterSpacing: '0.06em' }}>IRONCLAD</span>
               </div>
               <p style={{ fontSize: 13, color: '#263238', fontWeight: 300, maxWidth: 280, lineHeight: 1.75 }}>
-                South Africa&apos;s most trusted construction company. Built on steel, trust, and 18 years of proven delivery.
+                Commercial, industrial and civil construction. Johannesburg based, working nationally since 2008.
               </p>
             </div>
 

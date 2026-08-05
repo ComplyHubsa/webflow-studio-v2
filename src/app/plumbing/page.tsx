@@ -20,30 +20,30 @@ interface Ripple {
 }
 
 const SERVICES = [
-  { num: '01', title: 'Emergency Repairs', badge: '15 MIN', desc: 'Burst pipes, slab leaks, major flooding. We dispatch immediately — 24 hours a day, every day of the year.' },
+  { num: '01', title: 'Emergency Repairs', badge: '24/7', desc: 'Burst pipes, geyser failures, major flooding. We dispatch immediately — 24 hours a day, every day of the year.' },
   { num: '02', title: 'Blocked Drains', badge: null, desc: 'High-pressure jet blasting and CCTV drain inspection. We clear it, film it, and prove the fix on-screen.' },
   { num: '03', title: 'Hot Water Systems', badge: null, desc: 'Install, repair, or replace any hot water system — gas, electric, solar, or heat pump. Same-day availability.' },
-  { num: '04', title: 'Gas Fitting', badge: null, desc: 'Certified gas plumbers for BBQs, stoves, heaters, and commercial fit-outs. Compliance certificates included.' },
+  { num: '04', title: 'Gas Fitting', badge: null, desc: 'Registered gas installers for braais, hobs, heaters and commercial fit-outs. LPG certificate of conformity included.' },
   { num: '05', title: 'Bathroom Plumbing', badge: null, desc: 'New builds and full renovations. Tiled showers, freestanding baths, vanities — start to finish.' },
-  { num: '06', title: 'Commercial', badge: null, desc: 'Retail, strata, hospitality. Maintenance contracts and 2-hour SLA emergency response for businesses.' },
+  { num: '06', title: 'Commercial', badge: null, desc: 'Retail, sectional title and hospitality. Maintenance contracts and 2-hour SLA emergency response for businesses.' },
 ]
 
 const REVIEWS = [
-  { name: 'Sarah M.', suburb: 'Newtown', text: "Called at 2am with a burst pipe. They were at my door in 11 minutes. I couldn't believe it — and the price was completely fair." },
-  { name: 'James T.', suburb: 'Bondi Junction', text: "Showed up on time, explained everything before starting, no upselling. I've had so many bad experiences with tradies. These guys are genuinely different." },
-  { name: 'Priya K.', suburb: 'Surry Hills', text: "Another company quoted $900 and wanted to dig up the yard. Flux fixed it in 18 minutes for $180. Honest and incredibly fast." },
+  { name: 'Sarah M.', suburb: 'Randburg', text: "Called at 2am with a burst pipe. Someone was at my gate inside the hour. I couldn't believe it — and the price was completely fair." },
+  { name: 'James T.', suburb: 'Fourways', text: "Showed up on time, explained everything before starting, no upselling. I've had so many bad experiences with plumbers. These guys are genuinely different." },
+  { name: 'Priya K.', suburb: 'Bryanston', text: "Another company quoted R4,500 and wanted to dig up the yard. Flux fixed it in 20 minutes for R950. Honest and incredibly fast." },
 ]
 
 const STATS = [
   { num: '500+', label: 'Jobs Done' },
-  { num: '15', label: 'Min Avg Response' },
+  { num: '60', label: 'Min Avg Response' },
   { num: '4.9', label: 'Star Rating' },
   { num: '12', label: 'Yrs in Business' },
 ]
 
 const STEPS = [
   { n: '01', title: 'Call or Book', desc: 'Phone us anytime or book online in 60 seconds. Tell us the problem — we plan the response immediately.' },
-  { n: '02', title: 'We Show Up', desc: 'Nearest crew dispatched. GPS-tracked. Fully stocked van. Uniformed plumber at your door in 15 minutes.' },
+  { n: '02', title: 'We Show Up', desc: 'Nearest crew dispatched, GPS-tracked, with a fully stocked van. Most Joburg call-outs are on site within the hour.' },
   { n: '03', title: 'Fixed. Guaranteed.', desc: 'We quote before touching anything. Done right the first time. 12-month workmanship warranty on every job.' },
 ]
 
@@ -178,7 +178,7 @@ export default function PlumbingPage() {
           className="fixed bottom-6 right-6 z-50 bg-[#E8481E] text-white rounded-full shadow-2xl"
           style={{ fontFamily: 'var(--font-barlow)', fontWeight: 800, fontSize: '13px', letterSpacing: '0.07em', textTransform: 'uppercase', padding: '14px 22px' }}
         >
-          📞 Call Now
+          Call now
         </motion.a>
       )}
 
@@ -202,7 +202,7 @@ export default function PlumbingPage() {
           <div className="flex flex-col justify-center flex-1 pt-4 md:pt-0">
             <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.12 }} className="flex items-center gap-2 mb-7">
               <span className="w-2 h-2 rounded-full bg-[#E8481E] animate-pulse" />
-              <span className="text-[#E8481E]" style={{ fontFamily: 'var(--font-barlow)', fontWeight: 800, letterSpacing: '0.2em', textTransform: 'uppercase', fontSize: '11px' }}>Available Now · Sydney</span>
+              <span className="text-[#E8481E]" style={{ fontFamily: 'var(--font-barlow)', fontWeight: 800, letterSpacing: '0.2em', textTransform: 'uppercase', fontSize: '11px' }}>Available now · Johannesburg</span>
             </motion.div>
 
             {[
@@ -224,7 +224,7 @@ export default function PlumbingPage() {
 
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.68 }} className="mt-10 flex flex-col sm:flex-row items-start sm:items-center gap-5">
               <p className="text-[#0F0F0F]/45 max-w-[290px]" style={{ fontSize: '15px', lineHeight: 1.7 }}>
-                Fixed price, no surprises. There in 15 minutes or your call-out fee is waived.
+                Fixed price, quoted before we start. On site within the hour or your call-out fee is waived.
               </p>
               <div className="flex gap-3 shrink-0">
                 <a href="#quote" className="bg-[#E8481E] text-white hover:bg-[#0F0F0F] transition-colors" style={{ fontFamily: 'var(--font-barlow)', fontWeight: 800, fontSize: '14px', letterSpacing: '0.1em', textTransform: 'uppercase', padding: '14px 26px', display: 'inline-block' }}>Book Now →</a>
@@ -234,10 +234,10 @@ export default function PlumbingPage() {
           </div>
 
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.1 }} className="flex flex-wrap gap-6 border-t border-[#0F0F0F]/10 pt-7 mt-6">
-            {[{ icon: '🔒', label: 'Licensed' }, { icon: '🛡️', label: '$20M Insured' }, { icon: '⭐', label: '4.9 Rating' }, { icon: '📜', label: 'Fixed Price' }].map(t => (
-              <div key={t.label} className="flex items-center gap-1.5">
-                <span className="text-sm">{t.icon}</span>
-                <span className="text-[#0F0F0F]/38" style={{ fontFamily: 'var(--font-barlow)', fontWeight: 700, letterSpacing: '0.05em', textTransform: 'uppercase', fontSize: '11px' }}>{t.label}</span>
+            {['PIRB registered', 'R20M public liability', '4.9 rating', 'Fixed price upfront'].map(label => (
+              <div key={label} className="flex items-center gap-2">
+                <span className="w-1 h-1 rounded-full bg-[#E8481E]" />
+                <span className="text-[#0F0F0F]/45" style={{ fontFamily: 'var(--font-barlow)', fontWeight: 700, letterSpacing: '0.05em', textTransform: 'uppercase', fontSize: '11px' }}>{label}</span>
               </div>
             ))}
           </motion.div>
@@ -358,7 +358,7 @@ export default function PlumbingPage() {
           <div className="md:pt-16">
             <p className="text-white/35 mb-10 max-w-sm" style={{ fontSize: '15px', lineHeight: 1.75 }}>Every minute a pipe leaks, the damage multiplies. We answer every call, every hour. No voicemail. No hold music.</p>
             <div className="flex flex-col gap-4 items-start">
-              <a href="tel:0800359869" className="bg-[#E8481E] text-white hover:bg-white hover:text-[#0F0F0F] transition-colors" style={{ fontFamily: 'var(--font-barlow)', fontWeight: 900, fontSize: '22px', letterSpacing: '0.06em', textTransform: 'uppercase', padding: '18px 40px', display: 'inline-block' }}>📞 0800 359 869</a>
+              <a href="tel:0800359869" className="bg-[#E8481E] text-white hover:bg-white hover:text-[#0F0F0F] transition-colors" style={{ fontFamily: 'var(--font-barlow)', fontWeight: 900, fontSize: '22px', letterSpacing: '0.06em', textTransform: 'uppercase', padding: '18px 40px', display: 'inline-block' }}>0800 359 869</a>
               <a href="#" className="text-white/30 text-sm underline hover:text-white transition-colors">Or book online instead</a>
             </div>
           </div>

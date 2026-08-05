@@ -8,8 +8,10 @@ const dmSans = DM_Sans({ subsets: ['latin'], weight: ['300', '400', '500', '700'
 const dmMono = DM_Mono({ subsets: ['latin'], weight: ['300', '400', '500'], variable: '--font-mono' })
 
 // ─── Canvas particle system ───────────────────────────────────────────────────
-const SYMBOLS = ['£', '$', '%', '∑', '∞', '÷', '×', '=', '€', '¥', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.', ',']
-const STRINGS = ['R.O.I', 'TAX', 'P&L', 'EBITDA', 'YoY', 'CAGR', 'VAT', 'IRR', 'NPV', 'FASB', 'IFRS']
+// South African practice — rand only, and local reporting terms. The old set
+// carried £/€/¥ and US-only FASB, which reads wrong to a local client.
+const SYMBOLS = ['R', '%', '+', '−', '=', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.', ',']
+const STRINGS = ['SARS', 'VAT', 'PAYE', 'P&L', 'CIPC', 'IFRS', 'YoY', 'UIF', 'TAX']
 
 interface Particle {
   x: number; y: number; vx: number; vy: number
@@ -89,8 +91,8 @@ function ProfitLine({ animate }: { animate: boolean }) {
     <svg viewBox="0 0 480 100" className="w-full" style={{ height: 100 }} preserveAspectRatio="none">
       <defs>
         <linearGradient id="chartGrad" x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0%" stopColor="#00FF88" stopOpacity="0.3" />
-          <stop offset="100%" stopColor="#00FF88" stopOpacity="1" />
+          <stop offset="0%" stopColor="#5FA98A" stopOpacity="0.3" />
+          <stop offset="100%" stopColor="#5FA98A" stopOpacity="1" />
         </linearGradient>
         <filter id="glow">
           <feGaussianBlur stdDeviation="3" result="blur" />
@@ -118,7 +120,7 @@ function ProfitLine({ animate }: { animate: boolean }) {
       />
       {/* dots at key points */}
       {CHART_POINTS.filter((_, i) => i % 2 === 0).map((p, i) => (
-        <circle key={i} cx={p.x} cy={p.y} r={animate ? 3 : 0} fill="#00FF88"
+        <circle key={i} cx={p.x} cy={p.y} r={animate ? 3 : 0} fill="#5FA98A"
           filter="url(#glow)"
           style={{ transition: `r 0.3s ${0.3 + i * 0.15}s, opacity 0.3s ${0.3 + i * 0.15}s` }}
           opacity={animate ? 1 : 0}
@@ -203,7 +205,7 @@ export default function AccountantHeroPage() {
     resize()
     window.addEventListener('resize', resize)
 
-    const colors = ['#00FF88', '#00CC6A', '#FFD700', '#ffffff']
+    const colors = ['#5FA98A', '#3E7D62', '#C9A961', '#ffffff']
 
     const spawn = () => {
       if (particles.current.length > 180) return
@@ -238,7 +240,7 @@ export default function AccountantHeroPage() {
         p.y += p.vy
         const t = p.life / p.maxLife
         p.alpha = t < 0.2 ? t / 0.2 : t > 0.8 ? 1 - (t - 0.8) / 0.2 : 1
-        const hex = Math.round(p.alpha * 0.35 * 255).toString(16).padStart(2, '0')
+        const hex = Math.round(p.alpha * 0.12 * 255).toString(16).padStart(2, '0')
         ctx.fillStyle = p.color + hex
         ctx.font = `${p.size}px 'DM Mono', monospace`
         ctx.fillText(p.char, p.x, p.y)
@@ -296,25 +298,20 @@ export default function AccountantHeroPage() {
             initial={{ opacity: 0, scale: 0.92 }}
             animate={loaded ? { opacity: 1, scale: 1 } : {}}
             transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
-            className="text-[clamp(3rem,10vw,9rem)] font-black leading-none tracking-tighter mb-2"
+            className="text-[clamp(2.4rem,7vw,6rem)] font-bold leading-[1.02] tracking-tight mb-2"
             style={{ fontFamily: 'var(--font-dm)' }}
           >
-            <span className="text-white">YOUR MONEY.</span>
+            <span className="text-white">Know exactly where</span>
           </motion.h1>
 
           <motion.h1
             initial={{ opacity: 0, scale: 0.92 }}
             animate={loaded ? { opacity: 1, scale: 1 } : {}}
             transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
-            className="text-[clamp(3rem,10vw,9rem)] font-black leading-none tracking-tighter mb-8"
+            className="text-[clamp(2.4rem,7vw,6rem)] font-bold leading-[1.02] tracking-tight mb-8"
+            style={{ fontFamily: 'var(--font-dm)' }}
           >
-            <span style={{
-              background: 'linear-gradient(135deg, #00FF88 0%, #00CC6A 40%, #FFD700 100%)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-            }}>
-              FINALLY WORKING.
-            </span>
+            <span style={{ color: '#5FA98A' }}>your business stands.</span>
           </motion.h1>
         </motion.div>
 
@@ -323,10 +320,10 @@ export default function AccountantHeroPage() {
           initial={{ opacity: 0 }}
           animate={loaded ? { opacity: 1 } : {}}
           transition={{ duration: 0.6, delay: 0.5 }}
-          className="font-mono text-white/50 text-sm md:text-base tracking-wide max-w-lg mb-14"
+          className="text-white/55 text-base md:text-lg leading-[1.75] max-w-xl mb-14"
         >
           <Typewriter
-            text="We turn your financial chaos into compound clarity — tax strategy, growth accounting, and profit engineering for ambitious businesses."
+            text="Monthly bookkeeping, VAT and PAYE submissions, annual financial statements and tax returns — handled properly, filed on time, explained in plain language."
             delay={800}
           />
         </motion.p>
@@ -429,9 +426,9 @@ export default function AccountantHeroPage() {
       {/* ══════════ STATS ══════════ */}
       <section ref={statsRef} className="relative z-10 py-16 px-6">
         <div className="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-4">
-          <StatCard value={2400000} prefix="£" suffix="+" label="Tax Saved for Clients" delay={0} animate={statsVisible} />
-          <StatCard value={340} suffix="%" label="Avg. Client Growth" delay={0.15} animate={statsVisible} />
-          <StatCard value={98} suffix="%" label="Client Retention Rate" delay={0.3} animate={statsVisible} />
+          <StatCard value={2400000} prefix="R" suffix="" label="Tax saved for clients last year" delay={0} animate={statsVisible} />
+          <StatCard value={240} suffix="+" label="Businesses we file for" delay={0.15} animate={statsVisible} />
+          <StatCard value={100} suffix="%" label="Returns filed before deadline" delay={0.3} animate={statsVisible} />
         </div>
       </section>
 
@@ -445,10 +442,10 @@ export default function AccountantHeroPage() {
             transition={{ duration: 0.7 }}
             className="mb-16"
           >
-            <p className="font-mono text-emerald-400 text-xs tracking-widest uppercase mb-4">What We Do</p>
-            <h2 className="text-5xl font-black text-white leading-none">
-              Precision.<br />
-              <span className="text-white/30">At Every Level.</span>
+            <p className="font-mono text-emerald-400 text-xs tracking-widest uppercase mb-4">What we do</p>
+            <h2 className="text-[clamp(2rem,4vw,3.2rem)] font-bold text-white leading-[1.1] tracking-tight">
+              The whole finance function,<br />
+              <span className="text-white/35">handled properly.</span>
             </h2>
           </motion.div>
 
@@ -456,27 +453,27 @@ export default function AccountantHeroPage() {
             {[
               {
                 num: '01',
-                title: 'Tax Strategy',
-                desc: 'We don\'t just file — we engineer. Legal minimisation, R&D credits, capital allowances optimised before HMRC ever sees a figure.',
-                tag: 'HMRC · PAYE · VAT',
+                title: 'Tax and SARS submissions',
+                desc: 'Provisional and annual returns, VAT, PAYE and UIF. We handle eFiling, deal with SARS on your behalf, and make sure nothing is filed late.',
+                tag: 'SARS · VAT · PAYE',
               },
               {
                 num: '02',
-                title: 'Profit Engineering',
-                desc: 'Margin analysis, cost architecture, and cash flow modelling that turns revenue into compounding wealth.',
-                tag: 'P&L · Cash Flow · EBITDA',
+                title: 'Monthly bookkeeping',
+                desc: 'Your books reconciled every month on Xero or Sage, so you know what the business actually made without waiting for year end.',
+                tag: 'Xero · Sage · Reconciliation',
               },
               {
                 num: '03',
-                title: 'Growth Accounting',
-                desc: 'Real-time dashboards, KPI architecture, and board-ready reports. Know your numbers before your competitors know theirs.',
-                tag: 'MIS · KPIs · Forecasting',
+                title: 'Annual financial statements',
+                desc: 'IFRS for SMEs compliant statements, prepared and signed off — ready for the bank, SARS, or a buyer doing due diligence.',
+                tag: 'AFS · IFRS for SMEs',
               },
               {
                 num: '04',
-                title: 'CFO on Demand',
-                desc: 'Strategic financial leadership — fundraising, M&A due diligence, investor decks — without the £200k salary.',
-                tag: 'M&A · Fundraising · Strategy',
+                title: 'CFO on demand',
+                desc: 'Cash flow forecasting, board-ready reporting and help with funding applications, without carrying a full-time CFO salary.',
+                tag: 'Forecasting · Funding · Reporting',
               },
             ].map((s, i) => (
               <motion.div
@@ -528,8 +525,8 @@ export default function AccountantHeroPage() {
         >
           {[...Array(2)].map((_, rep) => (
             <span key={rep} className="flex gap-12">
-              {['TAX SAVINGS', 'PROFIT GROWTH', 'CASH FLOW', 'STRATEGIC CFO', 'HMRC COMPLIANCE',
-                'ANNUAL RETURNS', 'VAT RETURNS', 'PAYROLL', 'R&D CREDITS', 'XERO PARTNER'].map((t, i) => (
+              {['BOOKKEEPING', 'CASH FLOW', 'SARS EFILING', 'VAT RETURNS', 'PAYE & UIF',
+                'ANNUAL STATEMENTS', 'PAYROLL', 'TAX CLEARANCE', 'CIPC RETURNS', 'XERO PARTNER'].map((t, i) => (
                 <span key={i} className="flex items-center gap-4">
                   <span className="font-mono text-white/15 text-xs tracking-[0.3em] uppercase">{t}</span>
                   <span className="text-emerald-400/30 text-xl font-mono">·</span>
@@ -554,10 +551,10 @@ export default function AccountantHeroPage() {
             className="text-[clamp(12rem,35vw,30rem)] font-black leading-none select-none"
             style={{
               color: 'transparent',
-              WebkitTextStroke: '1px rgba(0,255,136,0.04)',
+              WebkitTextStroke: '1px rgba(95,169,138,0.06)',
             }}
           >
-            £∞
+            R
           </span>
         </motion.div>
 
@@ -579,7 +576,7 @@ export default function AccountantHeroPage() {
           >
             Stop leaving<br />
             <span style={{
-              background: 'linear-gradient(135deg, #00FF88, #FFD700)',
+              background: 'linear-gradient(135deg, #5FA98A, #C9A961)',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
             }}>

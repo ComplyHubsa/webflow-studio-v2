@@ -1,13 +1,14 @@
 @import "tailwindcss";
 
 :root {
-  --bg: #050507;
-  --surface: #0d0d12;
-  --border: rgba(255,255,255,0.06);
-  --accent: #6c63ff;
-  --accent2: #a78bfa;
-  --text: #f0eff5;
-  --muted: #7b7a8e;
+  --bg: #0a0a0c;
+  --surface: #101013;
+  --border: rgba(255,255,255,0.08);
+  --accent: #c9a961;
+  --accent2: #d9bd84;
+  --text: #f4f2ee;
+  --muted: #8a857a;
+  --ink: #14120e;
 }
 
 @theme inline {
@@ -33,36 +34,19 @@ body {
   overflow-x: hidden;
 }
 
-::selection { background: var(--accent); color: #fff; }
+::selection { background: var(--accent); color: var(--ink); }
 
 ::-webkit-scrollbar { width: 4px; }
 ::-webkit-scrollbar-track { background: var(--bg); }
-::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 2px; }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.18); border-radius: 2px; }
 
-.gradient-text {
-  background: linear-gradient(135deg, #a78bfa 0%, #6c63ff 50%, #38bdf8 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.glow {
-  box-shadow: 0 0 40px rgba(108, 99, 255, 0.25), 0 0 80px rgba(108, 99, 255, 0.1);
-}
+/* Kept for legacy markup — now a flat accent, not a gradient. */
+.gradient-text { color: var(--accent); }
 
 .glass {
   background: rgba(255,255,255,0.03);
-  backdrop-filter: blur(20px);
   border: 1px solid var(--border);
 }
-
-@keyframes marquee {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
-
-.marquee-track { animation: marquee 25s linear infinite; }
-.marquee-track:hover { animation-play-state: paused; }
 
 @keyframes scrollPulse {
   0%, 100% { opacity: 0.3; transform: scaleY(0.6); }

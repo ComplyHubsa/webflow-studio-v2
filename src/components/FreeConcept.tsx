@@ -219,7 +219,7 @@ export default function FreeConcept() {
     <section className="py-18 px-6">
       <div className="max-w-6xl mx-auto">
         <FadeIn>
-          <div ref={cardRef} className="relative rounded-3xl" style={{ background: "linear-gradient(160deg, #f0eeff 0%, #e8e6ff 25%, #ede8ff 55%, #e6ecff 100%)" }}>
+          <div ref={cardRef} className="relative rounded-3xl" style={{ background: "linear-gradient(160deg, #f2ede3 0%, #e9e2d5 30%, #efe8db 60%, #e6ddcd 100%)" }}>
             {/* SVG body — warping card shape, paints beyond bounds */}
             <svg
               ref={svgRef}
@@ -234,9 +234,9 @@ export default function FreeConcept() {
             >
               <defs>
                 <linearGradient id="freeConceptBg" x1="0" y1="0" x2="1" y2="1">
-                  <stop offset="0%"   stopColor="#f0eeff" />
-                  <stop offset="40%"  stopColor="#e8e6ff" />
-                  <stop offset="100%" stopColor="#e6ecff" />
+                  <stop offset="0%"   stopColor="#f2ede3" />
+                  <stop offset="40%"  stopColor="#e9e2d5" />
+                  <stop offset="100%" stopColor="#e6ddcd" />
                 </linearGradient>
               </defs>
               <path ref={pathRef} fill="url(#freeConceptBg)" />
@@ -245,25 +245,11 @@ export default function FreeConcept() {
             {/* Decoration layer — clipped to rounded rect */}
             <div className="absolute inset-0 rounded-3xl overflow-hidden pointer-events-none">
               <div
-                className="absolute inset-0 opacity-[0.04]"
+                className="absolute inset-0 opacity-[0.05]"
                 style={{
                   backgroundImage:
-                    "linear-gradient(rgba(108,99,255,1) 1px, transparent 1px), linear-gradient(90deg, rgba(108,99,255,1) 1px, transparent 1px)",
+                    "linear-gradient(rgba(20,18,14,1) 1px, transparent 1px), linear-gradient(90deg, rgba(20,18,14,1) 1px, transparent 1px)",
                   backgroundSize: "40px 40px",
-                }}
-              />
-              <div
-                className="absolute -top-24 -right-24 w-96 h-96 rounded-full hidden sm:block"
-                style={{
-                  background: "radial-gradient(circle, rgba(108,99,255,0.18) 0%, transparent 70%)",
-                  filter: "blur(50px)",
-                }}
-              />
-              <div
-                className="absolute -bottom-20 -left-20 w-80 h-80 rounded-full hidden sm:block"
-                style={{
-                  background: "radial-gradient(circle, rgba(167,139,250,0.22) 0%, transparent 70%)",
-                  filter: "blur(50px)",
                 }}
               />
             </div>
@@ -273,65 +259,51 @@ export default function FreeConcept() {
               {/* Left */}
               <div>
                 <div
-                  className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-full mb-8"
+                  className="inline-flex items-center gap-2 text-xs font-medium uppercase tracking-[0.2em] px-4 py-2 mb-8"
                   style={{
-                    background: "rgba(108,99,255,0.12)",
-                    border: "1px solid rgba(108,99,255,0.25)",
-                    color: "#6c63ff",
+                    borderTop: "1px solid rgba(20,18,14,0.2)",
+                    borderBottom: "1px solid rgba(20,18,14,0.2)",
+                    color: "#4a4437",
                   }}
                 >
-                  <span className="w-1.5 h-1.5 rounded-full" style={{ background: "#6c63ff" }} />
-                  Zero Risk
+                  Nothing to lose
                 </div>
 
                 <h2
-                  className="font-bold leading-[1.0] tracking-tight mb-6"
+                  className="font-bold leading-[1.05] tracking-[-0.02em] mb-6"
                   style={{
                     fontFamily: "var(--font-space)",
-                    fontSize: "clamp(2rem, 3.5vw, 3.5rem)",
-                    color: "#0d0b1a",
+                    fontSize: "clamp(2rem, 3.5vw, 3.2rem)",
+                    color: "#14120e",
                   }}
                 >
-                  Get Your{" "}
-                  <span
-                    style={{
-                      background: "linear-gradient(135deg, #6c63ff, #a78bfa)",
-                      WebkitBackgroundClip: "text",
-                      WebkitTextFillColor: "transparent",
-                      backgroundClip: "text",
-                    }}
-                  >
-                    Free Concept
-                  </span>{" "}
-                  First.
+                  See the design before you pay for it.
                 </h2>
 
                 <p
                   className="text-base leading-[1.85] mb-8"
-                  style={{ color: "#4a4870", maxWidth: "42ch" }}
+                  style={{ color: "#4a4437", maxWidth: "44ch" }}
                 >
-                  We research your business, your competitors, and your audience
-                  — then build you a fully custom design concept at{" "}
-                  <strong style={{ color: "#0d0b1a" }}>absolutely no charge</strong>.
-                  You only pay if you love what you see.
+                  I look at your business, your competitors and the customers
+                  you&apos;re after, then design a real homepage for you at{" "}
+                  <strong style={{ color: "#14120e" }}>no charge</strong>. If it
+                  isn&apos;t right, you&apos;ve lost nothing but the five minutes
+                  it took to brief me.
                 </p>
 
                 <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
                   <Link
                     href="/contact"
-                    className="inline-flex items-center gap-2 font-bold px-7 py-4 rounded-full text-white text-sm transition-all duration-300 hover:scale-105 hover:shadow-xl"
-                    style={{
-                      background: "linear-gradient(135deg, #6c63ff, #8b5cf6)",
-                      boxShadow: "0 8px 30px rgba(108,99,255,0.35)",
-                    }}
+                    className="inline-flex items-center gap-2 font-semibold px-7 py-4 rounded-full text-sm transition-opacity duration-300 hover:opacity-88"
+                    style={{ background: "#14120e", color: "#f4f2ee" }}
                   >
-                    Claim Your Free Concept
+                    Send me the brief
                     <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
                       <path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
                   </Link>
-                  <span className="text-sm" style={{ color: "#9490b5" }}>
-                    No credit card. No commitment.
+                  <span className="text-sm" style={{ color: "#6b6455" }}>
+                    No card, no deposit.
                   </span>
                 </div>
               </div>
@@ -341,42 +313,42 @@ export default function FreeConcept() {
                 {[
                   {
                     step: "01",
-                    title: "We research your business",
-                    desc: "We study your industry, competitors, and target customers before touching a pixel.",
+                    title: "I research your business",
+                    desc: "Your industry, your competitors and the customers you want — before I touch a pixel.",
                   },
                   {
                     step: "02",
-                    title: "We design a custom concept",
-                    desc: "A real, full homepage design — built specifically for your business. Not a template.",
+                    title: "I design a real homepage",
+                    desc: "Built for your business specifically. Not a template with your logo dropped in.",
                   },
                   {
                     step: "03",
                     title: "You decide",
-                    desc: "Love it? We build it out from R3,500. Not feeling it? Walk away — no charge, no awkward conversation.",
+                    desc: "Like it? I build it out from R3,500. Don't? Walk away — no charge, no awkward follow-up.",
                   },
                 ].map((item) => (
                   <div
                     key={item.step}
-                    className="flex gap-4 items-start p-5 rounded-2xl"
+                    className="flex gap-4 items-start p-5 rounded-xl"
                     style={{
-                      background: "rgba(108,99,255,0.07)",
-                      border: "1px solid rgba(108,99,255,0.14)",
+                      background: "rgba(20,18,14,0.045)",
+                      border: "1px solid rgba(20,18,14,0.1)",
                       transition: "transform 0.2s ease",
                     }}
                     onMouseEnter={(e) => (e.currentTarget.style.transform = "translateX(4px)")}
                     onMouseLeave={(e) => (e.currentTarget.style.transform = "none")}
                   >
                     <div
-                      className="text-xs font-bold tabular-nums flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center mt-0.5"
-                      style={{ background: "rgba(108,99,255,0.14)", color: "#6c63ff" }}
+                      className="text-xs font-semibold tabular-nums flex-shrink-0 mt-0.5"
+                      style={{ color: "#8a7a4f", letterSpacing: "0.1em" }}
                     >
                       {item.step}
                     </div>
                     <div>
-                      <div className="text-sm font-semibold mb-1" style={{ color: "#0d0b1a" }}>
+                      <div className="text-sm font-semibold mb-1" style={{ color: "#14120e" }}>
                         {item.title}
                       </div>
-                      <div className="text-sm leading-[1.7]" style={{ color: "#6b6890" }}>
+                      <div className="text-sm leading-[1.7]" style={{ color: "#5c5648" }}>
                         {item.desc}
                       </div>
                     </div>

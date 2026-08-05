@@ -11,34 +11,27 @@ export const metadata = {
 export default function WorkPage() {
   return (
     <>
-      <div
-        className="pt-44 pb-10 px-6"
-        style={{
-          background:
-            "radial-gradient(ellipse 80% 50% at 50% 0%, rgba(108,99,255,0.08) 0%, transparent 60%)",
-        }}
-      >
-        <div className="max-w-7xl mx-auto text-center">
+      <div className="pt-44 pb-10 px-6">
+        <div className="max-w-7xl mx-auto">
           <FadeIn>
             <span
-              className="text-xs font-semibold uppercase tracking-widest mb-6 block"
-              style={{ color: "var(--accent2)" }}
+              className="text-xs font-medium uppercase tracking-[0.2em] mb-5 block"
+              style={{ color: "var(--accent)" }}
             >
               Portfolio
             </span>
             <h1
-              className="text-[clamp(3rem,7vw,6rem)] font-bold leading-[0.95] tracking-tight mb-7"
+              className="text-[clamp(2.4rem,5.5vw,4.5rem)] font-bold leading-[1.05] tracking-[-0.02em] mb-6"
               style={{ fontFamily: "var(--font-space)" }}
             >
-              Our{" "}
-              <span className="gradient-text">Work</span>
+              Selected work.
             </h1>
             <p
-              className="text-base md:text-lg max-w-lg mx-auto leading-[1.8]"
+              className="text-base md:text-lg max-w-xl leading-[1.8]"
               style={{ color: "var(--muted)" }}
             >
-              Every site we build is custom — no templates, no shortcuts. Here&apos;s
-              a selection of projects we&apos;re proud of.
+              Every site here was built from scratch — no templates, no theme
+              bought off a marketplace.
             </p>
           </FadeIn>
         </div>

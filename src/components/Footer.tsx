@@ -3,10 +3,11 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Mail, Phone } from "lucide-react";
+import { isStandaloneRoute } from "@/lib/routes";
 
 export default function Footer() {
   const pathname = usePathname();
-  if (pathname?.startsWith("/party")) return null;
+  if (isStandaloneRoute(pathname)) return null;
 
   return (
     <footer
@@ -19,10 +20,10 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
           <div>
-            <div className="flex items-center gap-2 mb-4">
+            <div className="flex items-center gap-2.5 mb-4">
               <div
-                className="w-8 h-8 rounded-lg flex items-center justify-center text-white text-sm font-bold"
-                style={{ background: "linear-gradient(135deg, #6c63ff, #38bdf8)" }}
+                className="w-8 h-8 rounded-md flex items-center justify-center text-sm font-bold"
+                style={{ background: "var(--accent)", color: "var(--ink)" }}
               >
                 W
               </div>
@@ -33,9 +34,9 @@ export default function Footer() {
                 Webflow Studio
               </span>
             </div>
-            <p className="text-[#7b7a8e] text-sm leading-relaxed max-w-xs">
-              Premium custom websites for South African small businesses. Built
-              to impress, designed to convert.
+            <p className="text-sm leading-[1.75] max-w-xs" style={{ color: "var(--muted)" }}>
+              Custom websites for South African small businesses. Designed and
+              built by hand, one project at a time.
             </p>
           </div>
 
@@ -105,8 +106,8 @@ export default function Footer() {
             color: "var(--muted)",
           }}
         >
-          <p>© {new Date().getFullYear()} Webflow Studio. All rights reserved.</p>
-          <p>Made with care in South Africa 🇿🇦</p>
+          <p>© {new Date().getFullYear()} Webflow Studio</p>
+          <p>Built by Aidan O&apos;Gorman · South Africa</p>
         </div>
       </div>
     </footer>
