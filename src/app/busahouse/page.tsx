@@ -75,9 +75,12 @@ export default function BusaHouseConcept() {
         .bh-btn-dark { background: var(--ink); color: var(--cream); }
         .bh-btn-ghost { border: 1px solid var(--line); color: var(--ink); }
         .bh-img { display: block; width: 100%; height: 100%; object-fit: cover; }
-        .bh-hero { display: grid; grid-template-columns: 1fr 1.05fr; gap: 0; align-items: stretch; }
-        .bh-hero-copy { padding: 96px 56px 88px 0; }
-        .bh-hero-photo { min-height: 580px; overflow: hidden; border-radius: 3px; }
+        /* Centred with a landscape aspect rather than stretched to the copy
+           column: every photo they have is landscape, and a full-height column
+           cropped them to a narrow vertical slice. */
+        .bh-hero { display: grid; grid-template-columns: 1fr 1.25fr; gap: 0; align-items: center; }
+        .bh-hero-copy { padding: 96px 52px 88px 0; }
+        .bh-hero-photo { aspect-ratio: 5 / 4; overflow: hidden; border-radius: 3px; }
         .bh-g2 { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
         .bh-g3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
         .bh-card { background: var(--card); border: 1px solid var(--line); border-radius: 4px; overflow: hidden; height: 100%; display: flex; flex-direction: column; }
@@ -86,7 +89,7 @@ export default function BusaHouseConcept() {
         @media (max-width: 980px) {
           .bh-nav { display: none !important; }
           .bh-hero { grid-template-columns: 1fr; }
-          .bh-hero-photo { min-height: 320px; order: -1; margin: 0 -40px; border-radius: 0; }
+          .bh-hero-photo { aspect-ratio: 16 / 10; order: -1; margin: 0 -40px; border-radius: 0; }
           .bh-hero-copy { padding: 44px 0 60px; }
           .bh-g2, .bh-g3 { grid-template-columns: 1fr; gap: 28px; }
         }
@@ -99,7 +102,7 @@ export default function BusaHouseConcept() {
         @media (max-width: 640px) {
           .bh-wrap { padding: 0 20px; }
           .bh-sec { padding: 68px 0; }
-          .bh-hero-photo { margin: 0 -20px; min-height: 260px; }
+          .bh-hero-photo { margin: 0 -20px; aspect-ratio: 3 / 2; }
           .bh-facts { grid-template-columns: 1fr; gap: 16px; }
           .bh-btn { display: block; width: 100%; }
         }
@@ -154,7 +157,9 @@ export default function BusaHouseConcept() {
           </div>
 
           <motion.div className="bh-hero-photo" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.9 }}>
-            <img src={`${IMG}/pool.jpg`} alt="The pool and gardens at Busa House" className="bh-img" />
+            {/* Their own pool photo, AI-upscaled from 1100x450 — the originals
+                are all capped at 450px tall and went soft at hero size. */}
+            <img src={`${IMG}/pool-hero.jpg`} alt="The pool and gardens at Busa House" className="bh-img" />
           </motion.div>
         </div>
       </section>
@@ -162,8 +167,15 @@ export default function BusaHouseConcept() {
       {/* STORY */}
       <section id="story" className="bh-sec" style={{ background: 'var(--card)', borderTop: '1px solid var(--line)', borderBottom: '1px solid var(--line)' }}>
         <div className="bh-wrap">
+          {/* Image sits first so this section mirrors the hero rather than
+              repeating its text-then-image rhythm. */}
           <div className="bh-g2">
             <Reveal>
+              <div style={{ borderRadius: 4, overflow: 'hidden', border: '1px solid var(--line)', aspectRatio: '4 / 3' }}>
+                <img src={`${IMG}/2025_new_patio.jpg`} alt="The patio at Busa House" className="bh-img" loading="lazy" />
+              </div>
+            </Reveal>
+            <Reveal delay={0.12}>
               <div>
                 <p className="bh-eyebrow" style={{ color: 'var(--gold-dk)', marginBottom: 16 }}>Our story</p>
                 <h2 style={{ fontSize: 'clamp(1.7rem, 3.1vw, 2.6rem)', lineHeight: 1.15, marginBottom: 20 }}>
@@ -179,11 +191,6 @@ export default function BusaHouseConcept() {
                   change what already works. Same gardens, same quiet, and
                   someone on the property who knows hospitality.
                 </p>
-              </div>
-            </Reveal>
-            <Reveal delay={0.12}>
-              <div style={{ borderRadius: 4, overflow: 'hidden', border: '1px solid var(--line)', aspectRatio: '4 / 3' }}>
-                <img src={`${IMG}/2025_new_patio.jpg`} alt="The patio at Busa House" className="bh-img" loading="lazy" />
               </div>
             </Reveal>
           </div>

@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     title,
     description,
     type: "website",
-    images: [{ url: "/busahouse/pool.jpg" }],
+    images: [{ url: "/busahouse/pool-hero.jpg" }],
   },
   twitter: { card: "summary_large_image", title, description },
 };
