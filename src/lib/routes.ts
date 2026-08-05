@@ -11,6 +11,7 @@ export const STANDALONE_ROUTES = [
   "/cosmetics",
   "/beauty",
   "/hopshollow",
+  "/busahouse",
 ];
 
 export function isStandaloneRoute(pathname: string | null): boolean {
