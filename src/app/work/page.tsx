@@ -3,7 +3,7 @@ import ContactCTA from "@/components/ContactCTA";
 import FadeIn from "@/components/FadeIn";
 
 export const metadata = {
-  title: "Our Work | Webflow Studio",
+  title: "Our Work | O'Gorman Studio",
   description:
     "Explore our portfolio of custom websites built for South African small businesses.",
 };

@@ -25,13 +25,13 @@ export default function Footer() {
                 className="w-8 h-8 rounded-md flex items-center justify-center text-sm font-bold"
                 style={{ background: "var(--accent)", color: "var(--ink)" }}
               >
-                W
+                OG
               </div>
               <span
                 className="text-white font-semibold text-lg"
                 style={{ fontFamily: "var(--font-space)" }}
               >
-                Webflow Studio
+                O&apos;Gorman Studio
               </span>
             </div>
             <p className="text-sm leading-[1.75] max-w-xs" style={{ color: "var(--muted)" }}>
@@ -106,8 +106,8 @@ export default function Footer() {
             color: "var(--muted)",
           }}
         >
-          <p>© {new Date().getFullYear()} Webflow Studio</p>
-          <p>Built by Aidan O&apos;Gorman · South Africa</p>
+          <p>© {new Date().getFullYear()} O&apos;Gorman Studio</p>
+          <p>Designed and built in South Africa</p>
         </div>
       </div>
     </footer>

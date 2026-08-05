@@ -50,10 +50,10 @@ export default function Nav() {
         <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2.5 group">
             <div
-              className="w-8 h-8 rounded-md flex items-center justify-center text-sm font-bold"
+              className="w-8 h-8 rounded-md flex items-center justify-center text-xs font-bold tracking-tight"
               style={{ background: "var(--accent)", color: "var(--ink)" }}
             >
-              W
+              OG
             </div>
             <span
               className="font-semibold text-lg tracking-[-0.01em]"
@@ -62,7 +62,7 @@ export default function Nav() {
                 color: onLightHero ? "var(--ink)" : "#fff",
               }}
             >
-              Webflow Studio
+              O&apos;Gorman Studio
             </span>
           </Link>
 

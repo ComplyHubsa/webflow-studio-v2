@@ -3,7 +3,7 @@ import FadeIn from "@/components/FadeIn";
 import { Server, PencilLine, ShieldCheck, MessageCircle, X } from "lucide-react";
 
 export const metadata = {
-  title: "Website Care Plan | Webflow Studio",
+  title: "Website Care Plan | O'Gorman Studio",
   description:
     "Keep your site online, backed up and up to date — R450/month, cancel anytime.",
   // Handover-only page: sent directly to clients, not meant for search results.

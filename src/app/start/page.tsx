@@ -3,7 +3,7 @@ import FadeIn from "@/components/FadeIn";
 import { CheckCircle2, ClipboardList, Rocket } from "lucide-react";
 
 export const metadata = {
-  title: "Payment Received | Webflow Studio",
+  title: "Payment Received | O'Gorman Studio",
   description:
     "Thanks for your payment — one quick step and your 5-day build starts.",
 };

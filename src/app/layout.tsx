@@ -17,13 +17,13 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  title: "Webflow Studio | Custom websites for South African businesses",
+  title: "O'Gorman Studio | Custom websites for South African businesses",
   description:
     "Custom websites for South African small businesses, from R3,500. See a free design concept before you pay anything. Most sites live within five days.",
   keywords:
     "web design South Africa, custom website, small business website, affordable web design",
   openGraph: {
-    title: "Webflow Studio",
+    title: "O'Gorman Studio",
     description:
       "Custom websites for South African small businesses. See the design before you pay.",
     type: "website",

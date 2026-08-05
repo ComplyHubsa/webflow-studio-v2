@@ -2,9 +2,9 @@ import Contact from "@/components/Contact";
 import FadeIn from "@/components/FadeIn";
 
 export const metadata = {
-  title: "Contact | Webflow Studio",
+  title: "Contact | O'Gorman Studio",
   description:
-    "Get in touch with Webflow Studio to start your custom website project.",
+    "Get in touch with O'Gorman Studio to start your custom website project.",
 };
 
 export default function ContactPage() {
