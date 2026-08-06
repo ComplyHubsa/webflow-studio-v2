@@ -1,5 +1,6 @@
 'use client'
 
+import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { Outfit, Inter } from 'next/font/google'
 
@@ -55,6 +56,21 @@ function Reveal({ children, delay = 0 }: { children: React.ReactNode; delay?: nu
 }
 
 export default function BusaHouseConcept() {
+  /* The enquiry builder is the point of the hero: their current site has no
+     way to book at all, so the concept has to show one working. It composes a
+     WhatsApp message rather than posting to a server the client doesn't have. */
+  const [arrive, setArrive] = useState('')
+  const [depart, setDepart] = useState('')
+  const [guests, setGuests] = useState('2')
+
+  const enquiryLink = () => {
+    const bits = ['Hi Busa House, I would like to check availability.']
+    if (arrive) bits.push(`Arriving ${arrive}`)
+    if (depart) bits.push(`Leaving ${depart}`)
+    bits.push(`${guests} ${guests === '1' ? 'guest' : 'guests'}`)
+    return `${WA}?text=${encodeURIComponent(bits.join(' · '))}`
+  }
+
   return (
     <div className={`${display.variable} ${body.variable} bh`}>
       <style>{`
@@ -85,6 +101,22 @@ export default function BusaHouseConcept() {
         .bh-g3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
         .bh-card { background: var(--card); border: 1px solid var(--line); border-radius: 4px; overflow: hidden; height: 100%; display: flex; flex-direction: column; }
         .bh-facts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+        .bh-enquiry { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 18px; box-shadow: 0 10px 30px rgba(34,29,20,0.06); }
+        .bh-enquiry-row { display: grid; grid-template-columns: 1fr 1fr 88px; gap: 10px; margin-bottom: 12px; }
+        .bh-enquiry label { display: flex; flex-direction: column; gap: 5px; }
+        .bh-enquiry label span { color: var(--muted); font-size: 10px; }
+        .bh-enquiry input, .bh-enquiry select {
+          font-family: var(--bh-body); font-size: 14.5px; color: var(--ink);
+          border: 1px solid var(--line); border-radius: 7px; padding: 10px 11px;
+          background: #fff; width: 100%; min-width: 0; appearance: none;
+        }
+        .bh-enquiry input:focus, .bh-enquiry select:focus { outline: 2px solid var(--gold); outline-offset: -1px; }
+        @media (max-width: 460px) { .bh-enquiry-row { grid-template-columns: 1fr 1fr; } .bh-enquiry label:last-child { grid-column: 1 / -1; } }
+        .bh-time { border-top: 1px solid var(--line); }
+        .bh-time-row { display: grid; grid-template-columns: 96px 1fr; gap: 18px; padding: 15px 0; border-bottom: 1px solid var(--line); align-items: baseline; }
+        .bh-time-key { font-family: var(--bh-display); font-size: 17px; color: var(--gold-dk); }
+        .bh-time-val { font-size: 14.5px; line-height: 1.7; color: var(--muted); font-weight: 300; }
+        @media (max-width: 460px) { .bh-time-row { grid-template-columns: 1fr; gap: 4px; } }
 
         @media (max-width: 980px) {
           .bh-nav { display: none !important; }
@@ -140,13 +172,33 @@ export default function BusaHouseConcept() {
               Kruger gate.
             </motion.p>
             <motion.div initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.34 }}
-              style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginBottom: 46 }}>
-              <a href={WA} className="bh-btn bh-btn-primary">Check availability</a>
-              <a href="#stay" className="bh-btn bh-btn-ghost">See the units</a>
+              className="bh-enquiry">
+              <div className="bh-enquiry-row">
+                <label>
+                  <span className="bh-eyebrow">Arrive</span>
+                  <input type="date" value={arrive} onChange={e => setArrive(e.target.value)} />
+                </label>
+                <label>
+                  <span className="bh-eyebrow">Leave</span>
+                  <input type="date" value={depart} onChange={e => setDepart(e.target.value)} />
+                </label>
+                <label>
+                  <span className="bh-eyebrow">Guests</span>
+                  <select value={guests} onChange={e => setGuests(e.target.value)}>
+                    {['1', '2', '3', '4', '5', '6', '7', '8+'].map(g => <option key={g} value={g}>{g}</option>)}
+                  </select>
+                </label>
+              </div>
+              <a href={enquiryLink()} target="_blank" rel="noopener noreferrer" className="bh-btn bh-btn-primary" style={{ width: '100%' }}>
+                Check availability on WhatsApp
+              </a>
+              <p style={{ fontSize: 12.5, color: 'var(--muted)', marginTop: 10, textAlign: 'center' }}>
+                Goes straight to Pinky — usually answered the same day.
+              </p>
             </motion.div>
 
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.8, delay: 0.46 }}
-              className="bh-facts" style={{ borderTop: '1px solid var(--line)', paddingTop: 24 }}>
+              className="bh-facts" style={{ borderTop: '1px solid var(--line)', paddingTop: 22, marginTop: 34 }}>
               {[['8', 'units'], ['1960', 'since'], ['Self-catering', 'and caravan park']].map(([v, k]) => (
                 <div key={k}>
                   <div style={{ fontFamily: 'var(--bh-display)', fontSize: 20, marginBottom: 3 }}>{v}</div>
@@ -178,19 +230,27 @@ export default function BusaHouseConcept() {
             <Reveal delay={0.12}>
               <div>
                 <p className="bh-eyebrow" style={{ color: 'var(--gold-dk)', marginBottom: 16 }}>Our story</p>
-                <h2 style={{ fontSize: 'clamp(1.7rem, 3.1vw, 2.6rem)', lineHeight: 1.15, marginBottom: 20 }}>
+                <h2 style={{ fontSize: 'clamp(1.7rem, 3.1vw, 2.6rem)', lineHeight: 1.15, marginBottom: 18 }}>
                   In one family since 1960. In good hands since.
                 </h2>
-                <p style={{ fontSize: 16, lineHeight: 1.85, color: 'var(--muted)', marginBottom: 16, fontWeight: 300 }}>
-                  Marthie and Berand van der Linde spent twenty-three years
-                  turning this property into what it is — the gardens, the trees,
-                  and the birdlife that arrived with them.
+                <p style={{ fontSize: 16, lineHeight: 1.85, color: 'var(--muted)', marginBottom: 26, fontWeight: 300 }}>
+                  Most places in White River were built. This one was grown.
                 </p>
-                <p style={{ fontSize: 16, lineHeight: 1.85, color: 'var(--muted)', fontWeight: 300 }}>
-                  Bongani and Pinky Lukhele have taken it on, with no plans to
-                  change what already works. Same gardens, same quiet, and
-                  someone on the property who knows hospitality.
-                </p>
+
+                {/* A timeline reads faster than two paragraphs and gives the
+                    section something to look at besides a single photo. */}
+                <div className="bh-time">
+                  {[
+                    ['1960', 'The van der Linde family settle on Burger Street.'],
+                    ['23 years', 'Marthie and Berand plant the gardens, the trees, and the birdlife that came with them.'],
+                    ['Today', 'Bongani and Pinky Lukhele take it on, changing nothing that already works.'],
+                  ].map(([k, v]) => (
+                    <div key={k} className="bh-time-row">
+                      <span className="bh-time-key">{k}</span>
+                      <span className="bh-time-val">{v}</span>
+                    </div>
+                  ))}
+                </div>
               </div>
             </Reveal>
           </div>
