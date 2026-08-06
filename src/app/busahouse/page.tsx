@@ -366,6 +366,24 @@ export default function BusaHouseConcept() {
             </div>
           </Reveal>
 
+          <Reveal delay={0.14}>
+            {/* /maps/embed?pb= form. The simpler ?q=...&output=embed 301s through
+                a response carrying x-frame-options: SAMEORIGIN and renders blank;
+                this is the redirect target Google itself uses, and it returns 200
+                with no framing restriction. No API key needed. */}
+            <div style={{ borderRadius: 6, overflow: 'hidden', border: '1px solid var(--line)', marginBottom: 32 }}>
+              <iframe
+                title="Busa House on the map"
+                src="https://www.google.com/maps/embed?origin=mfe&pb=!1m2!2m1!1sBenmari+Busa+House,+82+Burger+Street,+White+River,+South+Africa"
+                width="100%"
+                height="380"
+                style={{ border: 0, display: 'block' }}
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              />
+            </div>
+          </Reveal>
+
           <Reveal delay={0.16}>
             <a href={WA} className="bh-btn bh-btn-dark" style={{ width: 'auto' }}>Check availability</a>
           </Reveal>

@@ -330,6 +330,24 @@ export default function ValleyViewConcept() {
             </div>
           </Reveal>
 
+          <Reveal delay={0.14}>
+            {/* Their own embed URL, lifted from valley-view.co.za/contact. The
+                simpler ?q=...&output=embed form 301s to a response carrying
+                x-frame-options: SAMEORIGIN and renders blank; this /maps/embed?pb=
+                form returns 200 with no framing restriction. */}
+            <div style={{ borderRadius: 6, overflow: 'hidden', border: '1px solid var(--line)', marginBottom: 32 }}>
+              <iframe
+                title="Valley View Backpackers on the map"
+                src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14471.83184399443!2d30.834439!3d-24.933502!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xfc69ce63780ca197!2sValley%20View%20Backpackers%20Graskop!5e0!3m2!1sen!2sza!4v1630939541335!5m2!1sen!2sza"
+                width="100%"
+                height="380"
+                style={{ border: 0, display: 'block' }}
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              />
+            </div>
+          </Reveal>
+
           <Reveal delay={0.16}>
             <a href={WA} className="vv-btn vv-btn-dark" style={{ width: 'auto' }}>Book direct on WhatsApp</a>
           </Reveal>

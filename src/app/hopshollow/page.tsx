@@ -396,6 +396,23 @@ export default function HopsHollowConcept() {
             </div>
           </Reveal>
 
+          <Reveal delay={0.14}>
+            {/* /maps/embed?pb= form. The simpler ?q=...&output=embed 301s through
+                a response carrying x-frame-options: SAMEORIGIN and renders blank;
+                this is Google's own redirect target and needs no API key. */}
+            <div style={{ borderRadius: 4, overflow: 'hidden', border: '1px solid var(--line)', marginBottom: 36 }}>
+              <iframe
+                title="Hops Hollow on the map"
+                src="https://www.google.com/maps/embed?origin=mfe&pb=!1m2!2m1!1sHops+Hollow+Country+House,+Long+Tom+Pass,+Mpumalanga,+South+Africa"
+                width="100%"
+                height="380"
+                style={{ border: 0, display: 'block' }}
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              />
+            </div>
+          </Reveal>
+
           <Reveal delay={0.16}>
             <a href={WA} className="hh-btn hh-btn-primary" style={{ width: 'auto' }}>Check availability</a>
           </Reveal>
