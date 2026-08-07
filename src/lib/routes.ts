@@ -13,6 +13,7 @@ export const STANDALONE_ROUTES = [
   "/hopshollow",
   "/busahouse",
   "/valleyview",
+  "/hazyview",
 ];
 
 export function isStandaloneRoute(pathname: string | null): boolean {
