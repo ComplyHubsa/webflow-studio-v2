@@ -1,7 +1,7 @@
 'use client'
 
-import { useState, useEffect } from 'react'
-import { motion } from 'framer-motion'
+import { useState, useEffect, useMemo } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import { Bricolage_Grotesque, Inter } from 'next/font/google'
 
 const display = Bricolage_Grotesque({ subsets: ['latin'], weight: ['500', '600', '700'], variable: '--vv-display', display: 'swap' })
@@ -17,17 +17,25 @@ const WA = 'https://wa.me/27842990423'
    says "we get international travellers", so it's kept here. */
 const GREETINGS = ['Welcome', 'Welkom', 'Bem-vindo', 'Willkommen', 'Bienvenue', 'Benvenuti', 'Bienvenido', 'Siyalemukela', 'Välkommen', 'ようこそ']
 
+/* Priced low to high. Backpackers pick on budget rather than party size — the
+   biggest unit here only sleeps four — so the finder below filters on price. */
 const RATES = [
-  { name: 'Dorm bed', detail: 'Six-bed mixed dorm, ensuite bathroom', price: 'R200', unit: 'per person' },
-  { name: 'Cabin 1', detail: 'Timber cabin, bunk bed, sleeps 2', price: 'R400', unit: 'R300 on your own' },
-  { name: 'Cabin 2', detail: 'Timber cabin, double bed, sleeps 2', price: 'R400', unit: 'R300 on your own' },
-  { name: 'Cabin 3', detail: 'Double bed, terrace looking at the mountains', price: 'R420', unit: 'R300 on your own' },
-  { name: 'Cabin 4', detail: 'Double bed, set in the garden', price: 'R420', unit: 'R300 on your own' },
-  { name: 'Ndebele Room', detail: 'Sleeps up to 3', price: 'R410', unit: 'R615 for three' },
-  { name: 'African Market Room', detail: 'Sleeps up to 3', price: 'R410', unit: 'R615 for three' },
-  { name: 'Pilgrim Rest Room', detail: 'Double bed and a bunk, sleeps up to 4', price: 'R420', unit: '+R200 per extra guest' },
-  { name: 'Valley View Room', detail: 'Double and bunk, private shower and toilet', price: 'R460', unit: '+R200 per extra guest' },
-  { name: 'The Rondavel', detail: 'Self-catering — kitchenette, lounge, shower', price: 'R550', unit: '+R200 per extra guest' },
+  { name: 'Dorm bed', detail: 'Six-bed mixed dorm, ensuite bathroom', price: 200, unit: 'per person' },
+  { name: 'Cabin 1', detail: 'Timber cabin, bunk bed, sleeps 2', price: 400, unit: 'R300 on your own' },
+  { name: 'Cabin 2', detail: 'Timber cabin, double bed, sleeps 2', price: 400, unit: 'R300 on your own' },
+  { name: 'Ndebele Room', detail: 'Sleeps up to 3', price: 410, unit: 'R615 for three' },
+  { name: 'African Market Room', detail: 'Sleeps up to 3', price: 410, unit: 'R615 for three' },
+  { name: 'Cabin 3', detail: 'Double bed, terrace looking at the mountains', price: 420, unit: 'R300 on your own' },
+  { name: 'Cabin 4', detail: 'Double bed, set in the garden', price: 420, unit: 'R300 on your own' },
+  { name: 'Pilgrim Rest Room', detail: 'Double bed and a bunk, sleeps up to 4', price: 420, unit: '+R200 per extra guest' },
+  { name: 'Valley View Room', detail: 'Double and bunk, private shower and toilet', price: 460, unit: '+R200 per extra guest' },
+  { name: 'The Rondavel', detail: 'Self-catering — kitchenette, lounge, shower', price: 550, unit: '+R200 per extra guest' },
+]
+
+const BUDGETS = [
+  { label: 'Cheapest bed', v: 200 },
+  { label: 'My own cabin', v: 400 },
+  { label: 'A bit more space', v: 550 },
 ]
 
 const NEARBY = [
@@ -53,6 +61,11 @@ export default function ValleyViewConcept() {
   const [depart, setDepart] = useState('')
   const [guests, setGuests] = useState('2')
   const [greet, setGreet] = useState(0)
+  /* Starts at the top of the range so the full list shows by default — sliding
+     down narrows it rather than making them hunt for everything. */
+  const [budget, setBudget] = useState(550)
+
+  const affordable = useMemo(() => RATES.filter(r => r.price <= budget), [budget])
 
   useEffect(() => {
     const t = setInterval(() => setGreet(g => (g + 1) % GREETINGS.length), 2600)
@@ -100,6 +113,16 @@ export default function ValleyViewConcept() {
         }
         .vv-enquiry input:focus, .vv-enquiry select:focus { outline: 2px solid var(--timber); outline-offset: -1px; }
         .vv-rate { display: grid; grid-template-columns: 1fr auto; gap: 20px; padding: 15px 0; border-bottom: 1px solid var(--line); align-items: baseline; }
+        .vv-budget { background: var(--paper); border: 1px solid var(--line); border-radius: 12px; padding: 22px; }
+        .vv-chips { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
+        .vv-chip {
+          border: 1px solid var(--line); background: transparent; color: var(--ink);
+          border-radius: 999px; padding: 9px 16px; font-size: 13.5px; cursor: pointer;
+          font-family: var(--vv-body); transition: all .18s;
+        }
+        .vv-chip:hover { border-color: var(--timber); }
+        .vv-chip[data-on="true"] { background: var(--timber); color: #FFFDF8; border-color: var(--timber); }
+        .vv-slider { width: 100%; accent-color: var(--timber); height: 4px; }
         .vv-g3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
         .vv-g2 { display: grid; grid-template-columns: 1fr 1fr; gap: 44px; align-items: center; }
         .vv-near { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0 40px; }
@@ -197,32 +220,63 @@ export default function ValleyViewConcept() {
       <section id="rates" className="vv-sec" style={{ background: 'var(--card)', borderTop: '1px solid var(--line)', borderBottom: '1px solid var(--line)' }}>
         <div className="vv-wrap">
           <Reveal>
-            <div style={{ marginBottom: 34, maxWidth: 620 }}>
+            <div style={{ marginBottom: 30, maxWidth: 640 }}>
               <p className="vv-eyebrow" style={{ color: 'var(--timber)', marginBottom: 14 }}>Rates</p>
               <h2 style={{ fontSize: 'clamp(1.7rem, 3.1vw, 2.5rem)', lineHeight: 1.15, marginBottom: 14 }}>
-                Every bed, every price, right here.
+                What does R{budget} get you?
               </h2>
               <p style={{ fontSize: 15.5, lineHeight: 1.8, color: 'var(--muted)', fontWeight: 300 }}>
-                Per night. Book with us directly and you pay us, not a booking site.
+                Slide it down to your budget. Per night, and booking with us
+                directly means you pay us, not a booking site.
               </p>
             </div>
           </Reveal>
 
-          <Reveal delay={0.08}>
-            <div style={{ borderTop: '1px solid var(--line)' }}>
-              {RATES.map(r => (
-                <div key={r.name} className="vv-rate">
-                  <div>
-                    <div style={{ fontFamily: 'var(--vv-display)', fontWeight: 600, fontSize: 16.5, marginBottom: 2 }}>{r.name}</div>
-                    <div style={{ fontSize: 14, color: 'var(--muted)', fontWeight: 300 }}>{r.detail}</div>
-                  </div>
-                  <div style={{ textAlign: 'right', whiteSpace: 'nowrap' }}>
-                    <div style={{ fontFamily: 'var(--vv-display)', fontWeight: 600, fontSize: 19, color: 'var(--timber)' }}>{r.price}</div>
-                    <div style={{ fontSize: 12, color: 'var(--muted)' }}>{r.unit}</div>
-                  </div>
-                </div>
-              ))}
+          <Reveal delay={0.06}>
+            <div className="vv-budget">
+              <div className="vv-chips">
+                {BUDGETS.map(b => (
+                  <button key={b.label} className="vv-chip" data-on={budget === b.v} onClick={() => setBudget(b.v)}>
+                    {b.label}
+                  </button>
+                ))}
+              </div>
+              <div style={{ display: 'flex', alignItems: 'baseline', gap: 12, marginBottom: 8 }}>
+                <span style={{ fontFamily: 'var(--vv-display)', fontWeight: 700, fontSize: 40, lineHeight: 1, color: 'var(--timber)' }}>R{budget}</span>
+                <span style={{ fontSize: 14.5, color: 'var(--muted)' }}>a night or under</span>
+              </div>
+              <input className="vv-slider" type="range" min={200} max={550} step={10} value={budget}
+                onChange={e => setBudget(Number(e.target.value))} aria-label="Budget per night" />
+              <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 11.5, color: 'var(--muted)', marginTop: 6 }}>
+                <span>R200</span><span>R550</span>
+              </div>
             </div>
+          </Reveal>
+
+          <Reveal delay={0.1}>
+            <div style={{ borderTop: '1px solid var(--line)', marginTop: 28 }}>
+              <AnimatePresence initial={false}>
+                {affordable.map(r => (
+                  <motion.div key={r.name} layout
+                    initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }}
+                    transition={{ duration: 0.22 }} style={{ overflow: 'hidden' }}>
+                    <div className="vv-rate">
+                      <div>
+                        <div style={{ fontFamily: 'var(--vv-display)', fontWeight: 600, fontSize: 16.5, marginBottom: 2 }}>{r.name}</div>
+                        <div style={{ fontSize: 14, color: 'var(--muted)', fontWeight: 300 }}>{r.detail}</div>
+                      </div>
+                      <div style={{ textAlign: 'right', whiteSpace: 'nowrap' }}>
+                        <div style={{ fontFamily: 'var(--vv-display)', fontWeight: 600, fontSize: 19, color: 'var(--timber)' }}>R{r.price}</div>
+                        <div style={{ fontSize: 12, color: 'var(--muted)' }}>{r.unit}</div>
+                      </div>
+                    </div>
+                  </motion.div>
+                ))}
+              </AnimatePresence>
+            </div>
+            <p style={{ fontSize: 13.5, color: 'var(--muted)', marginTop: 14 }}>
+              {affordable.length} of {RATES.length} options under R{budget}.
+            </p>
           </Reveal>
 
           <Reveal delay={0.14}>
