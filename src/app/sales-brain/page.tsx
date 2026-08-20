@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import FadeIn from "@/components/FadeIn";
+import ElasticCard from "@/components/motion/ElasticCard";
 
 export const metadata: Metadata = {
   title: "Sales Brain | Automated outreach — in development",
@@ -112,10 +113,18 @@ export default function SalesBrainPage() {
       <section className="px-6 pb-20 md:pb-28">
         <div className="max-w-3xl mx-auto">
           <FadeIn>
-            <div
-              className="rounded-[18px] p-10 md:p-14 text-center"
+            {/* Same jelly physics as the free-concept block. Slightly softer
+                push than the default: this card is a third the size, and the
+                default 46px bulge on a small box reads as a wobble rather than
+                a stretch. */}
+            <ElasticCard
+              radius={18}
+              className="rounded-[18px]"
               style={{ background: "var(--text)" }}
+              fill="var(--text)"
+              physics={{ push: 34, influence: 240 }}
             >
+            <div className="relative z-10 p-10 md:p-14 text-center">
               <h2
                 className="display text-[clamp(1.7rem,3.2vw,2.4rem)] mb-4"
                 style={{ color: "var(--bg)" }}
@@ -138,6 +147,7 @@ export default function SalesBrainPage() {
                 Join the waitlist
               </Link>
             </div>
+            </ElasticCard>
           </FadeIn>
         </div>
       </section>
