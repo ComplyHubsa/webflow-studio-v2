@@ -1,7 +1,12 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useLayoutEffect, useRef } from "react";
 import { useReducedMotion } from "framer-motion";
+
+/* The path has to exist before the first paint, otherwise the card flashes
+   with no background at all — the SVG is now the only thing painting it. */
+const useIsoLayoutEffect =
+  typeof window !== "undefined" ? useLayoutEffect : useEffect;
 
 /* A card whose outline behaves like a sheet of jelly under the pointer.
 
@@ -36,12 +41,18 @@ interface Physics {
   neighbour?: number;
 }
 
+/* Tuned by simulating the ring rather than by eye. At stiffness 0.14 /
+   damping 0.055 / neighbour 0.28 the wobble spread across 21 of the 72 points
+   and rang for 2.2s — the whole outline rippled, which reads as broken rather
+   than springy. These values keep the deformation local (15 points, same as
+   the original stiff version) while still ringing for ~1s, roughly 2.5x the
+   original's 0.42s. */
 const DEFAULTS: Required<Physics> = {
   push: 46,
   influence: 270,
-  stiffness: 0.14,
-  damping: 0.055,
-  neighbour: 0.28,
+  stiffness: 0.2,
+  damping: 0.12,
+  neighbour: 0.14,
 };
 
 const N = 72;
@@ -122,7 +133,7 @@ export default function ElasticCard({
   const pathRef = useRef<SVGPathElement>(null);
   const reduce = useReducedMotion();
 
-  useEffect(() => {
+  useIsoLayoutEffect(() => {
     if (reduce) return;
     const cardEl = cardRef.current;
     const svgEl = svgRef.current;

@@ -97,7 +97,6 @@ export default function SalesBrainPage() {
             <ElasticCard
               radius={18}
               className="rounded-[18px]"
-              style={{ background: "var(--text)" }}
               fill="var(--text)"
               physics={{ push: 34, influence: 240 }}
             >

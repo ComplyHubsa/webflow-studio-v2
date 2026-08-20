@@ -30,13 +30,12 @@ export default function FreeConcept() {
     <section className="py-18 px-6">
       <div className="max-w-6xl mx-auto">
         <FadeIn>
+          {/* No background on the card itself — the SVG paints the shape. With
+              an opaque rounded rect sitting behind it, any inward dent was
+              hidden by that rect and only half the wobble was visible. */}
           <ElasticCard
             radius={24}
             className="rounded-3xl"
-            style={{
-              background:
-                "linear-gradient(160deg, #f2ede3 0%, #e9e2d5 30%, #efe8db 60%, #e6ddcd 100%)",
-            }}
             fill="url(#freeConceptBg)"
             defs={
               <linearGradient id="freeConceptBg" x1="0" y1="0" x2="1" y2="1">
