@@ -3,6 +3,7 @@ import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import FadeIn from "@/components/FadeIn";
 import ElasticCard from "@/components/motion/ElasticCard";
+import ScrollSteps, { type Step } from "@/components/motion/ScrollSteps";
 
 export const metadata: Metadata = {
   title: "Sales Brain | Automated outreach — in development",
@@ -16,25 +17,25 @@ export const metadata: Metadata = {
   },
 };
 
-const managers = [
+const managers: Step[] = [
   {
     no: "01",
-    role: "The finder",
+    title: "The finder",
     body: "Works through directories and listing sites to pull businesses that match what you sell, with a real contact number attached to each one.",
   },
   {
     no: "02",
-    role: "The checker",
+    title: "The checker",
     body: "Throws out the ones that have closed, the ones already sorted, and the numbers that won't reach a human. Most of a raw list dies here — that's the point.",
   },
   {
     no: "03",
-    role: "The writer",
+    title: "The writer",
     body: "Looks at each business properly and writes one message about their actual situation, not a mail-merge with a name dropped into the middle of it.",
   },
   {
     no: "04",
-    role: "The chaser",
+    title: "The chaser",
     body: "Tracks who replied, who didn't and when a follow-up is due, so nothing sits in the pipeline quietly going cold.",
   },
 ];
@@ -52,31 +53,7 @@ export default function SalesBrainPage() {
 
       <section className="px-6 py-16 md:py-24" style={{ background: "var(--surface)" }}>
         <div className="max-w-5xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-14 gap-y-12">
-            {managers.map((m, i) => (
-              <FadeIn key={m.no} delay={(i % 2) * 0.1}>
-                <div className="flex gap-6">
-                  <div
-                    className="display text-[15px] pt-1 tabular-nums"
-                    style={{ color: "var(--accent)", letterSpacing: "0.08em" }}
-                  >
-                    {m.no}
-                  </div>
-                  <div>
-                    <h3
-                      className="display text-xl mb-3"
-                      style={{ color: "var(--text)" }}
-                    >
-                      {m.role}
-                    </h3>
-                    <p className="text-[15px] leading-[1.75]" style={{ color: "var(--muted)" }}>
-                      {m.body}
-                    </p>
-                  </div>
-                </div>
-              </FadeIn>
-            ))}
-          </div>
+          <ScrollSteps steps={managers} />
         </div>
       </section>
 

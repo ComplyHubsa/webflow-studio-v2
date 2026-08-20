@@ -4,6 +4,36 @@ import PageHero from "@/components/PageHero";
 import FadeIn from "@/components/FadeIn";
 import BookingPricing from "@/components/BookingPricing";
 import CountUp from "@/components/motion/CountUp";
+import Accordion, { type QA } from "@/components/motion/Accordion";
+
+/* Every answer here is something the running build actually does — no
+   roadmap dressed up as a current feature. */
+const faqs: QA[] = [
+  {
+    q: "Do I need a website already?",
+    a: "No. If you have one, the booking widget drops into it with a single line of script and nothing else about your site changes. If you don't have one — or yours can't take a booking — we host a booking page for you that stands on its own, and the link goes in your Google listing, your WhatsApp and your Instagram bio.",
+  },
+  {
+    q: "Where does the guest's money actually go?",
+    a: "Straight into your own Payfast merchant account. The card is charged against your credentials, not ours, so the money never passes through us and there's nothing to pay out to you afterwards.",
+  },
+  {
+    q: "What happens to my Booking.com and Airbnb listings?",
+    a: "They keep running. We read those calendars every hour and publish yours back out to them, so a room sold on any channel closes on all of them. You're not choosing between direct bookings and the listing sites — you're just stopping them from taking a cut of the guests who would have found you anyway.",
+  },
+  {
+    q: "Can it double-book a room?",
+    a: "No. Every hold is taken under a lock on that specific unit, so two guests clicking the same room in the same second can't both get it. The one who's a fraction slower is told it's gone rather than being charged for a room you can't give them.",
+  },
+  {
+    q: "What if I want to stop?",
+    a: "It's month to month with no contract and no setup fee. Stop it whenever you like and your bookings and guest records come with you.",
+  },
+  {
+    q: "Who sets it up?",
+    a: "I do, and it's included. You send me your rooms, your rates and your existing calendar links, and I'll have it running and tested before you show it to a single guest.",
+  },
+];
 
 export const metadata: Metadata = {
   title: "BookDirect | Direct booking software for SA guesthouses",
@@ -174,6 +204,22 @@ export default function BookDirectPage() {
       </section>
 
       <BookingPricing />
+
+      <section className="px-6 py-16 md:py-24" style={{ background: "var(--surface)" }}>
+        <div className="max-w-4xl mx-auto">
+          <FadeIn>
+            <h2
+              className="display text-[clamp(1.9rem,3.6vw,2.9rem)] mb-12"
+              style={{ color: "var(--text)" }}
+            >
+              The questions I get asked.
+            </h2>
+          </FadeIn>
+          <FadeIn delay={0.08}>
+            <Accordion items={faqs} />
+          </FadeIn>
+        </div>
+      </section>
 
       <section className="px-6 py-20 md:py-28 text-center">
         <div className="max-w-2xl mx-auto">

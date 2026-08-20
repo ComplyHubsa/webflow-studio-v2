@@ -2,15 +2,16 @@
 
 import Link from "next/link";
 import FadeIn from "./FadeIn";
+import ScrollSteps, { type Step } from "./motion/ScrollSteps";
 
 /* Homepage summary of Sales Brain. The "in development" badge and the line
    about there being no price stay in even at this length — the status is the
    one thing that must never get trimmed for space. */
-const managers = [
-  { no: "01", role: "The finder",  body: "Pulls businesses that match what you sell, with a real number attached." },
-  { no: "02", role: "The checker", body: "Throws out the closed ones and the numbers that won't reach a human." },
-  { no: "03", role: "The writer",  body: "Writes one message about their actual situation, not a mail-merge." },
-  { no: "04", role: "The chaser",  body: "Tracks who replied and when a follow-up is due, so nothing goes cold." },
+const managers: Step[] = [
+  { no: "01", title: "The finder",  body: "Pulls businesses that match what you sell, with a real number attached." },
+  { no: "02", title: "The checker", body: "Throws out the closed ones and the numbers that won't reach a human." },
+  { no: "03", title: "The writer",  body: "Writes one message about their actual situation, not a mail-merge." },
+  { no: "04", title: "The chaser",  body: "Tracks who replied and when a follow-up is due, so nothing goes cold." },
 ];
 
 export default function SalesBrainSection() {
@@ -42,28 +43,8 @@ export default function SalesBrainSection() {
           </div>
         </FadeIn>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-10 mb-12">
-          {managers.map((m, i) => (
-            <FadeIn key={m.no} delay={i * 0.08}>
-              <div>
-                <div
-                  className="display text-[13px] mb-4 tabular-nums"
-                  style={{ color: "var(--accent)", letterSpacing: "0.08em" }}
-                >
-                  {m.no}
-                </div>
-                <h3
-                  className="text-[17px] font-semibold mb-2.5 tracking-[-0.01em]"
-                  style={{ color: "var(--text)" }}
-                >
-                  {m.role}
-                </h3>
-                <p className="text-[15px] leading-[1.75]" style={{ color: "var(--muted)" }}>
-                  {m.body}
-                </p>
-              </div>
-            </FadeIn>
-          ))}
+        <div className="mb-14">
+          <ScrollSteps steps={managers} />
         </div>
 
         <FadeIn delay={0.18}>

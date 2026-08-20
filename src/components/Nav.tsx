@@ -7,7 +7,6 @@ import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { isStandaloneRoute } from "@/lib/routes";
 
-/* Real routes now, not homepage anchors — each product has its own page. */
 const links = [
   { href: "/bookdirect", label: "BookDirect" },
   { href: "/sales-brain", label: "Sales Brain" },
@@ -33,72 +32,99 @@ export default function Nav() {
 
   return (
     <>
-      {/* Always translucent rather than transparent-then-solid: the bar stays
-          one consistent object instead of appearing on scroll. */}
-      <header
-        className="fixed top-0 left-0 right-0 z-50 transition-shadow duration-300"
-        style={{
-          background: "rgba(255,255,255,0.72)",
-          backdropFilter: "saturate(180%) blur(20px)",
-          WebkitBackdropFilter: "saturate(180%) blur(20px)",
-          borderBottom: `1px solid ${scrolled ? "var(--border)" : "transparent"}`,
-        }}
+      {/* Floating pill rather than a full-width bar — it reads as an object
+          sitting on the page instead of a band stuck to the top. Shadow
+          deepens slightly once you scroll so it lifts off the content. */}
+      <motion.header
+        className="fixed top-3 left-0 right-0 z-50 px-4"
+        initial={{ opacity: 0, y: -16 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
       >
-        <div className="max-w-6xl mx-auto px-6 h-12 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2">
-            <div
-              className="w-6 h-6 rounded-md flex items-center justify-center text-[10px] font-bold tracking-tight"
-              style={{ background: "var(--text)", color: "var(--bg)" }}
-            >
-              OG
-            </div>
-            <span
-              className="font-semibold text-[15px] tracking-[-0.01em]"
-              style={{ color: "var(--text)" }}
-            >
-              O&apos;Gorman
-            </span>
-          </Link>
-
-          <nav className="hidden md:flex items-center gap-9">
-            {links.map((l) => (
-              <Link
-                key={l.href}
-                href={l.href}
-                className="text-[13px] transition-opacity duration-200 hover:opacity-100"
-                style={{
-                  color: "var(--text)",
-                  opacity: pathname === l.href ? 1 : 0.72,
-                  fontWeight: pathname === l.href ? 600 : 450,
-                }}
-              >
-                {l.label}
-              </Link>
-            ))}
+        <div
+          className="max-w-5xl mx-auto rounded-full transition-shadow duration-500"
+          style={{
+            background: "rgba(255,255,255,0.78)",
+            backdropFilter: "saturate(180%) blur(20px)",
+            WebkitBackdropFilter: "saturate(180%) blur(20px)",
+            border: "1px solid var(--border)",
+            boxShadow: scrolled
+              ? "0 8px 30px rgba(0,0,0,0.10)"
+              : "0 2px 10px rgba(0,0,0,0.04)",
+          }}
+        >
+          <div className="pl-2 pr-2 h-14 flex items-center justify-between">
             <Link
-              href="/contact"
-              className="text-[13px] font-medium px-4 py-1.5 rounded-full transition-opacity duration-300 hover:opacity-80"
-              style={{ background: "var(--text)", color: "var(--bg)" }}
+              href="/"
+              className="flex items-center gap-2 rounded-full pl-2 pr-4 py-1.5 transition-colors duration-300 hover:bg-black/[0.04]"
             >
-              Get started
+              <div
+                className="w-6 h-6 rounded-md flex items-center justify-center text-[10px] font-bold"
+                style={{ background: "var(--text)", color: "var(--bg)" }}
+              >
+                OG
+              </div>
+              <span
+                className="font-semibold text-[15px] tracking-[-0.01em]"
+                style={{ color: "var(--text)" }}
+              >
+                O&apos;Gorman
+              </span>
             </Link>
-          </nav>
 
-          <button
-            className="md:hidden p-1.5 -mr-1.5"
-            style={{ color: "var(--text)" }}
-            onClick={() => setOpen(!open)}
-            aria-label="Toggle menu"
-          >
-            {open ? <X size={20} /> : <Menu size={20} />}
-          </button>
+            <nav className="hidden md:flex items-center gap-1">
+              {links.map((l) => {
+                const active = pathname === l.href;
+                return (
+                  <Link
+                    key={l.href}
+                    href={l.href}
+                    className="relative px-4 py-2 text-[13px] rounded-full transition-colors duration-200"
+                    style={{
+                      color: "var(--text)",
+                      opacity: active ? 1 : 0.7,
+                      fontWeight: active ? 600 : 450,
+                    }}
+                  >
+                    {/* Shared layout id slides the pill between items rather
+                        than cross-fading two of them. */}
+                    {active && (
+                      <motion.span
+                        layoutId="nav-pill"
+                        className="absolute inset-0 rounded-full -z-10"
+                        style={{ background: "rgba(0,0,0,0.05)" }}
+                        transition={{ type: "spring", stiffness: 380, damping: 32 }}
+                      />
+                    )}
+                    {l.label}
+                  </Link>
+                );
+              })}
+              <Link
+                href="/contact"
+                className="ml-2 text-[13px] font-medium px-5 py-2.5 rounded-full transition-transform duration-300 hover:scale-[1.03]"
+                style={{ background: "var(--text)", color: "var(--bg)" }}
+              >
+                Get started
+              </Link>
+            </nav>
+
+            <button
+              className="md:hidden p-2.5"
+              style={{ color: "var(--text)" }}
+              onClick={() => setOpen(!open)}
+              aria-label="Toggle menu"
+            >
+              {open ? <X size={20} /> : <Menu size={20} />}
+            </button>
+          </div>
         </div>
-      </header>
+      </motion.header>
 
       <AnimatePresence>
         {open && (
           <motion.div
-            className="fixed inset-0 z-40 flex flex-col pt-20 px-6 pb-10 md:hidden"
+            className="fixed inset-0 z-40 flex flex-col pt-24 px-6 pb-10 md:hidden"
             style={{
               background: "rgba(255,255,255,0.97)",
               backdropFilter: "blur(30px)",
@@ -112,9 +138,9 @@ export default function Nav() {
               {links.map((l, i) => (
                 <motion.div
                   key={l.href}
-                  initial={{ opacity: 0, y: 8 }}
+                  initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: i * 0.05, duration: 0.25 }}
+                  transition={{ delay: i * 0.05, duration: 0.3 }}
                   style={{ borderBottom: "1px solid var(--border)" }}
                 >
                   <Link
