@@ -4,6 +4,7 @@ import PageHero from "@/components/PageHero";
 import FadeIn from "@/components/FadeIn";
 import ElasticCard from "@/components/motion/ElasticCard";
 import ScrollSteps, { type Step } from "@/components/motion/ScrollSteps";
+import SalesBrainMock from "@/components/SalesBrainMock";
 
 export const metadata: Metadata = {
   title: "Sales Brain | Automated outreach — in development",
@@ -50,6 +51,12 @@ export default function SalesBrainPage() {
         lede="Four managers, each running its own agents. One finds the leads, one throws out the dead ones, one writes the message, one chases the reply. You approve what goes out — nothing sends on its own."
         primary={{ label: "Join the waitlist", href: "/contact" }}
       />
+
+      <section className="px-6 pb-4">
+        <FadeIn lift>
+          <SalesBrainMock />
+        </FadeIn>
+      </section>
 
       <section className="px-6 py-16 md:py-24" style={{ background: "var(--surface)" }}>
         <div className="max-w-5xl mx-auto">

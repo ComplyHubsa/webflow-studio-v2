@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import FadeIn from "./FadeIn";
+import Spotlight from "./motion/Spotlight";
 
 /* Status sits on every card because Sales Brain is not finished. A product
    grid that hides that gets found out on the first sales call. */
@@ -67,13 +68,20 @@ export default function Products() {
             <FadeIn key={p.name} delay={i * 0.09} className="w-full">
               <Link href={p.href} className="block h-full group">
                 <motion.div
-                  className="rounded-[18px] p-8 flex flex-col h-full"
+                  className="rounded-[18px] h-full"
                   style={{
                     background: p.dark ? "var(--text)" : "var(--surface)",
                     border: p.dark ? "1px solid var(--text)" : "1px solid transparent",
                   }}
                   whileHover={{ y: -6 }}
                   transition={{ type: "spring", stiffness: 340, damping: 26 }}
+                >
+                {/* Warmer, stronger bloom on the dark card — bronze at 0.16
+                    over near-black is invisible. */}
+                <Spotlight
+                  className="rounded-[18px] h-full p-8 flex flex-col"
+                  color={p.dark ? "201, 169, 97" : "138, 106, 47"}
+                  strength={p.dark ? 0.3 : 0.16}
                 >
                   <div className="flex items-center justify-between mb-8">
                     <span
@@ -129,6 +137,7 @@ export default function Products() {
                       ›
                     </span>
                   </span>
+                </Spotlight>
                 </motion.div>
               </Link>
             </FadeIn>

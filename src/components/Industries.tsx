@@ -4,6 +4,13 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import FadeIn from "./FadeIn";
 import Marquee from "./motion/Marquee";
+import Spotlight from "./motion/Spotlight";
+
+/** "#C2410C" -> "194, 65, 12" for use inside an rgba() string. */
+function hexToRgb(hex: string) {
+  const n = parseInt(hex.replace("#", ""), 16);
+  return `${(n >> 16) & 255}, ${(n >> 8) & 255}, ${n & 255}`;
+}
 
 /* Muted, print-ish brand colours. The previous set (notably a #00FF88 lime for
    the accounting demo) read as generated rather than chosen. */
@@ -26,11 +33,18 @@ function DemoCard({ item }: { item: (typeof industries)[number] }) {
       style={{ width: 288 }}
     >
       <motion.div
-        className="flex flex-col h-full p-7 rounded-[18px]"
+        className="h-full rounded-[18px]"
         style={{ background: "var(--surface)", border: "1px solid transparent" }}
         whileHover={{ y: -6 }}
         transition={{ type: "spring", stiffness: 340, damping: 26 }}
       >
+        {/* Bloom picks up each demo's own accent, so the six cards read as six
+            different brands rather than one repeated component. */}
+        <Spotlight
+          className="rounded-[18px] h-full p-7 flex flex-col"
+          color={hexToRgb(item.accent)}
+          strength={0.18}
+        >
         <div className="flex items-center justify-between mb-10">
           <span className="text-[11px] tabular-nums tracking-[0.15em]" style={{ color: "var(--muted)" }}>
             {item.no}
@@ -54,6 +68,7 @@ function DemoCard({ item }: { item: (typeof industries)[number] }) {
             ↗
           </span>
         </span>
+        </Spotlight>
       </motion.div>
     </Link>
   );

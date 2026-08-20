@@ -3,6 +3,7 @@ import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import FadeIn from "@/components/FadeIn";
 import BookingPricing from "@/components/BookingPricing";
+import BookingMock from "@/components/BookingMock";
 import CountUp from "@/components/motion/CountUp";
 import Accordion, { type QA } from "@/components/motion/Accordion";
 
@@ -88,6 +89,12 @@ export default function BookDirectPage() {
         primary={{ label: "Get set up", href: "/contact" }}
         secondary={{ label: "WhatsApp me", href: "https://wa.me/27731275190", external: true }}
       />
+
+      <section className="px-6 pb-4">
+        <FadeIn lift>
+          <BookingMock />
+        </FadeIn>
+      </section>
 
       {/* The maths is the pitch — put a number on it early */}
       <section className="px-6 py-16 md:py-24" style={{ background: "var(--surface)" }}>
