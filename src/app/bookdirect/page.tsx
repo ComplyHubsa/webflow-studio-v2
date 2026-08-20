@@ -3,6 +3,7 @@ import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import FadeIn from "@/components/FadeIn";
 import BookingPricing from "@/components/BookingPricing";
+import CountUp from "@/components/motion/CountUp";
 
 export const metadata: Metadata = {
   title: "BookDirect | Direct booking software for SA guesthouses",
@@ -64,16 +65,18 @@ export default function BookDirectPage() {
           <FadeIn>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-6 text-center">
               {[
-                { figure: "R300", label: "commission on one R1,800 night, at 17%" },
-                { figure: "R9,000", label: "a month, if you sell thirty of them" },
-                { figure: "2", label: "nights a month covers what BookDirect costs" },
+                { value: 300, prefix: "R", label: "commission on one R1,800 night, at 17%" },
+                { value: 9000, prefix: "R", label: "a month, if you sell thirty of them" },
+                { value: 2, prefix: "", label: "nights a month covers what BookDirect costs" },
               ].map((s) => (
                 <div key={s.label}>
-                  <div
-                    className="display text-[clamp(2.4rem,5vw,3.4rem)] mb-3"
-                    style={{ color: "var(--text)" }}
-                  >
-                    {s.figure}
+                  <div className="mb-3">
+                    <CountUp
+                      value={s.value}
+                      prefix={s.prefix}
+                      className="display text-[clamp(2.4rem,5vw,3.4rem)]"
+                      style={{ color: "var(--text)" }}
+                    />
                   </div>
                   <p
                     className="text-[15px] leading-[1.6] max-w-[15rem] mx-auto"

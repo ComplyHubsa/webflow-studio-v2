@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
+import Magnetic from "./motion/Magnetic";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 const up = (delay: number, y = 22) => ({
@@ -76,16 +77,18 @@ export default function PageHero({
             className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-x-8 gap-y-4"
           >
             {primary && (
-              <Link
-                href={primary.href}
-                {...(primary.external
-                  ? { target: "_blank", rel: "noopener noreferrer" }
-                  : {})}
-                className="inline-flex items-center justify-center font-medium px-7 py-3 rounded-full text-[15px] transition-opacity duration-300 hover:opacity-85"
-                style={{ background: "var(--text)", color: "var(--bg)" }}
-              >
-                {primary.label}
-              </Link>
+              <Magnetic>
+                <Link
+                  href={primary.href}
+                  {...(primary.external
+                    ? { target: "_blank", rel: "noopener noreferrer" }
+                    : {})}
+                  className="inline-flex items-center justify-center font-medium px-7 py-3 rounded-full text-[15px] transition-opacity duration-300 hover:opacity-85"
+                  style={{ background: "var(--text)", color: "var(--bg)" }}
+                >
+                  {primary.label}
+                </Link>
+              </Magnetic>
             )}
             {secondary && (
               <Link
@@ -93,11 +96,16 @@ export default function PageHero({
                 {...(secondary.external
                   ? { target: "_blank", rel: "noopener noreferrer" }
                   : {})}
-                className="inline-flex items-center gap-1 text-[15px] font-medium transition-opacity hover:opacity-70"
+                className="group inline-flex items-center gap-1 text-[15px] font-medium transition-opacity hover:opacity-70"
                 style={{ color: "var(--accent)" }}
               >
                 {secondary.label}
-                <span aria-hidden="true">›</span>
+                <span
+                  aria-hidden="true"
+                  className="transition-transform duration-300 group-hover:translate-x-1"
+                >
+                  ›
+                </span>
               </Link>
             )}
           </motion.div>

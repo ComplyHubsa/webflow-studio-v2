@@ -2,7 +2,13 @@
 
 import { useEffect, useRef } from "react";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import {
+  motion,
+  useScroll,
+  useTransform,
+  useReducedMotion,
+} from "framer-motion";
+import Magnetic from "./motion/Magnetic";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 function fadeUp(delay: number, y = 24) {
@@ -129,6 +135,18 @@ function initGL(canvas: HTMLCanvasElement) {
 
 export default function Hero() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
+  const reduce = useReducedMotion();
+
+  /* Hero content drifts up and dissolves as the page scrolls past it, so the
+     section below arrives over the top rather than simply following it. */
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end start"],
+  });
+  const driftY = useTransform(scrollYProgress, [0, 1], [0, 110]);
+  const dissolve = useTransform(scrollYProgress, [0, 0.72], [1, 0]);
+  const shrink = useTransform(scrollYProgress, [0, 1], [1, 0.955]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -200,7 +218,10 @@ export default function Hero() {
   }, []);
 
   return (
-    <section className="relative min-h-[92vh] flex flex-col items-center justify-center overflow-hidden pt-12">
+    <section
+      ref={sectionRef}
+      className="relative min-h-[92vh] flex flex-col items-center justify-center overflow-hidden pt-12"
+    >
       <div className="absolute inset-0" style={{ background: "var(--bg)" }} />
       <canvas
         ref={canvasRef}
@@ -216,7 +237,10 @@ export default function Hero() {
         }}
       />
 
-      <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
+      <motion.div
+        className="relative z-10 max-w-4xl mx-auto px-6 text-center"
+        style={reduce ? undefined : { y: driftY, opacity: dissolve, scale: shrink }}
+      >
         <motion.p {...fadeUp(0.05, 10)} className="eyebrow mb-7">
           O&apos;Gorman Studio
         </motion.p>
@@ -243,23 +267,30 @@ export default function Hero() {
           {...fadeUp(0.42, 12)}
           className="flex flex-col sm:flex-row items-center justify-center gap-x-8 gap-y-4"
         >
-          <Link
-            href="/bookdirect"
-            className="inline-flex items-center justify-center font-medium px-7 py-3 rounded-full text-[15px] transition-opacity duration-300 hover:opacity-85"
-            style={{ background: "var(--text)", color: "var(--bg)" }}
-          >
-            Explore BookDirect
-          </Link>
+          <Magnetic>
+            <Link
+              href="/bookdirect"
+              className="inline-flex items-center justify-center font-medium px-7 py-3 rounded-full text-[15px] transition-opacity duration-300 hover:opacity-85"
+              style={{ background: "var(--text)", color: "var(--bg)" }}
+            >
+              Explore BookDirect
+            </Link>
+          </Magnetic>
           <Link
             href="/websites"
-            className="inline-flex items-center gap-1 text-[15px] font-medium transition-opacity hover:opacity-70"
+            className="group inline-flex items-center gap-1 text-[15px] font-medium transition-opacity hover:opacity-70"
             style={{ color: "var(--accent)" }}
           >
             See the websites
-            <span aria-hidden="true">›</span>
+            <span
+              aria-hidden="true"
+              className="transition-transform duration-300 group-hover:translate-x-1"
+            >
+              ›
+            </span>
           </Link>
         </motion.div>
-      </div>
+      </motion.div>
 
       <motion.div
         className="absolute bottom-10 left-1/2 -translate-x-1/2 hidden sm:block"

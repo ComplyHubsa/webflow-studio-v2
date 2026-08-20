@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { motion } from "framer-motion";
 import FadeIn from "./FadeIn";
 
 /* Status sits on every card because Sales Brain is not finished. A product
@@ -65,12 +66,14 @@ export default function Products() {
           {products.map((p, i) => (
             <FadeIn key={p.name} delay={i * 0.09} className="w-full">
               <Link href={p.href} className="block h-full group">
-                <div
-                  className="rounded-[18px] p-8 flex flex-col h-full transition-colors duration-300"
+                <motion.div
+                  className="rounded-[18px] p-8 flex flex-col h-full"
                   style={{
                     background: p.dark ? "var(--text)" : "var(--surface)",
                     border: p.dark ? "1px solid var(--text)" : "1px solid transparent",
                   }}
+                  whileHover={{ y: -6 }}
+                  transition={{ type: "spring", stiffness: 340, damping: 26 }}
                 >
                   <div className="flex items-center justify-between mb-8">
                     <span
@@ -119,9 +122,14 @@ export default function Products() {
                     style={{ color: p.dark ? "var(--accent2)" : "var(--accent)" }}
                   >
                     {p.cta}
-                    <span aria-hidden="true">›</span>
+                    <span
+                      aria-hidden="true"
+                      className="transition-transform duration-300 group-hover:translate-x-1"
+                    >
+                      ›
+                    </span>
                   </span>
-                </div>
+                </motion.div>
               </Link>
             </FadeIn>
           ))}

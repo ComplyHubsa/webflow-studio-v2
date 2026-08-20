@@ -3,6 +3,8 @@ import { Inter, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
+import ScrollProgress from "@/components/motion/ScrollProgress";
+import Cursor from "@/components/motion/Cursor";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -38,6 +40,11 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${spaceGrotesk.variable}`}>
       <body>
+        {/* Both sit outside <main> so the route template doesn't remount them
+            on navigation — the progress bar and cursor should feel continuous
+            across pages, not restart with each one. */}
+        <ScrollProgress />
+        <Cursor />
         <Nav />
         <main>{children}</main>
         <Footer />
