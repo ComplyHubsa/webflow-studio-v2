@@ -3,7 +3,7 @@ import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import FadeIn from "@/components/FadeIn";
 import ElasticCard from "@/components/motion/ElasticCard";
-import ScrollSteps, { type Step } from "@/components/motion/ScrollSteps";
+import SalesBrainField from "@/components/SalesBrainField";
 import SalesBrainMock from "@/components/SalesBrainMock";
 
 export const metadata: Metadata = {
@@ -18,29 +18,6 @@ export const metadata: Metadata = {
   },
 };
 
-const managers: Step[] = [
-  {
-    no: "01",
-    title: "The finder",
-    body: "Works through directories and listing sites to pull businesses that match what you sell, with a real contact number attached to each one.",
-  },
-  {
-    no: "02",
-    title: "The checker",
-    body: "Throws out the ones that have closed, the ones already sorted, and the numbers that won't reach a human. Most of a raw list dies here — that's the point.",
-  },
-  {
-    no: "03",
-    title: "The writer",
-    body: "Looks at each business properly and writes one message about their actual situation, not a mail-merge with a name dropped into the middle of it.",
-  },
-  {
-    no: "04",
-    title: "The chaser",
-    body: "Tracks who replied, who didn't and when a follow-up is due, so nothing sits in the pipeline quietly going cold.",
-  },
-];
-
 export default function SalesBrainPage() {
   return (
     <>
@@ -52,17 +29,10 @@ export default function SalesBrainPage() {
         primary={{ label: "Join the waitlist", href: "/contact" }}
       />
 
-      <section className="px-6 pb-4">
-        <FadeIn lift>
-          <SalesBrainMock />
-        </FadeIn>
-      </section>
-
-      <section className="px-6 py-16 md:py-24" style={{ background: "var(--surface)" }}>
-        <div className="max-w-5xl mx-auto">
-          <ScrollSteps steps={managers} />
-        </div>
-      </section>
+      {/* The exploded stack replaces the step row that used to sit here — both
+          described the same four managers, and saying it twice on one page
+          just makes the page longer. */}
+      <SalesBrainField />
 
       {/* The honest bit. Stated plainly rather than buried in small print. */}
       <section className="px-6 py-16 md:py-24">
@@ -92,6 +62,14 @@ export default function SalesBrainPage() {
             </p>
           </FadeIn>
         </div>
+      </section>
+
+      {/* Proof it runs, placed after the honest status rather than before it —
+          the claim comes first, the evidence backs it up. */}
+      <section className="px-6 pb-16 md:pb-24">
+        <FadeIn lift>
+          <SalesBrainMock />
+        </FadeIn>
       </section>
 
       <section className="px-6 pb-20 md:pb-28">
