@@ -5,54 +5,74 @@ import { motion } from "framer-motion";
 import FadeIn from "./FadeIn";
 import { Check } from "lucide-react";
 
-const plans = [
+/* Booking plans are monthly and lead the section — that ordering is the
+   software-first repositioning. They deliberately do NOT link to the Yoco
+   pay links: those are once-off charges, and pointing a subscription at one
+   would take a single payment and imply a recurring one. Recurring goes
+   through PayFast once that link exists; until then it starts as a conversation. */
+const bookingPlans = [
   {
-    name: "Quick Fix",
-    price: "R500",
-    desc: "Something on your existing site is broken or out of date.",
+    name: "Single property",
+    price: "R750",
+    per: "/mo",
+    desc: "One guesthouse taking its own bookings instead of paying an agent.",
     features: [
-      "Single page update",
-      "Bug fixing",
-      "Copy or image changes",
-      "Performance tweak",
-      "1 round of revisions",
-      "24–48hr turnaround",
+      "Booking widget on your own site, or a hosted booking page if you don't have one",
+      "Card payments through your own Payfast account",
+      "Owner dashboard — bookings, calendar and rooms",
+      "Rates and availability you change yourself",
+      "Setup and onboarding included",
     ],
-    payUrl: "https://pay.yoco.com/r/2YV6j5",
     popular: false,
   },
   {
+    name: "With channel sync",
+    price: "R1,500",
+    per: "/mo",
+    desc: "For places also listed on Booking.com, Airbnb or LekkeSlaap.",
+    features: [
+      "Everything in Single property plus:",
+      "Two-way calendar sync with the OTAs, checked hourly",
+      "A room booked anywhere closes everywhere — no double bookings",
+      "Your calendar published back out to the channels",
+      "Multiple room types and per-night pricing",
+    ],
+    popular: true,
+  },
+  {
+    name: "Multiple properties",
+    price: "R3,500",
+    per: "/mo",
+    desc: "Several places run from one login, under one owner.",
+    features: [
+      "Everything in Channel sync plus:",
+      "Unlimited properties on one dashboard",
+      "Per-property payment accounts and reporting",
+      "Priority support straight to me on WhatsApp",
+      "Help moving your existing bookings across",
+    ],
+    popular: false,
+  },
+];
+
+const sitePlans = [
+  {
     name: "Starter Site",
     price: "R3,500",
-    desc: "One clean page that gets you online and taking calls.",
-    features: [
-      "Single-page site, built from scratch",
-      "Mobile-friendly and fast-loading",
-      "Contact form included",
-      "WhatsApp and call buttons",
-      "Basic SEO setup",
-      "Live within 5 days",
-      "1 round of revisions",
-      "Free concept before you pay anything",
-    ],
+    desc: "One clean page that gets you online and taking enquiries.",
     payUrl: "https://pay.yoco.com/r/78RkZE",
-    popular: false,
   },
   {
     name: "Premium Site",
     price: "R6,500",
     desc: "The full build — the same standard as the demo sites above.",
-    features: [
-      "Everything in Starter plus:",
-      "Up to four pages",
-      "Scroll animations and hover states",
-      "Custom layout designed around your content",
-      "Photo and gallery sections",
-      "Live within 7–10 days",
-      "2 rounds of revisions",
-    ],
     payUrl: "https://pay.yoco.com/r/mO1JaL",
-    popular: true,
+  },
+  {
+    name: "Quick Fix",
+    price: "R500",
+    desc: "Something on your existing site is broken or out of date.",
+    payUrl: "https://pay.yoco.com/r/2YV6j5",
   },
 ];
 
@@ -61,7 +81,7 @@ export default function Pricing() {
     <section id="pricing" className="py-18 px-6 scroll-mt-24" style={{ background: "var(--surface)" }}>
       <div className="max-w-6xl mx-auto">
         <FadeIn>
-          <div className="mb-16 max-w-2xl">
+          <div className="mb-14 max-w-2xl">
             <span
               className="text-xs font-medium uppercase tracking-[0.2em] mb-5 block"
               style={{ color: "var(--accent)" }}
@@ -75,15 +95,26 @@ export default function Pricing() {
               What it costs, in full.
             </h2>
             <p className="text-base leading-[1.8]" style={{ color: "var(--muted)" }}>
-              Once-off prices, paid through Yoco. Hosting is free to start and
-              your domain stays in your name. If a job needs more than this, I
-              tell you before I start it — not after.
+              The booking system is monthly and you can stop it whenever — no
+              contract and no setup fee. Websites are once-off. Everything is in
+              rand, and if a job needs more than this I tell you before I start
+              it, not after.
             </p>
           </div>
         </FadeIn>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 max-w-6xl mx-auto items-start">
-          {plans.map((plan, i) => (
+        {/* ── Booking system — monthly, leads the section ── */}
+        <FadeIn>
+          <h3
+            className="text-xs font-medium uppercase tracking-[0.2em] mb-6"
+            style={{ color: "var(--muted)" }}
+          >
+            BookDirect — monthly
+          </h3>
+        </FadeIn>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 items-start mb-16">
+          {bookingPlans.map((plan, i) => (
             <FadeIn key={plan.name} delay={i * 0.14} className="w-full">
               <motion.div
                 className="relative rounded-xl p-9 flex flex-col h-full"
@@ -117,27 +148,27 @@ export default function Pricing() {
                   </p>
                 </div>
 
-                <div className="mb-8">
-                  <div
+                <div className="mb-8 flex items-baseline gap-1">
+                  <span
                     className="text-4xl font-bold tracking-[-0.02em]"
                     style={{ fontFamily: "var(--font-space)", color: "var(--text)" }}
                   >
                     {plan.price}
-                  </div>
-                  <div className="text-xs mt-1.5" style={{ color: "var(--muted)" }}>
-                    once-off
-                  </div>
+                  </span>
+                  <span className="text-sm" style={{ color: "var(--muted)" }}>
+                    {plan.per}
+                  </span>
                 </div>
 
                 <ul className="flex flex-col gap-3 mb-9 flex-1">
                   {plan.features.map((feature) =>
-                    feature === "Everything in Starter plus:" ? (
+                    feature.startsWith("Everything in") ? (
                       <li
                         key={feature}
                         className="text-xs uppercase tracking-[0.15em] pb-1"
                         style={{ color: "var(--muted)" }}
                       >
-                        Everything in Starter, plus
+                        {feature.replace(" plus:", ", plus")}
                       </li>
                     ) : (
                       <li key={feature} className="flex items-start gap-3 text-sm">
@@ -156,15 +187,66 @@ export default function Pricing() {
                 </ul>
 
                 <Link
-                  href={plan.payUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href="/contact"
                   className="w-full text-center font-semibold py-3.5 rounded-full text-sm transition-opacity duration-300 hover:opacity-85 inline-block"
                   style={
                     plan.popular
                       ? { background: "var(--text)", color: "var(--ink)" }
                       : { border: "1px solid var(--border)", color: "var(--text)" }
                   }
+                >
+                  Get set up
+                </Link>
+              </motion.div>
+            </FadeIn>
+          ))}
+        </div>
+
+        {/* ── Websites — once-off, secondary ── */}
+        <FadeIn>
+          <h3
+            className="text-xs font-medium uppercase tracking-[0.2em] mb-6"
+            style={{ color: "var(--muted)" }}
+          >
+            Websites — once-off
+          </h3>
+        </FadeIn>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 items-start">
+          {sitePlans.map((plan, i) => (
+            <FadeIn key={plan.name} delay={i * 0.1} className="w-full">
+              <motion.div
+                className="rounded-xl p-7 flex flex-col h-full"
+                style={{
+                  background: "rgba(255,255,255,0.02)",
+                  border: "1px solid var(--border)",
+                }}
+                whileHover={{ y: -3 }}
+                transition={{ duration: 0.25 }}
+              >
+                <div className="flex items-baseline justify-between mb-3">
+                  <h3
+                    className="text-base font-semibold"
+                    style={{ fontFamily: "var(--font-space)", color: "var(--text)" }}
+                  >
+                    {plan.name}
+                  </h3>
+                  <span
+                    className="text-2xl font-bold tracking-[-0.02em]"
+                    style={{ fontFamily: "var(--font-space)", color: "var(--text)" }}
+                  >
+                    {plan.price}
+                  </span>
+                </div>
+                <p className="text-sm leading-[1.7] mb-7 flex-1" style={{ color: "var(--muted)" }}>
+                  {plan.desc}
+                </p>
+                <Link
+                  href={plan.payUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full text-center font-semibold py-3 rounded-full text-sm transition-opacity duration-300 hover:opacity-85 inline-block"
+                  style={{ border: "1px solid var(--border)", color: "var(--text)" }}
                 >
                   Pay and get started
                 </Link>
@@ -174,6 +256,35 @@ export default function Pricing() {
         </div>
 
         <FadeIn delay={0.3}>
+          <div
+            className="mt-5 rounded-xl p-6 flex flex-col sm:flex-row sm:items-center gap-4"
+            style={{
+              background: "rgba(255,255,255,0.02)",
+              border: "1px solid var(--border)",
+            }}
+          >
+            <div className="flex-1">
+              <h3
+                className="text-base font-semibold mb-1"
+                style={{ fontFamily: "var(--font-space)", color: "var(--text)" }}
+              >
+                After a site is live — Care Plan, R450/mo
+              </h3>
+              <p className="text-sm leading-[1.65]" style={{ color: "var(--muted)" }}>
+                Hosting, domain and SSL handled, monthly backups, uptime
+                monitoring, and WhatsApp support straight to me. Optional —
+                you can host it yourself instead.
+              </p>
+            </div>
+            <Link
+              href="/care"
+              className="text-center font-semibold py-3 px-6 rounded-full text-sm transition-opacity duration-300 hover:opacity-85 whitespace-nowrap"
+              style={{ border: "1px solid var(--border)", color: "var(--text)" }}
+            >
+              See what&rsquo;s covered
+            </Link>
+          </div>
+
           <p className="text-sm mt-9 leading-[1.8]" style={{ color: "var(--muted)" }}>
             Rather talk it through first?{" "}
             <Link

@@ -14,6 +14,7 @@ export const STANDALONE_ROUTES = [
   "/busahouse",
   "/valleyview",
   "/hazyview",
+  "/tramontolodge",
 ];
 
 export function isStandaloneRoute(pathname: string | null): boolean {

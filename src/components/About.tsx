@@ -8,20 +8,20 @@ import FadeIn from "./FadeIn";
    Every card below is something a client can hold me to. */
 const promises = [
   {
-    title: "You see it first",
-    body: "A real homepage design for your business, before any money changes hands.",
+    title: "Your money, direct",
+    body: "Card payments run through your own Payfast account. We never hold a cent of your takings.",
   },
   {
-    title: "Five days",
-    body: "Most Starter sites go live within a week of getting your brief back.",
+    title: "No lock-in",
+    body: "The booking system is month to month. Stop it whenever — your data comes with you.",
   },
   {
     title: "One person",
-    body: "I design and build it myself. You deal with me, not an account manager.",
+    body: "I build it myself. You deal with me on WhatsApp, not an account manager.",
   },
   {
-    title: "Once-off, in rand",
-    body: "No monthly lock-in and no surprise invoices. Hosting is free to start.",
+    title: "You see it first",
+    body: "For websites, a real design for your business before any money changes hands.",
   },
 ];
 
@@ -48,19 +48,19 @@ export default function About() {
                 className="text-base md:text-lg leading-[1.9] mb-5"
                 style={{ color: "var(--muted)" }}
               >
-                I&apos;m Aidan — a web designer in South Africa. I started this
-                because most small businesses here are stuck choosing between a
-                R30,000 agency quote and a free site builder that looks like
-                everyone else&apos;s.
+                I&apos;m Aidan, and I build software in South Africa. This
+                started as website work, and turned into software the day I
+                worked out what the booking sites were quietly taking off
+                guesthouses every single night.
               </p>
               <p
                 className="text-base md:text-lg leading-[1.9]"
                 style={{ color: "var(--muted)" }}
               >
-                So I do the third thing: a proper custom site, built by hand, for
-                the price of a decent second-hand laptop. I only take on a few
-                builds at a time, which is why yours gets finished in a week
-                instead of a quarter.
+                So now I build the things underneath the website too — the
+                booking engine, the payment flow, the calendar sync. Small
+                enough that you get me on WhatsApp, and that what you ask for on
+                Monday is in by Friday.
               </p>
             </div>
           </FadeIn>

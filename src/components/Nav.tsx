@@ -7,9 +7,12 @@ import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { isStandaloneRoute } from "@/lib/routes";
 
+/* Anchors are written as "/#id" rather than "#id" so they still resolve when
+   the nav is rendered on /work, /contact or any other route. */
 const links = [
-  { href: "/", label: "Home" },
-  { href: "/work", label: "Work" },
+  { href: "/#booking", label: "Booking system" },
+  { href: "/#salesbrain", label: "Sales Brain" },
+  { href: "/#demos", label: "Websites" },
   { href: "/contact", label: "Contact" },
 ];
 
@@ -89,7 +92,7 @@ export default function Nav() {
                   : { background: "var(--text)", color: "var(--ink)" }
               }
             >
-              Get a free concept
+              Get started
             </Link>
           </nav>
 

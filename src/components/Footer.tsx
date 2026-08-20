@@ -35,8 +35,8 @@ export default function Footer() {
               </span>
             </div>
             <p className="text-sm leading-[1.75] max-w-xs" style={{ color: "var(--muted)" }}>
-              Custom websites for South African small businesses. Designed and
-              built by hand, one project at a time.
+              Software for South African businesses — direct booking, sales
+              automation and the websites they run on.
             </p>
           </div>
 
@@ -45,12 +45,14 @@ export default function Footer() {
               className="text-white font-semibold mb-4 text-sm uppercase tracking-widest"
               style={{ color: "var(--muted)" }}
             >
-              Navigation
+              Products
             </h4>
             <nav className="flex flex-col gap-3">
               {[
-                { href: "/", label: "Home" },
-                { href: "/work", label: "Our Work" },
+                { href: "/#booking", label: "BookDirect" },
+                { href: "/#salesbrain", label: "Sales Brain" },
+                { href: "/#demos", label: "Websites" },
+                { href: "/#pricing", label: "Pricing" },
                 { href: "/contact", label: "Contact" },
               ].map((l) => (
                 <Link

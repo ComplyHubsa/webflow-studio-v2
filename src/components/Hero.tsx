@@ -267,7 +267,7 @@ export default function Hero() {
               color: "#4a4437",
             }}
           >
-            Web design studio · South Africa
+            Software studio · South Africa
           </span>
         </motion.div>
 
@@ -277,19 +277,19 @@ export default function Hero() {
             className="block text-[clamp(2.6rem,7.5vw,6rem)] font-bold leading-[0.98] tracking-[-0.02em]"
             style={{ fontFamily: "var(--font-space)", color: "#14120e" }}
           >
-            Your website is the
+            Software for the
           </motion.span>
           <motion.span {...fadeUp(0.34)}
             className="block text-[clamp(2.6rem,7.5vw,6rem)] font-bold leading-[0.98] tracking-[-0.02em]"
             style={{ fontFamily: "var(--font-space)", color: "#14120e" }}
           >
-            first thing people
+            jobs you&apos;re still
           </motion.span>
           <motion.span {...fadeUp(0.46)}
             className="block text-[clamp(2.6rem,7.5vw,6rem)] font-bold leading-[0.98] tracking-[-0.02em]"
             style={{ fontFamily: "var(--font-space)", color: "#14120e" }}
           >
-            judge you on.
+            doing by hand.
           </motion.span>
         </div>
 
@@ -299,9 +299,10 @@ export default function Hero() {
           className="text-lg md:text-xl max-w-2xl mx-auto mb-11 leading-[1.75]"
           style={{ color: "#4a4437" }}
         >
-          I&apos;m Aidan. I build custom websites for South African small
-          businesses — no templates, no agency retainer. You see the design
-          before you pay a cent.
+          I&apos;m Aidan. I build software for South African businesses — a
+          direct booking system that cuts the agent&apos;s commission out,
+          sales automation that keeps the pipeline moving, and the websites
+          they run on.
         </motion.p>
 
         {/* CTAs */}
@@ -310,24 +311,24 @@ export default function Hero() {
           className="flex flex-col sm:flex-row items-center justify-center gap-3.5 mb-16"
         >
           <Link
-            href="/contact"
+            href="#booking"
             className="inline-flex items-center gap-2 font-semibold px-8 py-4 rounded-full text-base transition-all duration-300 hover:opacity-88"
             style={{ background: "#14120e", color: "#f4f2ee" }}
           >
-            Get a free concept
+            See the booking system
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
               <path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </Link>
           <Link
-            href="#demos"
+            href="#products"
             className="inline-flex items-center gap-2 font-medium px-8 py-4 rounded-full text-base transition-all duration-300 hover:bg-white/50"
             style={{
               color: "#14120e",
               border: "1px solid rgba(20,18,14,0.22)",
             }}
           >
-            See six real demo sites
+            Everything we build
           </Link>
         </motion.div>
 
@@ -337,9 +338,9 @@ export default function Hero() {
           className="flex items-start justify-center gap-8 md:gap-16"
         >
           {[
-            { value: "R3,500", label: "starting price"       },
-            { value: "5 days", label: "typical build"        },
-            { value: "R0",     label: "to see your concept"  },
+            { value: "0%",      label: "commission we take"     },
+            { value: "R750/mo", label: "booking system from"    },
+            { value: "R3,500",  label: "websites from"          },
           ].map((fact) => (
             <div key={fact.label} className="text-center">
               <div className="text-lg sm:text-2xl font-bold mb-1.5"

@@ -17,15 +17,15 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  title: "O'Gorman Studio | Custom websites for South African businesses",
+  title: "O'Gorman Studio | Booking software for South African businesses",
   description:
-    "Custom websites for South African small businesses, from R3,500. See a free design concept before you pay anything. Most sites live within five days.",
+    "Direct booking software for South African guesthouses from R750/mo — guests book and pay on your own site, so the agent's 15–18% commission stays with you. Plus custom websites from R3,500.",
   keywords:
-    "web design South Africa, custom website, small business website, affordable web design",
+    "direct booking system South Africa, guesthouse booking software, hotel booking engine, sales automation, web design South Africa",
   openGraph: {
     title: "O'Gorman Studio",
     description:
-      "Custom websites for South African small businesses. See the design before you pay.",
+      "Direct booking software for South African guesthouses. Guests book and pay on your own site — no commission.",
     type: "website",
   },
 };

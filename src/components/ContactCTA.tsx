@@ -25,9 +25,10 @@ export default function ContactCTA() {
               className="text-base md:text-lg max-w-xl mb-10 leading-[1.8]"
               style={{ color: "var(--muted)" }}
             >
-              Send me the brief and I&apos;ll come back with a concept, usually
-              within two working days. If you&apos;d rather just ask a question
-              first, WhatsApp is faster.
+              Whether it&apos;s getting the booking system onto your place, a
+              website, or a spot on the Sales Brain waitlist — tell me what
+              you&apos;re after and I&apos;ll come back within two working days.
+              If it&apos;s a quick question, WhatsApp is faster.
             </p>
 
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5">

@@ -18,6 +18,12 @@
       "runtimeExecutable": "npm",
       "runtimeArgs": ["--prefix", "/Users/aidanogorman/Desktop/Life Hub", "run", "dev", "--", "-p", "3003"],
       "port": 3003
+    },
+    {
+      "name": "bookdirect",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["--prefix", "/Users/aidanogorman/Desktop/Projects/BookDirect", "run", "dev", "--", "-p", "3100"],
+      "port": 3100
     }
   ]
 }
