@@ -1,136 +1,128 @@
 "use client";
 
 import Link from "next/link";
-import { motion } from "framer-motion";
 import FadeIn from "./FadeIn";
 
-/* Software first, websites last — that ordering is the repositioning.
-   Status is stated on each card because Sales Brain is not finished, and a
-   product page that hides that gets found out on the first sales call. */
+/* Status sits on every card because Sales Brain is not finished. A product
+   grid that hides that gets found out on the first sales call. */
 const products = [
   {
     name: "BookDirect",
     status: "Live",
     live: true,
     tagline: "Direct booking system",
-    body: "Guests pick their dates, see what's actually free and pay by card — on your own site. The money lands in your account, not an agent's.",
+    body: "Guests pick their dates, see what's free and pay by card — on your own site. The money lands in your account, not an agent's.",
     price: "From R750/mo",
-    href: "#booking",
-    cta: "How it works",
-    accent: "#0F766E",
+    href: "/bookdirect",
+    cta: "Explore BookDirect",
+    dark: true,
   },
   {
     name: "Sales Brain",
     status: "In development",
     live: false,
     tagline: "Automated outreach",
-    body: "Manager agents that find the leads, verify them, write the message and keep the follow-ups moving — so the pipeline runs while you're working.",
+    body: "Manager agents that find the leads, throw out the dead ones, write the message and keep the follow-ups moving.",
     price: "Waitlist open",
-    href: "#salesbrain",
+    href: "/sales-brain",
     cta: "Join the waitlist",
-    accent: "#8C7851",
+    dark: false,
   },
   {
     name: "Websites",
     status: "Live",
     live: true,
     tagline: "Custom builds",
-    body: "Hand-built sites for South African businesses. No templates and no retainer — and you see the design before you pay anything.",
-    price: "From R3,500 once-off",
-    href: "#demos",
-    cta: "See six live demos",
-    accent: "#92400E",
+    body: "Hand-built sites for South African businesses. No templates, no retainer — and you see the design before you pay.",
+    price: "From R3,500",
+    href: "/websites",
+    cta: "See the websites",
+    dark: false,
   },
 ];
 
 export default function Products() {
   return (
-    <section id="products" className="py-18 px-6 scroll-mt-24">
-      <div className="max-w-6xl mx-auto">
+    <section id="products" className="px-6 py-16 md:py-24 scroll-mt-20">
+      <div className="max-w-5xl mx-auto">
         <FadeIn>
           <div className="mb-14 max-w-2xl">
-            <span
-              className="text-xs font-medium uppercase tracking-[0.2em] mb-5 block"
-              style={{ color: "var(--accent)" }}
-            >
-              What we build
-            </span>
             <h2
-              className="text-[clamp(2rem,4vw,3.4rem)] font-bold leading-[1.08] tracking-[-0.02em] mb-5"
-              style={{ fontFamily: "var(--font-space)" }}
+              className="display text-[clamp(1.9rem,3.6vw,2.9rem)] mb-4"
+              style={{ color: "var(--text)" }}
             >
               Three products. Two of them are running.
             </h2>
-            <p className="text-base leading-[1.8]" style={{ color: "var(--muted)" }}>
-              The booking system and the websites are live and being used. The
-              Sales Brain is still being built — it&apos;s listed here so you can
-              put your name down, not so you can buy it today.
+            <p className="lede">
+              The booking system and the websites are live and in use. The Sales
+              Brain is still being built — it&apos;s here so you can put your
+              name down, not so you can buy it today.
             </p>
           </div>
         </FadeIn>
 
-        <div
-          className="grid grid-cols-1 md:grid-cols-3 gap-px"
-          style={{ background: "var(--border)" }}
-        >
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
           {products.map((p, i) => (
             <FadeIn key={p.name} delay={i * 0.09} className="w-full">
-              <motion.div
-                className="flex flex-col h-full p-8"
-                style={{ background: "var(--bg)" }}
-                whileHover={{ backgroundColor: "rgba(255,255,255,0.025)" }}
-                transition={{ duration: 0.2 }}
-              >
-                <div className="flex items-center justify-between mb-7">
-                  <span
-                    className="w-6 h-1 rounded-full"
-                    style={{ background: p.accent }}
-                  />
-                  <span
-                    className="text-[10px] font-semibold uppercase tracking-[0.16em] px-2.5 py-1 rounded-full"
-                    style={
-                      p.live
-                        ? { background: "rgba(201,169,97,0.14)", color: "var(--accent)" }
-                        : { border: "1px solid var(--border)", color: "var(--muted)" }
-                    }
+              <Link href={p.href} className="block h-full group">
+                <div
+                  className="rounded-[18px] p-8 flex flex-col h-full transition-colors duration-300"
+                  style={{
+                    background: p.dark ? "var(--text)" : "var(--surface)",
+                    border: p.dark ? "1px solid var(--text)" : "1px solid transparent",
+                  }}
+                >
+                  <div className="flex items-center justify-between mb-8">
+                    <span
+                      className="text-[10px] font-semibold uppercase tracking-[0.16em]"
+                      style={{
+                        color: p.dark
+                          ? "var(--accent2)"
+                          : p.live
+                          ? "var(--accent)"
+                          : "var(--muted)",
+                      }}
+                    >
+                      {p.status}
+                    </span>
+                  </div>
+
+                  <div
+                    className="display text-[1.75rem] mb-1.5"
+                    style={{ color: p.dark ? "var(--bg)" : "var(--text)" }}
                   >
-                    {p.status}
+                    {p.name}
+                  </div>
+                  <div
+                    className="text-[14px] mb-6"
+                    style={{ color: p.dark ? "rgba(255,255,255,0.62)" : "var(--muted)" }}
+                  >
+                    {p.tagline}
+                  </div>
+
+                  <p
+                    className="text-[15px] leading-[1.75] mb-8 flex-1"
+                    style={{ color: p.dark ? "rgba(255,255,255,0.82)" : "var(--muted)" }}
+                  >
+                    {p.body}
+                  </p>
+
+                  <div
+                    className="text-[14px] font-semibold mb-4"
+                    style={{ color: p.dark ? "var(--bg)" : "var(--text)" }}
+                  >
+                    {p.price}
+                  </div>
+
+                  <span
+                    className="text-[14px] font-medium inline-flex items-center gap-1 transition-opacity group-hover:opacity-70"
+                    style={{ color: p.dark ? "var(--accent2)" : "var(--accent)" }}
+                  >
+                    {p.cta}
+                    <span aria-hidden="true">›</span>
                   </span>
                 </div>
-
-                <div
-                  className="text-2xl font-bold mb-1.5"
-                  style={{ fontFamily: "var(--font-space)", color: "var(--text)" }}
-                >
-                  {p.name}
-                </div>
-                <div className="text-sm mb-5" style={{ color: "var(--muted)" }}>
-                  {p.tagline}
-                </div>
-
-                <p
-                  className="text-sm leading-[1.8] mb-7 flex-1"
-                  style={{ color: "var(--muted)" }}
-                >
-                  {p.body}
-                </p>
-
-                <div
-                  className="text-sm font-semibold mb-5"
-                  style={{ fontFamily: "var(--font-space)", color: "var(--text)" }}
-                >
-                  {p.price}
-                </div>
-
-                <Link
-                  href={p.href}
-                  className="text-sm font-medium inline-flex items-center gap-1.5 transition-opacity hover:opacity-70"
-                  style={{ color: p.accent }}
-                >
-                  {p.cta}
-                  <span aria-hidden="true">→</span>
-                </Link>
-              </motion.div>
+              </Link>
             </FadeIn>
           ))}
         </div>

@@ -52,7 +52,8 @@ export default function HowItWorks() {
               <div
                 className="relative p-8 rounded-xl h-full"
                 style={{
-                  background: "rgba(255,255,255,0.02)",
+                  /* section is --surface, so cards lift by going white */
+                  background: "var(--bg)",
                   border: "1px solid var(--border)",
                 }}
               >

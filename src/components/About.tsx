@@ -72,7 +72,7 @@ export default function About() {
                   key={card.title}
                   className="rounded-xl p-6 flex flex-col gap-2.5"
                   style={{
-                    background: "rgba(255,255,255,0.025)",
+                    background: "var(--surface)",
                     border: "1px solid var(--border)",
                   }}
                   whileHover={{ y: -3 }}

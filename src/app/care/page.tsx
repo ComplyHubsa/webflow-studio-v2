@@ -109,7 +109,7 @@ export default function CarePlanPage() {
               <div
                 className="rounded-2xl p-6 h-full"
                 style={{
-                  background: "rgba(255,255,255,0.02)",
+                  background: "var(--bg)",
                   border: "1px solid var(--border)",
                 }}
               >
@@ -137,7 +137,7 @@ export default function CarePlanPage() {
           <div
             className="rounded-2xl p-6 mb-10"
             style={{
-              background: "rgba(255,255,255,0.015)",
+              background: "var(--bg)",
               border: "1px solid var(--border)",
             }}
           >

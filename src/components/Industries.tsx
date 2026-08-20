@@ -53,7 +53,7 @@ export default function Industries() {
                 <motion.div
                   className="relative flex flex-col gap-6 h-full p-8"
                   style={{ background: "var(--bg)" }}
-                  whileHover={{ backgroundColor: "rgba(255,255,255,0.025)" }}
+                  whileHover={{ backgroundColor: "#f5f5f7" }}
                   transition={{ duration: 0.2 }}
                 >
                   <div className="flex items-center justify-between">

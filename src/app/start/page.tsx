@@ -73,7 +73,7 @@ export default function StartPage() {
                 style={{
                   background: step.done
                     ? "rgba(74,222,128,0.05)"
-                    : "rgba(255,255,255,0.02)",
+                    : "var(--bg)",
                   border: step.done
                     ? "1px solid rgba(74,222,128,0.25)"
                     : "1px solid var(--border)",

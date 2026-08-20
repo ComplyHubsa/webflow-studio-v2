@@ -1,27 +1,16 @@
 import Hero from "@/components/Hero";
 import Products from "@/components/Products";
-import BookingSystem from "@/components/BookingSystem";
-import SalesBrain from "@/components/SalesBrain";
-import Industries from "@/components/Industries";
-import FreeConcept from "@/components/FreeConcept";
-import Pricing from "@/components/Pricing";
 import About from "@/components/About";
 import ContactCTA from "@/components/ContactCTA";
 
-/* Software first: the two products come before the website work, which is now
-   a supporting service rather than the headline. HowItWorks was dropped from
-   the homepage — it describes the website process only, and the page is long
-   enough without it. The component is still there for a future /websites page. */
+/* The homepage is now an overview, not the whole pitch. Each product carries
+   its own page — /bookdirect, /sales-brain, /websites — so this stays short
+   enough that the three cards are the first real thing you reach. */
 export default function Home() {
   return (
     <>
       <Hero />
       <Products />
-      <BookingSystem />
-      <SalesBrain />
-      <Industries />
-      <FreeConcept />
-      <Pricing />
       <About />
       <ContactCTA />
     </>
