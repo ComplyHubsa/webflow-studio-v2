@@ -33,7 +33,7 @@ export default function SalesBrainMock() {
         className="rounded-[16px] overflow-hidden"
         style={{
           background: "#0b0b0d",
-          border: "1px solid rgba(255,255,255,0.10)",
+          border: "1px solid var(--border-strong)",
           boxShadow: "0 30px 70px rgba(0,0,0,0.28)",
         }}
       >

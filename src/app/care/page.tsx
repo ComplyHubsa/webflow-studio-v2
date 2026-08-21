@@ -1,5 +1,6 @@
 import Link from "next/link";
 import FadeIn from "@/components/FadeIn";
+import PageTheme from "@/components/PageTheme";
 import { Server, PencilLine, ShieldCheck, MessageCircle, X } from "lucide-react";
 
 export const metadata = {
@@ -49,9 +50,11 @@ export default function CarePlanPage() {
       className="min-h-screen pt-44 pb-24 px-6"
       style={{
         background:
-          "radial-gradient(ellipse 80% 50% at 50% 0%, rgba(108,99,255,0.08) 0%, transparent 60%)",
+          "radial-gradient(ellipse 80% 50% at 50% 0%, var(--accent-soft) 0%, transparent 60%)",
       }}
     >
+      <PageTheme name="care" />
+
       <div className="max-w-3xl mx-auto">
         <FadeIn>
           <div className="text-center mb-14">
@@ -83,9 +86,9 @@ export default function CarePlanPage() {
             className="rounded-3xl p-8 md:p-10 mb-8 text-center"
             style={{
               background:
-                "linear-gradient(145deg, rgba(108,99,255,0.12), rgba(139,92,246,0.06))",
-              border: "1px solid rgba(108,99,255,0.4)",
-              boxShadow: "0 0 60px rgba(108,99,255,0.1)",
+                "linear-gradient(145deg, var(--surface), var(--surface-2))",
+              border: "1px solid var(--border-strong)",
+              boxShadow: "0 18px 40px var(--nav-shadow)",
             }}
           >
             <div
@@ -97,7 +100,7 @@ export default function CarePlanPage() {
             <div className="text-sm mb-1" style={{ color: "var(--muted)" }}>
               per month
             </div>
-            <div className="text-sm font-semibold" style={{ color: "#4ade80" }}>
+            <div className="text-sm font-semibold" style={{ color: "var(--accent)" }}>
               First month free · cancel anytime
             </div>
           </div>
@@ -115,13 +118,13 @@ export default function CarePlanPage() {
               >
                 <span
                   className="w-10 h-10 rounded-xl flex items-center justify-center mb-4"
-                  style={{ background: "rgba(108,99,255,0.12)" }}
+                  style={{ background: "var(--accent-soft)" }}
                 >
                   <item.icon size={19} strokeWidth={2} style={{ color: "var(--accent)" }} />
                 </span>
                 <div
-                  className="text-sm font-bold text-white mb-1.5"
-                  style={{ fontFamily: "var(--font-space)" }}
+                  className="text-sm font-bold mb-1.5"
+                  style={{ fontFamily: "var(--font-space)", color: "var(--text)" }}
                 >
                   {item.title}
                 </div>
@@ -154,7 +157,7 @@ export default function CarePlanPage() {
                     size={15}
                     strokeWidth={2.5}
                     className="mt-0.5 flex-shrink-0"
-                    style={{ color: "#f87171" }}
+                    style={{ color: "var(--muted)", opacity: 0.7 }}
                   />
                   <span style={{ color: "var(--muted)" }}>{item}</span>
                 </li>
@@ -172,9 +175,8 @@ export default function CarePlanPage() {
                 rel="noopener noreferrer"
                 className="inline-block font-semibold py-4 px-10 rounded-2xl text-sm transition-all duration-300 hover:scale-105"
                 style={{
-                  background: "linear-gradient(135deg, #a78bfa, #6c63ff)",
-                  color: "#fff",
-                  boxShadow: "0 0 30px rgba(167,139,250,0.35)",
+                  background: "var(--text)",
+                  color: "var(--bg)",
                 }}
               >
                 Start my care plan →
@@ -186,9 +188,8 @@ export default function CarePlanPage() {
                 rel="noopener noreferrer"
                 className="inline-block font-semibold py-4 px-10 rounded-2xl text-sm transition-all duration-300 hover:scale-105"
                 style={{
-                  background: "linear-gradient(135deg, #a78bfa, #6c63ff)",
-                  color: "#fff",
-                  boxShadow: "0 0 30px rgba(167,139,250,0.35)",
+                  background: "var(--text)",
+                  color: "var(--bg)",
                 }}
               >
                 WhatsApp me to start →
@@ -201,7 +202,7 @@ export default function CarePlanPage() {
                 href="https://wa.me/27731275190"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="underline transition-colors hover:text-white"
+                className="underline transition-opacity hover:opacity-70"
                 style={{ color: "var(--accent2)" }}
               >
                 073 127 5190

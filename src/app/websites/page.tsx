@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import PageTheme from "@/components/PageTheme";
 import PageHero from "@/components/PageHero";
 import Industries from "@/components/Industries";
 import HowItWorks from "@/components/HowItWorks";
@@ -20,6 +21,8 @@ export const metadata: Metadata = {
 export default function WebsitesPage() {
   return (
     <>
+      <PageTheme name="websites" />
+
       <PageHero
         eyebrow="Websites"
         status="Live"

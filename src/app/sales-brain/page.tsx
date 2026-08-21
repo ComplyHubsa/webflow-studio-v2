@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import PageTheme from "@/components/PageTheme";
 import PageHero from "@/components/PageHero";
 import FadeIn from "@/components/FadeIn";
 import ElasticCard from "@/components/motion/ElasticCard";
@@ -21,6 +22,8 @@ export const metadata: Metadata = {
 export default function SalesBrainPage() {
   return (
     <>
+      <PageTheme name="sales-brain" />
+
       <PageHero
         eyebrow="Sales Brain"
         status="In development"
@@ -94,7 +97,7 @@ export default function SalesBrainPage() {
               </h2>
               <p
                 className="text-[16px] leading-[1.7] max-w-lg mx-auto mb-9"
-                style={{ color: "rgba(255,255,255,0.66)" }}
+                style={{ color: "var(--bg)", opacity: 0.66 }}
               >
                 Tell me what you&apos;d want it doing and who you&apos;d point it
                 at. I&apos;ll come back to you when it&apos;s ready for the first

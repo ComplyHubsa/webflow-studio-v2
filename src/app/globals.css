@@ -19,6 +19,118 @@
   --text: #1d1d1f;
   --muted: #6e6e73;
   --ink: #ffffff;
+  --nav-bg: rgba(255, 255, 255, 0.78);
+  --nav-shadow: rgba(0, 0, 0, 0.10);
+  --nav-pill: rgba(0, 0, 0, 0.05);
+}
+
+/* ── Per-page themes ──────────────────────────────────────────────────────
+   Selected by the marker <PageTheme> renders inside the page. :has() lifts it
+   to :root, so the nav and footer follow even though they live in the root
+   layout, outside the page tree — and unlike stamping <html> from an effect,
+   it is already correct in the server-rendered HTML.
+
+   Everything on the site already reads these variables, so overriding them
+   here re-themes every shared component without touching a single one.
+
+   --ink is always the contrast against --text, because primary buttons are
+   written as `background: var(--text); color: var(--ink)`. Get that backwards
+   on a dark theme and every button turns invisible. */
+
+/* BookDirect — cool and clinical. It is the page about money and calendars. */
+:root:has([data-page-theme="bookdirect"]) {
+  --bg: #f7fbfc;
+  --surface: #e9f2f5;
+  --surface-2: #fbfdfe;
+  --border: rgba(6, 42, 52, 0.10);
+  --border-strong: rgba(6, 42, 52, 0.18);
+  --accent: #0d6e7d;
+  --accent2: #1293a6;
+  --accent-soft: rgba(13, 110, 125, 0.07);
+  --text: #0d2b31;
+  --muted: #5b7b83;
+  --ink: #ffffff;
+  --nav-bg: rgba(255, 255, 255, 0.80);
+  --nav-shadow: rgba(6, 42, 52, 0.12);
+  --nav-pill: rgba(6, 42, 52, 0.07);
+}
+
+/* Sales Brain — dark, and not arbitrarily: the agent-graph video and the
+   particle field are both dark-native, and they sat awkwardly on white. */
+:root:has([data-page-theme="sales-brain"]) {
+  --bg: #0b0d12;
+  --surface: #141924;
+  --surface-2: #10141d;
+  --border: rgba(255, 255, 255, 0.10);
+  --border-strong: rgba(255, 255, 255, 0.22);
+  --accent: #7cc8ff;
+  --accent2: #a78bfa;
+  --accent-soft: rgba(124, 200, 255, 0.10);
+  --text: #eef2f8;
+  --muted: #8b98ac;
+  --ink: #0b0d12;
+  --nav-bg: rgba(20, 25, 36, 0.72);
+  --nav-shadow: rgba(0, 0, 0, 0.45);
+  --nav-pill: rgba(255, 255, 255, 0.10);
+}
+
+/* Websites — warm and papery, picking up the cream of the free-concept card. */
+:root:has([data-page-theme="websites"]) {
+  --bg: #fbf8f2;
+  --surface: #f1ebdf;
+  --surface-2: #fdfbf7;
+  --border: rgba(60, 46, 22, 0.12);
+  --border-strong: rgba(60, 46, 22, 0.20);
+  --accent: #8a6a2f;
+  --accent2: #a8823c;
+  --accent-soft: rgba(138, 106, 47, 0.08);
+  --text: #221c12;
+  --muted: #6d6353;
+  --ink: #ffffff;
+  --nav-bg: rgba(253, 251, 247, 0.80);
+  --nav-shadow: rgba(60, 46, 22, 0.12);
+  --nav-pill: rgba(60, 46, 22, 0.07);
+}
+
+/* Work — a gallery wall. The page is nothing but device mockups, and dark walls
+   are what galleries use for the same reason: the frames stop competing with
+   the room. Warm charcoal rather than Sales Brain's blue-black so the two dark
+   pages don't read as the same page. The bronze is lifted a couple of stops
+   because the studio bronze is too dark to see against it. */
+:root:has([data-page-theme="work"]) {
+  --bg: #131211;
+  --surface: #1c1a18;
+  --surface-2: #171614;
+  --border: rgba(255, 255, 255, 0.10);
+  --border-strong: rgba(255, 255, 255, 0.20);
+  --accent: #d9b25e;
+  --accent2: #e8cd93;
+  --accent-soft: rgba(217, 178, 94, 0.10);
+  --text: #f4f1ec;
+  --muted: #9a938a;
+  --ink: #131211;
+  --nav-bg: rgba(28, 26, 24, 0.72);
+  --nav-shadow: rgba(0, 0, 0, 0.45);
+  --nav-pill: rgba(255, 255, 255, 0.10);
+}
+
+/* Care — the upkeep plan. Quiet green: it is the page about nothing going
+   wrong, and it should feel like the least dramatic page on the site. */
+:root:has([data-page-theme="care"]) {
+  --bg: #f7faf7;
+  --surface: #e9f1ea;
+  --surface-2: #fbfdfb;
+  --border: rgba(18, 45, 30, 0.10);
+  --border-strong: rgba(18, 45, 30, 0.18);
+  --accent: #2f6b4a;
+  --accent2: #3f8a60;
+  --accent-soft: rgba(47, 107, 74, 0.08);
+  --text: #12251b;
+  --muted: #5d7568;
+  --ink: #ffffff;
+  --nav-bg: rgba(255, 255, 255, 0.80);
+  --nav-shadow: rgba(18, 45, 30, 0.12);
+  --nav-pill: rgba(18, 45, 30, 0.07);
 }
 
 @theme inline {
@@ -43,6 +155,10 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+  /* Crossfade between page themes instead of snapping. Slower than the route
+     transition itself so the colour is still settling as the new page arrives,
+     which reads as one movement rather than two. */
+  transition: background-color 0.6s ease, color 0.6s ease;
 }
 
 /* Display type is set tight and heavy; body copy stays open and quiet.
@@ -73,7 +189,7 @@ body {
 
 ::-webkit-scrollbar { width: 4px; }
 ::-webkit-scrollbar-track { background: var(--bg); }
-::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.2); border-radius: 2px; }
+::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 2px; }
 
 /* Kept for legacy markup — now a flat accent, not a gradient. */
 .gradient-text { color: var(--accent); }

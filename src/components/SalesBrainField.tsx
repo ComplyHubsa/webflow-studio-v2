@@ -20,8 +20,11 @@ import { motion, useScroll, useMotionValueEvent, useReducedMotion } from "framer
    carries a video. Particle targets are recomputed on resize, not stored in
    screen space, so the composition survives a window drag.
 
-   Colour stays inside the site palette: ink dots with bronze for the ones that
-   survive the cull, so the eye follows the survivors without a new hue. */
+   Colour stays inside the site palette, read from the CSS variables at runtime
+   rather than hardcoded: plain text-coloured dots, with the accent for the ones
+   that survive the cull, so the eye follows the survivors without a new hue.
+   Reading the variables is what lets the field invert with the page theme —
+   near-black dots would simply disappear on the dark one. */
 
 /* The reference (cognexa.co.za) runs three.js + GSAP on a WebGL2 canvas. That
    is ~600KB of JavaScript to draw a field of small flat dots, which a 2D
@@ -85,7 +88,25 @@ export default function SalesBrainField() {
       return v - Math.floor(v);
     };
 
+    /* Both palette entries are hex in every theme. Resolved once per build
+       instead of per frame — getComputedStyle forces a style recalc, and 2600
+       dots a frame is not the place for one. */
+    let inkRGB = "29,29,31";
+    let accentRGB = "138,106,47";
+    const toRGB = (hex: string, fallback: string) => {
+      const m = hex.trim().match(/^#([0-9a-f]{6})$/i);
+      if (!m) return fallback;
+      const n = parseInt(m[1], 16);
+      return `${(n >> 16) & 255},${(n >> 8) & 255},${n & 255}`;
+    };
+    const readPalette = () => {
+      const cs = getComputedStyle(document.documentElement);
+      inkRGB = toRGB(cs.getPropertyValue("--text"), inkRGB);
+      accentRGB = toRGB(cs.getPropertyValue("--accent"), accentRGB);
+    };
+
     const build = () => {
+      readPalette();
       const r = cv.getBoundingClientRect();
       dpr = Math.min(2, window.devicePixelRatio || 1);
       w = r.width; h = r.height;
@@ -164,8 +185,8 @@ export default function SalesBrainField() {
         const depth = 0.35 + p.z * 0.65;
         const survivor = p.alive && t * 3 > 0.9;
         ctx.fillStyle = survivor
-          ? `rgba(138, 106, 47, ${0.5 * alpha * depth})`
-          : `rgba(29, 29, 31, ${0.34 * alpha * depth})`;
+          ? `rgba(${accentRGB},${0.62 * alpha * depth})`
+          : `rgba(${inkRGB},${0.34 * alpha * depth})`;
         ctx.fillRect(p.x, p.y, size, size);
       }
       raf = requestAnimationFrame(draw);

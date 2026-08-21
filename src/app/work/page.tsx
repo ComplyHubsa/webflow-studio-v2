@@ -1,3 +1,4 @@
+import PageTheme from "@/components/PageTheme";
 import Work from "@/components/Work";
 import ContactCTA from "@/components/ContactCTA";
 import FadeIn from "@/components/FadeIn";
@@ -11,6 +12,8 @@ export const metadata = {
 export default function WorkPage() {
   return (
     <>
+      <PageTheme name="work" />
+
       <div className="pt-44 pb-10 px-6">
         <div className="max-w-7xl mx-auto">
           <FadeIn>

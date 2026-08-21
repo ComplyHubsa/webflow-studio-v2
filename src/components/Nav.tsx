@@ -44,19 +44,19 @@ export default function Nav() {
         <div
           className="max-w-5xl mx-auto rounded-full transition-shadow duration-500"
           style={{
-            background: "rgba(255,255,255,0.78)",
+            background: "var(--nav-bg)",
             backdropFilter: "saturate(180%) blur(20px)",
             WebkitBackdropFilter: "saturate(180%) blur(20px)",
             border: "1px solid var(--border)",
             boxShadow: scrolled
-              ? "0 8px 30px rgba(0,0,0,0.10)"
-              : "0 2px 10px rgba(0,0,0,0.04)",
+              ? "0 8px 30px var(--nav-shadow)"
+              : "0 2px 10px var(--nav-shadow)",
           }}
         >
           <div className="pl-2 pr-2 h-14 flex items-center justify-between">
             <Link
               href="/"
-              className="flex items-center gap-2 rounded-full pl-2 pr-4 py-1.5 transition-colors duration-300 hover:bg-black/[0.04]"
+              className="flex items-center gap-2 rounded-full pl-2 pr-4 py-1.5 transition-colors duration-300 hover:opacity-70"
             >
               <div
                 className="w-6 h-6 rounded-md flex items-center justify-center text-[10px] font-bold"
@@ -92,7 +92,7 @@ export default function Nav() {
                       <motion.span
                         layoutId="nav-pill"
                         className="absolute inset-0 rounded-full -z-10"
-                        style={{ background: "rgba(0,0,0,0.05)" }}
+                        style={{ background: "var(--nav-pill)" }}
                         transition={{ type: "spring", stiffness: 380, damping: 32 }}
                       />
                     )}
@@ -126,7 +126,7 @@ export default function Nav() {
           <motion.div
             className="fixed inset-0 z-40 flex flex-col pt-24 px-6 pb-10 md:hidden"
             style={{
-              background: "rgba(255,255,255,0.97)",
+              background: "var(--bg)",
               backdropFilter: "blur(30px)",
             }}
             initial={{ opacity: 0 }}

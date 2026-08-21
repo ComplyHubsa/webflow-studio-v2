@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import PageTheme from "@/components/PageTheme";
 import PageHero from "@/components/PageHero";
 import FadeIn from "@/components/FadeIn";
 import BookingPricing from "@/components/BookingPricing";
@@ -81,6 +82,8 @@ const features = [
 export default function BookDirectPage() {
   return (
     <>
+      <PageTheme name="bookdirect" />
+
       <PageHero
         eyebrow="BookDirect"
         status="Live"
